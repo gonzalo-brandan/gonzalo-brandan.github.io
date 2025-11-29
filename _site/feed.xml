@@ -1,0 +1,47 @@
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>http://localhost:4000/</id>
+  <title>Gonzalo Brandan</title>
+  <subtitle>Articles and lab notes on Cisco networking, wireless, routing, switching, and my progress toward the CCNP certification.</subtitle>
+  <updated>2025-11-29T18:20:05+01:00</updated>
+  <author>
+    <name>Gonzalo Brandan</name>
+    <uri>http://localhost:4000/</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="http://localhost:4000/feed.xml"/>
+  <link rel="alternate" type="text/html" hreflang="en"
+    href="http://localhost:4000/"/>
+  <generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator>
+  <rights> © 2025 Gonzalo Brandan </rights>
+  <icon>/assets/img/favicons/favicon.ico</icon>
+  <logo>/assets/img/favicons/favicon-96x96.png</logo>
+
+
+  
+  <entry>
+    <title>Configure a Basic WLAN on the WLC</title>
+    <link href="http://localhost:4000/posts/configure-a-basic-wlan-on-the-wlc/" rel="alternate" type="text/html" title="Configure a Basic WLAN on the WLC" />
+    <published>2025-11-29T17:00:00+01:00</published>
+  
+    <updated>2025-11-29T17:00:00+01:00</updated>
+  
+    <id>http://localhost:4000/posts/configure-a-basic-wlan-on-the-wlc/</id>
+    <content type="text/html" src="http://localhost:4000/posts/configure-a-basic-wlan-on-the-wlc/" />
+    <author>
+      <name>Gonzalo Brandan</name>
+    </author>
+
+  
+    
+    <category term="networking" />
+    
+  
+
+  <summary>In this lab I will learn some of the features of a wireless LAN controller. I will create a new WLAN on the controller and implement security on that LAN. Then, I will configure a wireless host to connect to the new WLAN through an AP that is under the control of the WLC.  Topology      Steps:  1. Access the WLCs management via HTTPS  First I open the web browser in the Admin PC. I enter the ma...</summary>
+
+  </entry>
+
+</feed>
+
+
