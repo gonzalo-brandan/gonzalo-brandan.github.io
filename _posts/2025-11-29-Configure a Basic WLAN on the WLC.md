@@ -1,8 +1,11 @@
 ---
-title: TITLE
-date: YYYY-MM-DD HH:MM:SS +/-TTTT
-categories: [TOP_CATEGORY, SUB_CATEGORY]
-tags: [TAG]     # TAG names should always be lowercase
+title: "Configure a Basic WLAN on the WLC"
+date: 2025-11-29 16:54:00 +0000
+categories: networking
+tags: [WLAN, Cisco, Tutorial]
+comments: true
+toc: true
+layout: post
 ---
 In this lab I will learn some of the features of a wireless LAN controller. I will create a new WLAN on the controller and implement security on that LAN. Then, I will configure a wireless host to connect to the new WLAN through an AP that is under the control of the WLC. 
 
