@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>Gonzalo Brandan</title>
   <subtitle>Articles and lab notes on Cisco networking, wireless, routing, switching, and my progress toward the CCNP certification.</subtitle>
-  <updated>2026-05-22T22:15:33+02:00</updated>
+  <updated>2026-05-22T22:37:28+02:00</updated>
   <author>
     <name>Gonzalo Brandan</name>
     <uri>http://localhost:4000/</uri>
@@ -48,7 +48,7 @@
     <link href="http://localhost:4000/posts/Configure-Secure-DMVPN-Tunnels/" rel="alternate" type="text/html" title="Configuring Secure DMVPN Tunnels" />
     <published>2026-05-22T18:00:00+02:00</published>
   
-    <updated>2026-05-22T18:00:00+02:00</updated>
+    <updated>2026-05-22T22:16:40+02:00</updated>
   
     <id>http://localhost:4000/posts/Configure-Secure-DMVPN-Tunnels/</id>
     <content type="text/html" src="http://localhost:4000/posts/Configure-Secure-DMVPN-Tunnels/" />
