@@ -30,24 +30,24 @@
 
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.4.1" />
-<meta property="og:title" content="Configure Secure Dmvpn Tunnels" />
+<meta property="og:title" content="Configuring Secure DMVPN Tunnels" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="In this lab, I explore how to secure a DMVPN Phase 3 network with IPsec. DMVPN dynamically builds GRE tunnels between hub and spokes, while IPsec encrypts the traffic running over them. I start by verifying the existing DMVPN setup, then configure IKE policies and IPsec protection on the hub and spokes, and finally check that the SAs are established and the spoke‑to‑spoke tunnels work as expected." />
-<meta property="og:description" content="In this lab, I explore how to secure a DMVPN Phase 3 network with IPsec. DMVPN dynamically builds GRE tunnels between hub and spokes, while IPsec encrypts the traffic running over them. I start by verifying the existing DMVPN setup, then configure IKE policies and IPsec protection on the hub and spokes, and finally check that the SAs are established and the spoke‑to‑spoke tunnels work as expected." />
+<meta name="description" content="In this lab, I explore how to secure a DMVPN Phase 3 network with IPsec. DMVPN dynamically builds GRE tunnels between the hub and spokes, while IPsec encrypts the traffic running over them. I start by verifying the existing DMVPN setup, then configure IKE policies and IPsec protection on the hub and spokes, and finally verify that the security associations (SAs) are established and that spoke-to-spoke tunnels work as expected." />
+<meta property="og:description" content="In this lab, I explore how to secure a DMVPN Phase 3 network with IPsec. DMVPN dynamically builds GRE tunnels between the hub and spokes, while IPsec encrypts the traffic running over them. I start by verifying the existing DMVPN setup, then configure IKE policies and IPsec protection on the hub and spokes, and finally verify that the security associations (SAs) are established and that spoke-to-spoke tunnels work as expected." />
 <link rel="canonical" href="http://localhost:4000/posts/Configure-Secure-DMVPN-Tunnels/" />
 <meta property="og:url" content="http://localhost:4000/posts/Configure-Secure-DMVPN-Tunnels/" />
 <meta property="og:site_name" content="Gonzalo Brandan" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-05-22T00:00:00+02:00" />
+<meta property="article:published_time" content="2026-05-22T18:00:00+02:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Configure Secure Dmvpn Tunnels" />
+<meta property="twitter:title" content="Configuring Secure DMVPN Tunnels" />
 <meta name="twitter:site" content="@twitter_username" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-22T00:00:00+02:00","datePublished":"2026-05-22T00:00:00+02:00","description":"In this lab, I explore how to secure a DMVPN Phase 3 network with IPsec. DMVPN dynamically builds GRE tunnels between hub and spokes, while IPsec encrypts the traffic running over them. I start by verifying the existing DMVPN setup, then configure IKE policies and IPsec protection on the hub and spokes, and finally check that the SAs are established and the spoke‑to‑spoke tunnels work as expected.","headline":"Configure Secure Dmvpn Tunnels","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Configure-Secure-DMVPN-Tunnels/"},"url":"http://localhost:4000/posts/Configure-Secure-DMVPN-Tunnels/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-22T18:00:00+02:00","datePublished":"2026-05-22T18:00:00+02:00","description":"In this lab, I explore how to secure a DMVPN Phase 3 network with IPsec. DMVPN dynamically builds GRE tunnels between the hub and spokes, while IPsec encrypts the traffic running over them. I start by verifying the existing DMVPN setup, then configure IKE policies and IPsec protection on the hub and spokes, and finally verify that the security associations (SAs) are established and that spoke-to-spoke tunnels work as expected.","headline":"Configuring Secure DMVPN Tunnels","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Configure-Secure-DMVPN-Tunnels/"},"url":"http://localhost:4000/posts/Configure-Secure-DMVPN-Tunnels/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
-  <title>Configure Secure Dmvpn Tunnels | Gonzalo Brandan
+  <title>Configuring Secure DMVPN Tunnels | Gonzalo Brandan
   </title>
 
   <!--
@@ -433,7 +433,7 @@
         
           
             
-              <span>Configure Secure Dmvpn Tunnels</span>
+              <span>Configuring Secure DMVPN Tunnels</span>
             
 
           
@@ -500,6 +500,796 @@
 
 
 
+
+  
+  
+
+  
+    
+      
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+
+  
 
 
 <!-- Add header for code snippets -->
@@ -580,7 +1370,7 @@
 
 <article class="px-1" data-toc="true">
   <header>
-    <h1 data-toc-skip>Configure Secure Dmvpn Tunnels</h1>
+    <h1 data-toc-skip>Configuring Secure DMVPN Tunnels</h1>
     
 
     <div class="post-meta text-muted">
@@ -597,7 +1387,7 @@
 
 <time
   
-  data-ts="1779400800"
+  data-ts="1779465600"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -652,7 +1442,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="758 words"
+  title="777 words"
 >
   <em>4 min</em> read</span>
 
@@ -663,7 +1453,7 @@
 
   
     <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
-      <span class="label text-truncate">Configure Secure Dmvpn Tunnels</span>
+      <span class="label text-truncate">Configuring Secure DMVPN Tunnels</span>
       <button type="button" class="toc-trigger btn me-1">
         <i class="fa-solid fa-list-ul fa-fw"></i>
       </button>
@@ -676,7 +1466,7 @@
 
     <dialog id="toc-popup" class="p-0">
       <div class="header d-flex flex-row align-items-center justify-content-between">
-        <div class="label text-truncate py-2 ms-4">Configure Secure Dmvpn Tunnels</div>
+        <div class="label text-truncate py-2 ms-4">Configuring Secure DMVPN Tunnels</div>
         <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
           <i class="fas fa-close"></i>
         </button>
@@ -686,102 +1476,105 @@
   
 
   <div class="content">
-    <p>In this lab, I explore how to secure a DMVPN Phase 3 network with IPsec. DMVPN dynamically builds GRE tunnels between hub and spokes, while IPsec encrypts the traffic running over them. I start by verifying the existing DMVPN setup, then configure IKE policies and IPsec protection on the hub and spokes, and finally check that the SAs are established and the spoke‑to‑spoke tunnels work as expected.</p>
+    <p>In this lab, I explore how to secure a DMVPN Phase 3 network with IPsec. DMVPN dynamically builds GRE tunnels between the hub and spokes, while IPsec encrypts the traffic running over them. I start by verifying the existing DMVPN setup, then configure IKE policies and IPsec protection on the hub and spokes, and finally verify that the security associations (SAs) are established and that spoke-to-spoke tunnels work as expected.</p>
 
-<p>![[Pasted image 20260522143349.png]]</p>
+<p><a href="/assets/img/Pasted image 20260522143349.png" class="popup img-link shimmer"><img src="/assets/img/Pasted image 20260522143349.png" alt="description" loading="lazy"></a></p>
 
-<p>![[Pasted image 20260522143403.png]]</p>
+<p><a href="/assets/img/Pasted image 20260522143403.png" class="popup img-link shimmer"><img src="/assets/img/Pasted image 20260522143403.png" alt="description" loading="lazy"></a></p>
 
-<p>IPsec functionality is essential to DMVPN implementation.</p>
+<p>IPsec functionality is essential for a DMVPN implementation.</p>
 
 <h2 id="step-1-verify-dmvpn-operation"><span class="me-2">Step 1: Verify DMVPN operation</span><a href="#step-1-verify-dmvpn-operation" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>I will ping the loopback addresses of R2 and R3 from R1 and use the sh dmvpn command</p>
+<p>I will ping the loopback addresses of R2 and R3 from R1 and use the <code class="language-plaintext highlighter-rouge">show dmvpn</code> command.</p>
 
-<p>![[Pasted image 20260522144705.png]]</p>
+<p><a href="/assets/img/Pasted image 20260522144705.png" class="popup img-link shimmer"><img src="/assets/img/Pasted image 20260522144705.png" alt="description" loading="lazy"></a></p>
 
-<h2 id="step-2-secure-dmvpn-phase-3-tunnels"><span class="me-2">Step 2: Secure DMVPN Phase 3 Tunnels</span><a href="#step-2-secure-dmvpn-phase-3-tunnels" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<h2 id="step-2-secure-dmvpn-phase-3-tunnels"><span class="me-2">Step 2: Secure DMVPN Phase 3 tunnels</span><a href="#step-2-secure-dmvpn-phase-3-tunnels" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>First I have to create the IKE policy that defines the hash algorithm, encryption type, key exchange method, Diffie-Hellman group, and the authentication method</p>
+<p>First, I need to create the IKE policy that defines the hash algorithm, encryption type, key exchange method, Diffie-Hellman group, and authentication method.</p>
 
-<p>IKE (Internet Key Exchange) is the protocol that <strong>sets up and manages the secure “handshake”</strong> between two devices before an IPsec VPN tunnel can protect real data.</p>
+<p>IKE (Internet Key Exchange) is the protocol that <strong>sets up and manages the secure “handshake”</strong> between two devices before an IPsec VPN tunnel can protect real traffic.</p>
 
-<p>![[Pasted image 20260522145107.png]]</p>
+<p><a href="/assets/img/Pasted image 20260522145107.png" class="popup img-link shimmer"><img src="/assets/img/Pasted image 20260522145107.png" alt="description" loading="lazy"></a></p>
 
-<p>this block configures <strong>IKE Phase 1 parameters</strong> on R1 so that when it talks to R3, both routers agree on the same hash, encryption, key‑exchange group, and authentication method to build the secure control channel.</p>
+<p>This configuration block sets the <strong>IKE Phase 1 parameters</strong> on R1 so that when it communicates with R3, both routers agree on the same hash, encryption method, Diffie-Hellman group, and authentication method to build the secure control channel.</p>
 
-<p>I have created an IKE/ISAKMP policy with number <strong>99</strong>, which uniquely identifies this policy and gives it a priority (higher numbers = lower priority).</p>
+<p>I created an IKE/ISAKMP policy with the number <strong>99</strong>, which uniquely identifies the policy and assigns it a priority (higher numbers = lower priority).</p>
 
-<p>It’s time to create the pre-shared key and peer address. I will use 0.0.0.0 to match multiple peer addresses, and use DMVPN@key# as the key.</p>
+<p>Next, I will create the pre-shared key and peer address. I will use <code class="language-plaintext highlighter-rouge">0.0.0.0</code> to match multiple peer addresses and use <code class="language-plaintext highlighter-rouge">DMVPN@key#</code> as the key.</p>
 
-<p>![[Pasted image 20260522191941.png]]</p>
+<p><a href="/assets/img/Pasted image 20260522191941.png" class="popup img-link shimmer"><img src="/assets/img/Pasted image 20260522191941.png" alt="description" loading="lazy"></a></p>
 
 <p>Now I will configure the IPsec transform set.</p>
 
-<p>![[Pasted image 20260522192345.png]]</p>
+<p><a href="/assets/img/Pasted image 20260522192345.png" class="popup img-link shimmer"><img src="/assets/img/Pasted image 20260522192345.png" alt="description" loading="lazy"></a></p>
 
-<p>There is two modes for the tunnel, can be either transport and tunnel.</p>
+<p>There are two tunnel modes available: transport mode and tunnel mode.</p>
 
 <ul>
   <li>
-    <p><strong>Tunnel mode</strong>: The whole original packet is hidden inside a new IP packet, so only the VPN endpoints’ IPs are visible on the network.</p>
+    <p><strong>Tunnel mode</strong>: The entire original packet is encapsulated inside a new IP packet, so only the VPN endpoints’ IP addresses are visible on the network.</p>
   </li>
   <li>
-    <p><strong>Transport mode</strong>: Only the data inside the packet is encrypted; the original sender and receiver IPs stay visible and unchanged.</p>
+    <p><strong>Transport mode</strong>: Only the payload of the original packet is encrypted, while the original sender and receiver IP addresses remain visible and unchanged.</p>
   </li>
 </ul>
 
-<p>I create an <strong>IPsec profile</strong> that “bundles” the IPsec protection settings and can later be applied to a tunnel interface.</p>
+<p>Next, I create an <strong>IPsec profile</strong> that bundles the IPsec protection settings and can later be applied to a tunnel interface.</p>
 
-<p>![[Pasted image 20260522192833.png]]</p>
+<p><a href="/assets/img/Pasted image 20260522192833.png" class="popup img-link shimmer"><img src="/assets/img/Pasted image 20260522192833.png" alt="description" loading="lazy"></a></p>
 
-<p>the <strong>IPsec profile</strong> is like a “template” that says “when you apply me to a tunnel, protect that tunnel with transform set <code class="language-plaintext highlighter-rouge">DMVPN_TRANS</code>”</p>
+<p>The <strong>IPsec profile</strong> acts like a template that says: “when you apply me to a tunnel, protect that tunnel using the transform set <code class="language-plaintext highlighter-rouge">DMVPN_TRANS</code>.”</p>
 
-<p>The command to apply the IPsec profile to an interface is <strong>tunnel protection ipsec profile</strong> <em>profile-name</em></p>
+<p>The command used to apply the IPsec profile to an interface is:</p>
 
-<p>![[Pasted image 20260522193644.png]]</p>
+<p><code class="language-plaintext highlighter-rouge">tunnel protection ipsec profile &lt;profile-name&gt;</code></p>
 
-<p>In this case, the routers are running EIGRP, but since R2 and R3 are not yet configured with IPsec, they fail to establish both the EIGRP neighbor adjacency and the IPsec security association.</p>
+<p><a href="/assets/img/Pasted image 20260522193644.png" class="popup img-link shimmer"><img src="/assets/img/Pasted image 20260522193644.png" alt="description" loading="lazy"></a></p>
 
-<p>I will now configure IPsec properly on R2 and R3. Since the hub’s interface has a dynamic IP address, I will use 0.0.0.0 0.0.0.0 as the address; otherwise, I would use the hub’s public IP address.</p>
+<p>At this point, the routers are running EIGRP, but because R2 and R3 are not yet configured with IPsec, they fail to establish both the EIGRP neighbor adjacency and the IPsec security associations.</p>
+
+<p>I will now configure IPsec properly on R2 and R3. Since the hub’s interface uses a dynamic IP address, I will use <code class="language-plaintext highlighter-rouge">0.0.0.0 0.0.0.0</code> as the peer address. Otherwise, I would use the hub’s public IP address directly.</p>
 
 <p>On R2 and R3:</p>
 
-<p>![[Pasted image 20260522194949.png]]</p>
+<p><a href="/assets/img/Pasted image 20260522194949.png" class="popup img-link shimmer"><img src="/assets/img/Pasted image 20260522194949.png" alt="description" loading="lazy"></a></p>
 
-<p>Tip: To help me remember these four steps, I think of it like this: I use the crypto isakmp command twice (for policies and pre‑shared keys) and the crypto ipsec command twice (for the transform set and the profile), and then I apply the IPsec profile to the tunnel interface.</p>
+<p><strong>Tip:</strong> To help me remember these four steps, I think of it this way: I use the <code class="language-plaintext highlighter-rouge">crypto isakmp</code> command twice (for policies and pre-shared keys) and the <code class="language-plaintext highlighter-rouge">crypto ipsec</code> command twice (for the transform set and the profile), and then I apply the IPsec profile to the tunnel interface.</p>
 
-<p>Now coming back to R1 and checking for the security associations, I check that the SAs with R2 and R3 are formed correctly, which they are</p>
+<p>Now, back on R1, I check the security associations and verify that the SAs with R2 and R3 are formed correctly, which they are.</p>
 
-<p>![[Pasted image 20260522195246.png]]</p>
+<p><a href="/assets/img/Pasted image 20260522195246.png" class="popup img-link shimmer"><img src="/assets/img/Pasted image 20260522195246.png" alt="description" loading="lazy"></a></p>
 
-<p>Another command I can use is show crypto ipsec sa.  It shows <strong>IPsec Phase 2 SAs</strong>: the security associations that actually encrypt and authenticate the <strong>data traffic</strong> (packets)</p>
+<p>Another useful command is <code class="language-plaintext highlighter-rouge">show crypto ipsec sa</code>. It displays the <strong>IPsec Phase 2 SAs</strong>, which are the security associations responsible for encrypting and authenticating the actual data traffic.</p>
 
-<p>![[Pasted image 20260522200020.png]]</p>
+<p><a href="/assets/img/Pasted image 20260522200020.png" class="popup img-link shimmer"><img src="/assets/img/Pasted image 20260522200020.png" alt="description" loading="lazy"></a></p>
 
-<p>First address corresponds to R1 and second one with R3, below R2 will appear too.</p>
+<p>The first address corresponds to R1 and the second one to R3. Below that, R2 will also appear.</p>
 
-<p>To finish I use traceroute from R2 to the simulated LAN interface on R3. Then I issue the traceroute command again. I will now see that R1 has enabled direct spoke-to-spoke
-communication between R2 and R3. This tunnel will expire and close dynamically. The tunnel reopens after data for the spoke router is sent again.</p>
+<p>To finish the lab, I run a traceroute from R2 to the simulated LAN interface on R3. Then I run the traceroute again. This time, I can see that R1 has enabled direct spoke-to-spoke communication between R2 and R3.</p>
 
-<p>![[Pasted image 20260522200419.png]]</p>
+<p>This tunnel expires and closes dynamically when it is no longer needed. The tunnel automatically reopens when new traffic is sent between the spokes.</p>
 
-<p>In the end, this lab showed me how DMVPN and IPsec work together: DMVPN dynamically builds the GRE tunnels, and IPsec protects them with strong encryption and IKE negotiation.</p>
+<p><a href="/assets/img/Pasted image 20260522200419.png" class="popup img-link shimmer"><img src="/assets/img/Pasted image 20260522200419.png" alt="description" loading="lazy"></a></p>
 
-<p>Here are my three <strong>must‑remember takeaways</strong> for this lab:</p>
+<p>In the end, this lab showed me how DMVPN and IPsec work together: DMVPN dynamically builds the GRE tunnels, while IPsec protects them using strong encryption and IKE negotiation.</p>
+
+<p>Here are my three <strong>must-remember takeaways</strong> from this lab:</p>
 
 <ol>
   <li>
-    <p><strong>IKE and IPsec are separate layers</strong>:<br />
- First you configure <strong>IKE (ISAKMP)</strong> to set up the secure control channel; then you configure <strong>IPsec (transform set + profile)</strong> to protect the actual data traffic.</p>
+    <p><strong>IKE and IPsec are separate layers</strong><br />
+First, you configure <strong>IKE (ISAKMP)</strong> to establish the secure control channel. Then, you configure <strong>IPsec (transform set + profile)</strong> to protect the actual data traffic.</p>
   </li>
   <li>
-    <p><strong>The hub uses <code class="language-plaintext highlighter-rouge">0.0.0.0</code> for dynamic spokes</strong>:<br />
- On the hub, using <code class="language-plaintext highlighter-rouge">crypto isakmp key ... address 0.0.0.0 0.0.0.0</code> lets one pre‑shared key work with many spokes, which is especially useful in DMVPN with dynamic IP addresses.</p>
+    <p><strong>The hub uses <code class="language-plaintext highlighter-rouge">0.0.0.0</code> for dynamic spokes</strong><br />
+On the hub, using <code class="language-plaintext highlighter-rouge">crypto isakmp key ... address 0.0.0.0 0.0.0.0</code> allows a single pre-shared key to work with multiple spokes, which is especially useful in DMVPN environments with dynamic IP addresses.</p>
   </li>
   <li>
-    <p><strong>Always check both SA types</strong>:<br />
- Use <code class="language-plaintext highlighter-rouge">show crypto isakmp sa</code> to confirm the IKE‑phase tunnel is up, and <code class="language-plaintext highlighter-rouge">show crypto ipsec sa</code> to confirm that real data is being encrypted between the peers.</p>
+    <p><strong>Always verify both SA types</strong><br />
+Use <code class="language-plaintext highlighter-rouge">show crypto isakmp sa</code> to confirm that the IKE tunnel is established, and use <code class="language-plaintext highlighter-rouge">show crypto ipsec sa</code> to verify that real traffic is actually being encrypted between the peers.</p>
   </li>
 </ol>
 
@@ -790,8 +1583,39 @@ communication between R2 and R3. This tunnel will expire and close dynamically. 
   <div class="post-tail-wrapper text-muted">
     <!-- categories -->
     
+      <div class="post-meta mb-3">
+        <i class="far fa-folder-open fa-fw me-1"></i>
+        
+          <a href="/categories/networking/">networking</a>
+      </div>
+    
 
     <!-- tags -->
+    
+      <div class="post-tags">
+        <i class="fa fa-tags fa-fw me-1"></i>
+        
+          <a
+            href="/tags/ipsec/"
+            class="post-tag no-text-decoration"
+          >ipsec</a>
+        
+          <a
+            href="/tags/dmvpn/"
+            class="post-tag no-text-decoration"
+          >dmvpn</a>
+        
+          <a
+            href="/tags/cisco/"
+            class="post-tag no-text-decoration"
+          >Cisco</a>
+        
+          <a
+            href="/tags/tutorial/"
+            class="post-tag no-text-decoration"
+          >Tutorial</a>
+        
+      </div>
     
 
     <div
@@ -825,21 +1649,21 @@ communication between R2 and R3. This tunnel will expire and close dynamically. 
 
       
 
-      <a href="https://twitter.com/intent/tweet?text=Configure%20Secure%20Dmvpn%20Tunnels%20-%20Gonzalo%20Brandan&url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2FConfigure-Secure-DMVPN-Tunnels%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
+      <a href="https://twitter.com/intent/tweet?text=Configuring%20Secure%20DMVPN%20Tunnels%20-%20Gonzalo%20Brandan&url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2FConfigure-Secure-DMVPN-Tunnels%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
         <i class="fa-fw fa-brands fa-square-x-twitter"></i>
       </a>
     
 
       
 
-      <a href="https://www.facebook.com/sharer/sharer.php?title=Configure%20Secure%20Dmvpn%20Tunnels%20-%20Gonzalo%20Brandan&u=http%3A%2F%2Flocalhost%3A4000%2Fposts%2FConfigure-Secure-DMVPN-Tunnels%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
+      <a href="https://www.facebook.com/sharer/sharer.php?title=Configuring%20Secure%20DMVPN%20Tunnels%20-%20Gonzalo%20Brandan&u=http%3A%2F%2Flocalhost%3A4000%2Fposts%2FConfigure-Secure-DMVPN-Tunnels%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
         <i class="fa-fw fab fa-facebook-square"></i>
       </a>
     
 
       
 
-      <a href="https://t.me/share/url?url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2FConfigure-Secure-DMVPN-Tunnels%2F&text=Configure%20Secure%20Dmvpn%20Tunnels%20-%20Gonzalo%20Brandan" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
+      <a href="https://t.me/share/url?url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2FConfigure-Secure-DMVPN-Tunnels%2F&text=Configuring%20Secure%20DMVPN%20Tunnels%20-%20Gonzalo%20Brandan" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
         <i class="fa-fw fab fa-telegram"></i>
       </a>
     
@@ -894,21 +1718,14 @@ communication between R2 and R3. This tunnel will expire and close dynamically. 
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Configure-Secure-DMVPN-Tunnels/">Configure Secure Dmvpn Tunnels</a>
+          <a href="/posts/Configure-Secure-DMVPN-Tunnels/">Configuring Secure DMVPN Tunnels</a>
         </li>
       
         
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/configure-secure-dmvpn-tunnels-with-ipsec.md/">Configure Secure Dmvpn Tunnels With Ipsec.md</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/configure-a-basic-wlan-on-the-wlc-Copy/">Configure a Basic WLAN on the WLC</a>
+          <a href="/posts/Implement-IPsec-Site-to-Site-VPNs-IPSec-post/">Implementing IPsec Site-to-Site VPNs</a>
         </li>
       
         
@@ -960,6 +1777,21 @@ communication between R2 and R3. This tunnel will expire and close dynamically. 
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -969,7 +1801,10 @@ communication between R2 and R3. This tunnel will expire and close dynamically. 
     
     
     
-      
+  
+    
+    
+    
     
   
     
@@ -977,6 +1812,77 @@ communication between R2 and R3. This tunnel will expire and close dynamically. 
     
     
       
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -998,6 +1904,15 @@ communication between R2 and R3. This tunnel will expire and close dynamically. 
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/tutorial/">Tutorial</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/ipsec/">ipsec</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/dmvpn/">dmvpn</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/security/">security</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/wlan/">WLAN</a>
@@ -1057,6 +1972,33 @@ communication between R2 and R3. This tunnel will expire and close dynamically. 
 
 
 
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
 
 
@@ -1066,6 +2008,71 @@ communication between R2 and R3. This tunnel will expire and close dynamically. 
 
 
 
+
+
+  <aside id="related-posts" aria-labelledby="related-label">
+    <h3 class="mb-4" id="related-label">Further Reading</h3>
+    <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
+      
+        <article class="col">
+          <a href="/posts/Implement-IPsec-Site-to-Site-VPNs-IPSec-post/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1779465600"
+  data-df="ll"
+  
+>
+  May 22, 2026
+</time>
+
+              <h4 class="pt-0 my-2">Implementing IPsec Site-to-Site VPNs</h4>
+              <div class="text-muted">
+                <p>Topology    Addressing Table      In this lab, I will establish a site-to-site IPsec VPN tunnel between R1 and R3 through R2. R2 acts as the ISP router and has no knowledge of the VPN itself. This ...</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/configure-a-basic-wlan-on-the-wlc/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1764432000"
+  data-df="ll"
+  
+>
+  Nov 29, 2025
+</time>
+
+              <h4 class="pt-0 my-2">Configure a Basic WLAN on the WLC</h4>
+              <div class="text-muted">
+                <p>In this lab I will learn some of the features of a wireless LAN controller. I will create a new WLAN on the controller and implement security on that LAN. Then, I will configure a wireless host to ...</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+    </nav>
+  </aside>
+  <!-- #related-posts -->
 
 
             
@@ -1088,11 +2095,11 @@ communication between R2 and R3. This tunnel will expire and close dynamically. 
 
   
     <a
-      href="/posts/configure-secure-dmvpn-tunnels-with-ipsec.md/"
+      href="/posts/Implement-IPsec-Site-to-Site-VPNs-IPSec-post/"
       class="btn btn-outline-primary"
       aria-label="Newer"
     >
-      <p>Configure Secure Dmvpn Tunnels With Ipsec.md</p>
+      <p>Implementing IPsec Site-to-Site VPNs</p>
     </a>
   
 </nav>
@@ -1180,6 +2187,21 @@ communication between R2 and R3. This tunnel will expire and close dynamically. 
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -1189,7 +2211,10 @@ communication between R2 and R3. This tunnel will expire and close dynamically. 
     
     
     
-      
+  
+    
+    
+    
     
   
     
@@ -1197,6 +2222,77 @@ communication between R2 and R3. This tunnel will expire and close dynamically. 
     
     
       
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -1218,6 +2314,15 @@ communication between R2 and R3. This tunnel will expire and close dynamically. 
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/tutorial/">Tutorial</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/ipsec/">ipsec</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/dmvpn/">dmvpn</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/security/">security</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/wlan/">WLAN</a>
