@@ -1,0 +1,4 @@
+to run it locally run
+bundle exec jekyll serve
+
+

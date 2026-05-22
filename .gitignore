@@ -3,8 +3,10 @@
 vendor
 Gemfile.lock
 
-# Jekyll cache
-
+# Jekyll cache: 3 removed because otherwise the website will not load properly.
+#.jekyll-cache
+#.jekyll-metadata
+#_site
 
 # RubyGems
 *.gem
@@ -26,3 +28,5 @@ assets/js/dist
 
 #python
 remove_img.py
+
+instructions.txt
