@@ -1,0 +1,115 @@
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>http://localhost:4000/</id>
+  <title>Gonzalo Brandan</title>
+  <subtitle>Articles and lab notes on Cisco networking, wireless, routing, switching, and my progress toward the CCNP certification.</subtitle>
+  <updated>2026-05-22T21:11:33+02:00</updated>
+  <author>
+    <name>Gonzalo Brandan</name>
+    <uri>http://localhost:4000/</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="http://localhost:4000/feed.xml"/>
+  <link rel="alternate" type="text/html" hreflang="en"
+    href="http://localhost:4000/"/>
+  <generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator>
+  <rights> © 2026 Gonzalo Brandan </rights>
+  <icon>/assets/img/favicons/favicon.ico</icon>
+  <logo>/assets/img/favicons/favicon-96x96.png</logo>
+
+
+  
+  <entry>
+    <title>Configure Secure Dmvpn Tunnels With Ipsec.md</title>
+    <link href="http://localhost:4000/posts/configure-secure-dmvpn-tunnels-with-ipsec.md/" rel="alternate" type="text/html" title="Configure Secure Dmvpn Tunnels With Ipsec.md" />
+    <published>2026-05-22T00:00:00+02:00</published>
+  
+    <updated>2026-05-22T00:00:00+02:00</updated>
+  
+    <id>http://localhost:4000/posts/configure-secure-dmvpn-tunnels-with-ipsec.md/</id>
+    <content type="text/html" src="http://localhost:4000/posts/configure-secure-dmvpn-tunnels-with-ipsec.md/" />
+    <author>
+      <name>Gonzalo Brandan</name>
+    </author>
+
+  
+    
+  
+
+  <summary>In this lab, I explore how to secure a DMVPN Phase 3 network with IPsec. DMVPN dynamically builds GRE tunnels between hub and spokes, while IPsec encrypts the traffic running over them. I start by verifying the existing DMVPN setup, then configure IKE policies and IPsec protection on the hub and spokes, and finally check that the SAs are established and the spoke‑to‑spoke tunnels work as expect...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>Configure Secure Dmvpn Tunnels</title>
+    <link href="http://localhost:4000/posts/Configure-Secure-DMVPN-Tunnels/" rel="alternate" type="text/html" title="Configure Secure Dmvpn Tunnels" />
+    <published>2026-05-22T00:00:00+02:00</published>
+  
+    <updated>2026-05-22T00:00:00+02:00</updated>
+  
+    <id>http://localhost:4000/posts/Configure-Secure-DMVPN-Tunnels/</id>
+    <content type="text/html" src="http://localhost:4000/posts/Configure-Secure-DMVPN-Tunnels/" />
+    <author>
+      <name>Gonzalo Brandan</name>
+    </author>
+
+  
+    
+  
+
+  <summary>In this lab, I explore how to secure a DMVPN Phase 3 network with IPsec. DMVPN dynamically builds GRE tunnels between hub and spokes, while IPsec encrypts the traffic running over them. I start by verifying the existing DMVPN setup, then configure IKE policies and IPsec protection on the hub and spokes, and finally check that the SAs are established and the spoke‑to‑spoke tunnels work as expect...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>Configure a Basic WLAN on the WLC</title>
+    <link href="http://localhost:4000/posts/configure-a-basic-wlan-on-the-wlc/" rel="alternate" type="text/html" title="Configure a Basic WLAN on the WLC" />
+    <published>2025-11-29T17:00:00+01:00</published>
+  
+    <updated>2025-11-29T17:00:00+01:00</updated>
+  
+    <id>http://localhost:4000/posts/configure-a-basic-wlan-on-the-wlc/</id>
+    <content type="text/html" src="http://localhost:4000/posts/configure-a-basic-wlan-on-the-wlc/" />
+    <author>
+      <name>Gonzalo Brandan</name>
+    </author>
+
+  
+    
+    <category term="networking" />
+    
+  
+
+  <summary>In this lab I will learn some of the features of a wireless LAN controller. I will create a new WLAN on the controller and implement security on that LAN. Then, I will configure a wireless host to connect to the new WLAN through an AP that is under the control of the WLC.  Topology      Steps:  1. Access the WLCs management via HTTPS  First I open the web browser in the Admin PC. I enter the ma...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>Configure a Basic WLAN on the WLC</title>
+    <link href="http://localhost:4000/posts/configure-a-basic-wlan-on-the-wlc-Copy/" rel="alternate" type="text/html" title="Configure a Basic WLAN on the WLC" />
+    <published>2025-11-29T17:00:00+01:00</published>
+  
+    <updated>2025-11-29T17:00:00+01:00</updated>
+  
+    <id>http://localhost:4000/posts/configure-a-basic-wlan-on-the-wlc-Copy/</id>
+    <content type="text/html" src="http://localhost:4000/posts/configure-a-basic-wlan-on-the-wlc-Copy/" />
+    <author>
+      <name>Gonzalo Brandan</name>
+    </author>
+
+  
+    
+    <category term="networking" />
+    
+  
+
+  <summary>In this lab I will learn some of the features of a wireless LAN controller. I will create a new WLAN on the controller and implement security on that LAN. Then, I will configure a wireless host to connect to the new WLAN through an AP that is under the control of the WLC.  Topology      Steps:  1. Access the WLCs management via HTTPS  First I open the web browser in the Admin PC. I enter the ma...</summary>
+
+  </entry>
+
+</feed>
+
+
