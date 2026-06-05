@@ -1,17 +1,24 @@
-To learn and link:
-HSRP
-Port channel
-Access,distribution,edge layer?tipo de network
+---
+title: "Creating a redundant network"
+date: 2026-06-05 16:00:00 +0000
+categories: networking
+tags: [redundancy, VLAN, NAT, HSRP, BGP, Cisco, Tutorial]
+comments: true
+toc: true
+layout: post
+---
 
-Disclaimer: This lab was completed by following Dan Miller’s Cisco Packet Tracer Lab Mastery: Build and Secure Advanced Topologies. I used it as a guided learning exercise, taking notes and making sure I understood each concept as I built the topology. This post is my documentation of that learning process.
 
-The goal of this write-up is to document the design decisions, the configurations, and the networking concepts that were applied throughout the lab. It was a useful way to reinforce topics like redundancy, VLAN segmentation, HSRP, BGP, NAT, and routing in a realistic Packet Tracer environment.
+
+The goal of this post to document the design decisions, the configurations, and the networking concepts that were applied throughout the lab. It was a useful way to reinforce topics like redundancy, VLAN segmentation, HSRP, BGP, NAT, and routing in a realistic Packet Tracer environment.
 
 # Lab objective
 
 The objective of this lab is to build a fully redundant enterprise network in Packet Tracer, starting from the internet edge and working inward through the edge, core, access, wireless, and end-user layers. The design includes dual ISP connections, redundant edge routers with HSRP, redundant core switches, access-layer VLAN segmentation, wireless connectivity, DHCP, routing, and NAT so the network can stay available even if a device or link fails.
 
 This lab was designed to show how the different layers of an enterprise network fit together and how redundancy is built into each part of the topology. By the end, the network is able to provide connectivity from end-user devices all the way out to the internet while keeping the design resilient, organized, and scalable.
+
+Disclaimer: This lab was completed by following Dan Miller’s Cisco Packet Tracer Lab Mastery: Build and Secure Advanced Topologies. (https://www.packtpub.com/en-us/product/cisco-packet-tracer-lab-mastery-build-and-secure-advanced-topologies-9781806708390) I used it as a guided learning exercise, taking notes and making sure I understood each concept as I built the topology. This post is my documentation of that learning process.
 
 # Internet side
 
