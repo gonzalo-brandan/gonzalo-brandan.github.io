@@ -1,6 +1,6 @@
 ---
 title: "Creating a redundant network"
-date: 2026-06-05 16:00:00 +0000
+date: 2026-06-04 16:00:00 +0000
 categories: networking
 tags: [redundancy, VLAN, NAT, HSRP, BGP, Cisco, Tutorial]
 comments: true
@@ -11,6 +11,7 @@ layout: post
 The goal of this post is to document the design decisions, the configurations, and the networking concepts that were applied throughout the lab. It was a useful way to reinforce topics like redundancy, VLAN segmentation, HSRP, BGP, NAT, and routing in a realistic Packet Tracer environment.
 
 ![description](/assets/img/Pasted image 20260605145741.png)
+
 ## Lab objective
 
 The objective of this lab is to build a fully redundant enterprise network in Packet Tracer, starting from the internet edge and working inward through the edge, core, access, wireless, and end-user layers. The design includes dual ISP connections, redundant edge routers with HSRP, redundant core switches, access-layer VLAN segmentation, wireless connectivity, DHCP, routing, and NAT so the network can stay available even if a device or link fails.
