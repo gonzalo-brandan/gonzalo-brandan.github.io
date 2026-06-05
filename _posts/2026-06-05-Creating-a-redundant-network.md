@@ -8,19 +8,17 @@ toc: true
 layout: post
 ---
 
+The goal of this post is to document the design decisions, the configurations, and the networking concepts that were applied throughout the lab. It was a useful way to reinforce topics like redundancy, VLAN segmentation, HSRP, BGP, NAT, and routing in a realistic Packet Tracer environment.
 
-
-The goal of this post to document the design decisions, the configurations, and the networking concepts that were applied throughout the lab. It was a useful way to reinforce topics like redundancy, VLAN segmentation, HSRP, BGP, NAT, and routing in a realistic Packet Tracer environment.
-
-# Lab objective
+![description](/assets/img/Pasted image 20260605145741.png)
+## Lab objective
 
 The objective of this lab is to build a fully redundant enterprise network in Packet Tracer, starting from the internet edge and working inward through the edge, core, access, wireless, and end-user layers. The design includes dual ISP connections, redundant edge routers with HSRP, redundant core switches, access-layer VLAN segmentation, wireless connectivity, DHCP, routing, and NAT so the network can stay available even if a device or link fails.
 
 This lab was designed to show how the different layers of an enterprise network fit together and how redundancy is built into each part of the topology. By the end, the network is able to provide connectivity from end-user devices all the way out to the internet while keeping the design resilient, organized, and scalable.
 
 Disclaimer: This lab was completed by following Dan Miller’s Cisco Packet Tracer Lab Mastery: Build and Secure Advanced Topologies. (https://www.packtpub.com/en-us/product/cisco-packet-tracer-lab-mastery-build-and-secure-advanced-topologies-9781806708390) I used it as a guided learning exercise, taking notes and making sure I understood each concept as I built the topology. This post is my documentation of that learning process.
-
-# Internet side
+## Internet side
 
 ![description](/assets/img/Pasted image 20260601172800.png)
 
@@ -32,7 +30,7 @@ The key idea behind this design is that redundancy means more than simply having
 
 To make the design realistic, I used BGP with separate autonomous systems so the routers could exchange routes the way real ISPs do. This reflects how enterprise networks connect to external providers and choose the best available path.
 
-# Edge design
+## Edge design
 
 ![description](/assets/img/Pasted image 20260601174015.png)
 
@@ -44,7 +42,7 @@ To support seamless failover, I used HSRP so both routers could present a single
 
 This part of the lab reinforces an important lesson: redundancy has to exist at multiple layers. Protecting against ISP failure is not enough if the edge itself is still a single point of failure.
 
-# Core design
+## Core design
 
 ![description](/assets/img/Pasted image 20260601175416.png)
 
@@ -57,7 +55,7 @@ I used a collapsed-core approach, which keeps the design simpler by combining co
 
 The inter-core link was included so the two switches could operate together, and the blocked spanning-tree port was expected at this stage because the port-channel had not yet been configured. At this point in the lab, the focus was on building the structure before moving into the detailed configuration.
 
-# Access design
+## Access design
 
 ![description](/assets/img/Pasted image 20260601192130.png)
 
@@ -70,7 +68,7 @@ I focused on the user experience here, because downtime at the access layer is i
 
 I kept the access layer separate from the core instead of connecting the access switches directly to one another, because user traffic should pass through the core. The multiple uplinks also prepare the design for spanning tree and port-channel behavior later in the lab.
 
-# End-user design
+## End-user design
 
 ![description](/assets/img/Pasted image 20260601193543.png)
 
@@ -82,7 +80,7 @@ I distributed the devices across different floors to make the access design feel
 
 End users do not usually need the same level of redundancy as the core or edge, but their connections still need to be stable and organized. The purpose of this layer is to make the network usable, secure, and easy to segment with tools such as VLANs and access controls.
 
-# Wireless Design
+## Wireless Design
 
 ![description](/assets/img/Pasted image 20260601194808.png)
 ![description](/assets/img/Pasted image 20260601194829.png)
@@ -94,20 +92,20 @@ Because the WLC acts as the control plane for the wireless network, I treated it
 For coverage, I used overlapping access points so users could stay connected even if one AP failed or went offline. The idea was to make sure the wireless network still had a path forward with minimal impact on users.
 
 Packet Tracer has limits when it comes to realistic wireless behavior, so this section was focused more on the design concept than on fully configuring every wireless feature. The main goal was to understand how a real Wi‑Fi deployment should be structured before moving on to IP planning.
-# VLAN Design
+## VLAN Design
 
 ![description](/assets/img/Pasted image 20260601195810.png)
 
 I split the internal LAN into three VLANs: VLAN 10 for wired staff, VLAN 20 for wired voice, and VLAN 30 for wireless staff. This keeps the network organized and lets each device type live in its own logical segment.
 
-### IP plan
+## IP plan
 I assigned one subnet to each VLAN: 192.168.10.0/24 for wired staff, 192.168.20.0/24 for voice, and 192.168.30.0/24 for wireless staff. I used .1 and .2 for the core switch gateways and .254 as the HSRP virtual IP on each VLAN.
 
 I wanted a simple design that still showed how VLANs separate traffic and how the core provides the default gateway through HSRP. This also gave me a clean foundation for later configuration topics like trunks, access ports, and spanning tree.
 
 This structure makes the LAN easier to manage and keeps voice, wireless, and data traffic separated from each other. It also makes the redundancy design clearer because the core switches act as shared gateways for the internal network.
 
-# ISP Configuration
+## ISP Configuration
 
 ![description](/assets/img/Pasted image 20260601205442.png)
 ![description](/assets/img/Pasted image 20260601205556.png)
@@ -117,7 +115,7 @@ I started with the internet side of the lab so the WAN foundation was in place b
 
 BGP was used so each ISP could advertise its own network and exchange routes with the edge routers across separate autonomous systems. This reflects the real-world model of two independent providers feeding a redundant enterprise edge.
 
-# Edge configuration
+## Edge configuration
 
 Edge1
 
@@ -137,7 +135,7 @@ Verification:
 
 I did same verification on Edge2 Router.
 
-# Core setup
+## Core setup
 
 Core1
 ```
@@ -252,7 +250,7 @@ I set up the VLANs on all three access switches first so the access layer was re
 ![description](/assets/img/Pasted image 20260602205947.png)
 
 
-# Access Ports
+## Access Ports
 
 ![description](/assets/img/Pasted image 20260603144654.png)
 
@@ -263,7 +261,7 @@ I wanted the access layer to stay organized and efficient, so each device type h
 This made the access layer ready to connect into the core without confusion and gave each device a clean path through the network. It also set up the lab so the later trunk and port-channel configuration could be tied in more easily.
 
 
-# Core to access
+## Core to access
 
 Access3
 ![description](/assets/img/Pasted image 20260603163037.png)
@@ -409,7 +407,7 @@ DHCP for WiredVoIP Vlan
 DHCP for WirelessStaff VLAN
 ![description](/assets/img/Pasted image 20260603174432.png)
 
-# Routing setup
+## Routing setup
 
 There is full connectivity between the end user devices, to the access and core layer. 
 
@@ -501,7 +499,7 @@ And now we have internet connection:
 
 ![description](/assets/img/Pasted image 20260605130109.png)
 
-# Testing redundancy
+## Testing redundancy
 
 ## Core failover
 
@@ -517,10 +515,11 @@ The timeouts come from when I shut down Core1 so all traffic was redirected thro
 ![description](/assets/img/Pasted image 20260605140729.png)
 
 Note: I add to create a new BGP adjacency between ISP1 and ISP2.
+
 ![description](/assets/img/Pasted image 20260605140831.png)
 
 
-# Final thoughts
+## Final thoughts
 
 This lab was a strong exercise in understanding how a resilient enterprise network is built from the ground up. It tied together redundancy at every layer, from dual ISPs and edge routers to the core, access, wireless, and end-user devices, which made the overall design much easier to understand in context.
 
