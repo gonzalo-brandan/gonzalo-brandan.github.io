@@ -59,7 +59,7 @@ RO2 Subnet Design (172.20.43.0/24)
 
 This plan leaves **172.20.43.200 through 172.20.43.255** unused for future expansion.
 
-## Part 2: Topology and Secure Remote Access
+## Topology and Secure Remote Access
 
 I connected the devices as required, 4 departments on RO2, dividing the RO2 LAN into 6 subnets, not done any configuration yet.
 
@@ -169,7 +169,7 @@ interface e0/0.40
 ip helper-address 172.20.47.249
 ```
 
-## Part 3: DHCP Implementation
+## DHCP Implementation
 
 I am using a centralized DHCP model where **HQ** acts as the server and **RO2** acts as the relay agent. This allows for easier management of all IP leases from a single device. Later I am planning to implement it through a windows server.
 
@@ -224,7 +224,7 @@ interface Ethernet0/0.40
  ip helper-address 172.20.47.249
 ```
 
-## Part 4: Router-on-a-Stick (ROAS) Implementation
+## Router-on-a-Stick (ROAS) Implementation
 
 Now that the DHCP server is ready, I must configure the path between the clients and the router. I am using **Router-on-a-Stick (ROAS)**, which uses a single physical link to carry multiple VLANs between the switches and the router RO2.
 
@@ -388,7 +388,7 @@ The ping was successful, confirming that:
 2. The switches are tagging frames with the correct **802.1Q headers**.
 3. **RO2** is successfully routing traffic between its logical subinterfaces.
 
-## Part 6: OSPF Area Design and Communication
+## OSPF Area Design and Communication
 
  
 To enable communication between RO1, HQ, and RO2, I implemented **Multi-Area OSPF**. This allows for a hierarchical design where Area 0 acts as the backbone connecting the remote sites.
@@ -494,3 +494,12 @@ Inside local: actual private IP address of the host (in this case PC0 on LAN RO2
 Outside global: Public IP address of the destination server, in this case Google DNS.
 Outside Local: In standard source NAT this is typically identical to the outside global address 
 
+## Summary 
+
+With the successful implementation of Multi-Area OSPF, Remote Office 2 is now fully integrated into the corporate backbone. By following a structured approach—starting with a rigid VLSM design and moving through Layer 2 segmentation to Layer 3 dynamic routing—I have established a stable, reachable network environment
+
+Summary of Accomplishments:
+
+- Logical Segmentation: Successfully implemented ROAS and trunking, ensuring that four distinct departments are isolated at Layer 2 but can communicate through the RO2 gateway.
+- Automated Services: Configured HQ as a centralized DHCP server, with RO2 acting as a relay agent to provide efficient IP addressing across all user subnets.
+- Dynamic Reachability: Established Multi-Area OSPF adjacencies using stable Loopback RIDs and optimized point-to-point network types for fast convergence
