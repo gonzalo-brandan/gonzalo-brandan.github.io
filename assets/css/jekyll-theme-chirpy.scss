@@ -1,0 +1,275 @@
+---
+---
+
+/* prettier-ignore */
+@use 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
+
+/* -----------------------------------------------------------------
+   Custom theme
+   Palette and details drawn from network hardware: status LEDs,
+   patch-cable jackets, and rack-equipment labeling, rather than the
+   theme's stock corporate-blue / SaaS defaults.
+------------------------------------------------------------------ */
+
+:root {
+  --bs-font-monospace: 'IBM Plex Mono', SFMono-Regular, Menlo, Monaco,
+    Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
+@mixin site-light {
+  --main-bg: #f5f6f4;
+  --text-color: #1b1f1d;
+  --heading-color: #14181a;
+  --label-color: #55605a;
+  --link-color: #96570d;
+  --link-underline-color: #dfe3df;
+  --main-border-color: #dfe3df;
+  --btn-border-color: #dfe3df;
+
+  --site-title-color: #3a423d;
+  --site-subtitle-color: #6b756f;
+  --sidebar-bg: #eef0ec;
+  --sidebar-border-color: #dfe3df;
+  --sidebar-muted-color: #55605a;
+  --sidebar-active-color: #14181a;
+  --sidebar-hover-bg: rgb(232 163 61 / 12%);
+  --avatar-border-color: #dfe3df;
+
+  --card-bg: #ffffff;
+  --card-hover-bg: #eef0ec;
+  --toc-highlight: #96570d;
+
+  --tag-border: #dfe3df;
+  --tag-hover: rgb(63 125 92 / 12%);
+  --checkbox-checked-color: #3f7d5c;
+
+  --code-header-icon-color: #96570d;
+
+  --accent-amber: #e8a33d;
+  --accent-green: #3f7d5c;
+}
+
+@mixin site-dark {
+  --main-bg: #14181a;
+  --text-color: #d7dbd8;
+  --heading-color: #f2f3f1;
+  --label-color: #9aa39d;
+  --link-color: #e8a33d;
+  --link-underline-color: #262b2c;
+  --main-border-color: #262b2c;
+  --btn-border-color: #262b2c;
+
+  --site-title-color: #c7cdc9;
+  --site-subtitle-color: #8b948e;
+  --sidebar-bg: #191d1f;
+  --sidebar-border-color: #262b2c;
+  --sidebar-muted-color: #9aa39d;
+  --sidebar-active-color: #f2f3f1;
+  --sidebar-hover-bg: rgb(232 163 61 / 10%);
+  --avatar-border-color: #262b2c;
+
+  --card-bg: #191d1f;
+  --card-hover-bg: #1e2325;
+  --toc-highlight: #e8a33d;
+
+  --tag-border: #262b2c;
+  --tag-hover: rgb(95 174 134 / 16%);
+  --checkbox-checked-color: #5fae86;
+
+  --code-header-icon-color: #e8a33d;
+
+  --accent-amber: #e8a33d;
+  --accent-green: #5fae86;
+}
+
+html {
+  @media (prefers-color-scheme: light) {
+    &:not([data-mode]),
+    &[data-mode='light'] {
+      @include site-light;
+    }
+
+    &[data-mode='dark'] {
+      @include site-dark;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &:not([data-mode]),
+    &[data-mode='dark'] {
+      @include site-dark;
+    }
+
+    &[data-mode='light'] {
+      @include site-light;
+    }
+  }
+}
+
+/* Avatar: corner brackets instead of a plain ring, like a rack-unit label */
+/* selector must match #sidebar #avatar's specificity, or its overflow: hidden clips the brackets below */
+#sidebar #avatar {
+  position: relative;
+  overflow: visible; /* let the corner brackets below extend past the frame */
+  box-shadow: none;
+  border: 1px solid var(--avatar-border-color);
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* overflow is no longer clipping this to a circle */
+    object-fit: cover;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-color: var(--accent-amber);
+    border-style: solid;
+    pointer-events: none;
+  }
+
+  &::before {
+    top: -5px;
+    left: -5px;
+    border-width: 2px 0 0 2px;
+  }
+
+  &::after {
+    bottom: -5px;
+    right: -5px;
+    border-width: 0 2px 2px 0;
+  }
+}
+
+/* Post tags: interface/port indicators rather than bare text links */
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+
+  .post-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.15rem 0.6rem 0.15rem 0.5rem;
+    border: 1px solid var(--tag-border);
+    border-radius: 2px;
+    font-family: var(--bs-font-monospace);
+    font-size: 0.78rem;
+    color: var(--text-color);
+
+    &::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--accent-green);
+    }
+
+    &:hover {
+      border-color: var(--accent-amber);
+      background: var(--tag-hover);
+    }
+  }
+}
+
+/* Code blocks: a console frame, not a fake macOS window */
+div[class^='language-'] {
+  border-top: 2px solid var(--accent-amber);
+
+  .code-header {
+    @media (min-width: 576px) {
+      &::before {
+        width: 8px;
+        height: 8px;
+        border-radius: 2px;
+        background-color: var(--accent-green);
+        box-shadow: none;
+      }
+    }
+  }
+}
+
+/* -----------------------------------------------------------------
+   Reassert font + radius here, literally.
+   $font-family-base/$font-family-heading/$radius-sm/$radius-lg in
+   _sass/abstracts/_variables.scss look like the right override point,
+   but Chirpy's own partials pull that partial with relative @use
+   paths (e.g. `@use '../abstracts/variables'`), which Sass always
+   resolves against the gem's own directory first. Our site-level
+   _sass/abstracts/_variables.scss is never reached, so the values
+   below have to be repeated verbatim, matching the selectors Chirpy
+   itself compiles them to.
+------------------------------------------------------------------ */
+
+$override-font-family: 'IBM Plex Sans', 'Microsoft Yahei', sans-serif;
+$override-radius-sm: 3px;
+$override-radius-lg: 4px;
+
+body,
+header .post-desc,
+#toc-bar .label,
+#search-results a,
+h1,
+h2,
+h3,
+h4,
+h5,
+kbd,
+#notification .toast-body,
+#toc-popup .header .label,
+#toc-popup #toc-popup-content,
+.pagination,
+#toc-solo-trigger .label,
+#archives .date.day {
+  font-family: $override-font-family;
+}
+
+.categories.card,
+.categories .list-group,
+.highlight,
+div[class^='language-'],
+.code-header button,
+blockquote[class^='prompt-'],
+.preview-img,
+.preview-img img,
+.post-preview,
+.post-preview::before,
+.embed-video,
+.content > div[class^='language-'],
+#toc-popup,
+#toc-solo-trigger {
+  border-radius: $override-radius-lg;
+}
+
+#post-list .card .preview-img img,
+#post-list .card .preview-img {
+  border-radius: $override-radius-lg $override-radius-lg 0 0;
+}
+
+.post-navigation .btn:first-child {
+  border-radius: $override-radius-lg 0 0 $override-radius-lg;
+}
+
+.post-navigation .btn:last-child {
+  border-radius: 0 $override-radius-lg $override-radius-lg 0;
+}
+
+.categories .card-header {
+  border-radius: calc(#{$override-radius-lg} - 1px);
+}
+
+kbd,
+code.highlighter-rouge {
+  border-radius: $override-radius-sm;
+}
