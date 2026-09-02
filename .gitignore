@@ -3,10 +3,10 @@
 vendor
 Gemfile.lock
 
-# Jekyll cache: 3 removed because otherwise the website will not load properly.
-#.jekyll-cache
-#.jekyll-metadata
-#_site
+# Jekyll cache / build output (rebuilt by the GitHub Actions deploy workflow)
+.jekyll-cache
+.jekyll-metadata
+_site
 
 # RubyGems
 *.gem
