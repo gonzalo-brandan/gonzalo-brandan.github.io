@@ -51,6 +51,11 @@
 
   --accent-amber: #e8a33d;
   --accent-green: #3f7d5c;
+
+  /* opaque, matching --main-bg exactly: the theme default is a translucent
+     overlay in a slightly different base color, which shows up as a seam
+     where the sticky topbar sits over the page */
+  --topbar-bg: var(--main-bg);
 }
 
 @mixin site-dark {
@@ -84,6 +89,8 @@
 
   --accent-amber: #e8a33d;
   --accent-green: #5fae86;
+
+  --topbar-bg: var(--main-bg);
 }
 
 html {
@@ -272,4 +279,40 @@ blockquote[class^='prompt-'],
 kbd,
 code.highlighter-rouge {
   border-radius: $override-radius-sm;
+}
+
+/* Bootstrap's own outline-primary buttons (trending tags, post pager)
+   default to Bootstrap blue on hover/active/focus; repoint that at the
+   site accent instead via the same --bs-btn-* custom properties Bootstrap
+   itself reads, so no specificity fight is needed. */
+.btn-outline-primary {
+  --bs-btn-color: var(--accent-amber);
+  --bs-btn-border-color: var(--accent-amber);
+  --bs-btn-hover-color: #14181a;
+  --bs-btn-hover-bg: var(--accent-amber);
+  --bs-btn-hover-border-color: var(--accent-amber);
+  --bs-btn-focus-shadow-rgb: 232, 163, 61;
+  --bs-btn-active-color: #14181a;
+  --bs-btn-active-bg: var(--accent-amber);
+  --bs-btn-active-border-color: var(--accent-amber);
+  --bs-btn-disabled-color: var(--accent-amber);
+  --bs-btn-disabled-border-color: var(--accent-amber);
+}
+
+/* Chirpy itself hardcodes this hover border blue with !important
+   ("Overwrite bootstrap outline button" in its own source), so the
+   --bs-btn-hover-border-color override above can't reach it; only an
+   equally-specific !important rule can. */
+.btn.btn-outline-primary:not(.disabled):hover {
+  border-color: var(--accent-amber) !important;
+}
+
+/* Search box: right-align it flush with the topbar and it ends up under
+   the panel column's far edge, past where "Recently Updated" etc. start;
+   left-align it flush and it sits in the main-content gutter. Split the
+   difference with a right margin sized to land its left edge at the
+   panel column's left edge instead, so it lines up with the section
+   headings below it. */
+#search {
+  margin-right: 1.75rem;
 }

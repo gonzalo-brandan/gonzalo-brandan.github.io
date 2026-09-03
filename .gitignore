@@ -1,7 +1,6 @@
 # Bundler cache
 .bundle
 vendor
-Gemfile.lock
 
 # Jekyll cache / build output (rebuilt by the GitHub Actions deploy workflow)
 .jekyll-cache
