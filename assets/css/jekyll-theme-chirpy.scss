@@ -93,27 +93,22 @@
   --topbar-bg: var(--main-bg);
 }
 
+/* Default to dark for a first-time visitor (no stored light/dark choice
+   yet, i.e. no [data-mode]) regardless of their OS preference, rather
+   than following prefers-color-scheme like Chirpy does out of the box.
+   The mode-toggle button still switches explicitly to light or dark from
+   there. */
 html {
-  @media (prefers-color-scheme: light) {
-    &:not([data-mode]),
-    &[data-mode='light'] {
-      @include site-light;
-    }
-
-    &[data-mode='dark'] {
-      @include site-dark;
-    }
+  &:not([data-mode]) {
+    @include site-dark;
   }
 
-  @media (prefers-color-scheme: dark) {
-    &:not([data-mode]),
-    &[data-mode='dark'] {
-      @include site-dark;
-    }
+  &[data-mode='light'] {
+    @include site-light;
+  }
 
-    &[data-mode='light'] {
-      @include site-light;
-    }
+  &[data-mode='dark'] {
+    @include site-dark;
   }
 }
 
