@@ -1,5 +1,15 @@
 terraform {
-  required_version = ">= 1.6"
+  required_version = ">= 1.10"
+
+  # State lives in S3 (versioned, private). Created once by hand with the
+  # AWS CLI, since Terraform can't create the bucket that stores its state.
+  backend "s3" {
+    bucket       = "tfstate-936719391198-us-east-1"
+    key          = "portfolio/terraform.tfstate"
+    region       = "us-east-1"
+    encrypt      = true
+    use_lockfile = true
+  }
 
   required_providers {
     aws = {
