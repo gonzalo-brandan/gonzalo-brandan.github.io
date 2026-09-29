@@ -10,10 +10,10 @@ variable "project_name" {
   default     = "portfolio"
 }
 
-variable "github_repo" {
-  description = "GitHub repository allowed to deploy, as owner/name."
+variable "github_sub_prefix" {
+  description = "OIDC subject prefix of the repo allowed to deploy. Get it with: gh api repos/OWNER/REPO/actions/oidc/customization/sub"
   type        = string
-  default     = "gonzalo-brandan/gonzalo-brandan.github.io"
+  default     = "repo:gonzalo-brandan@108426175/gonzalo-brandan.github.io@1106601850"
 }
 
 variable "create_github_oidc_provider" {
