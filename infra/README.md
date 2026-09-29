@@ -7,14 +7,15 @@ GitHub push to main
   └─ GitHub Actions: build → htmlproofer → assume IAM role (OIDC, no stored keys)
        └─ aws s3 sync → CloudFront invalidation
 
-Visitor → CloudFront (HTTPS, security headers, index rewrite) → private S3 bucket
+Visitor → Route 53 → CloudFront (HTTPS via ACM, security headers, www redirect, index rewrite) → private S3 bucket
 ```
 
 | File | What it creates |
 |---|---|
 | `main.tf` | Private S3 bucket, CloudFront distribution with Origin Access Control, bucket policy |
-| `index-rewrite.js` | CloudFront Function that serves `/posts/foo/` from `/posts/foo/index.html` |
+| `index-rewrite.js` | CloudFront Function that redirects `www` to the bare domain and serves `/posts/foo/` from `/posts/foo/index.html` |
 | `github.tf` | GitHub OIDC provider and a deploy role limited to this repo's `main` branch |
+| `domain.tf` | Route 53 zone, ACM certificate and DNS records for gonzalobrandan.com (registered at Namecheap, nameservers pointed at Route 53) |
 | `budget.tf` | Monthly cost budget with email alerts |
 
 State is stored in the S3 bucket `tfstate-936719391198-us-east-1` (versioned, with S3 native locking).

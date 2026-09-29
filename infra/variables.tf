@@ -39,3 +39,9 @@ variable "budget_warning_amount" {
   type        = string
   default     = "1.10"
 }
+
+variable "domain_name" {
+  description = "Custom domain for the site (without www)."
+  type        = string
+  default     = "gonzalobrandan.com"
+}
