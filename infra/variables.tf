@@ -21,3 +21,21 @@ variable "create_github_oidc_provider" {
   type        = bool
   default     = true
 }
+
+variable "budget_alert_email" {
+  description = "Email address that receives billing alerts."
+  type        = string
+  default     = "gonzalobrandan@outlook.de"
+}
+
+variable "budget_limit_amount" {
+  description = "Monthly budget in USD (AWS Budgets only supports USD). 3.40 USD is about 3 EUR."
+  type        = string
+  default     = "3.40"
+}
+
+variable "budget_warning_amount" {
+  description = "Early-warning alert in USD when actual spend passes it. 1.10 USD is about 1 EUR."
+  type        = string
+  default     = "1.10"
+}
