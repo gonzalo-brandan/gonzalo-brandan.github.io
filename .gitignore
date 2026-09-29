@@ -29,3 +29,11 @@ assets/js/dist
 remove_img.py
 fix_img_link.py
 instructions.txt
+
+# Terraform
+infra/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+_config.aws.yml
+infra/tfplan
