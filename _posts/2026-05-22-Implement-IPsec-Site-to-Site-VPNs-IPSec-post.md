@@ -6,11 +6,10 @@ tags: [ipsec, security, Cisco, Tutorial]
 comments: true
 toc: true
 layout: post
+image:
+  path: "/assets/img/Pasted image 20260520130556.png"
+  alt: "IPsec site-to-site VPN topology"
 ---
-
-## Topology
-
-![description](/assets/img/Pasted image 20260520130556.png)
 
 ## Addressing Table
 

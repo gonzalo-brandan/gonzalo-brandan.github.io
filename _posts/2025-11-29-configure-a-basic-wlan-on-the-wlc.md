@@ -6,12 +6,13 @@ tags: [WLAN, Cisco, Tutorial]
 comments: true
 toc: true
 layout: post
+image:
+  path: "/assets/img/Pasted image 20251125144231.png"
+  alt: "WLAN lab topology"
 ---
 In this lab I will learn some of the features of a wireless LAN controller. I will create a new WLAN on the controller and implement security on that LAN. Then, I will configure a wireless host to connect to the new WLAN through an AP that is under the control of the WLC. 
 
 ### Topology
-
-![description](/assets/img/Pasted image 20251125144231.png)
 
 ![description](/assets/img/Pasted image 20251125144445.png)
 

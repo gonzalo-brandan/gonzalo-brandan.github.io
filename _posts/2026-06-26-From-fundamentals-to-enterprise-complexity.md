@@ -13,6 +13,9 @@ tags:
 comments: true
 toc: true
 layout: post
+image:
+  path: "/assets/img/Pasted image 20260623101319.png"
+  alt: "Project network topology"
 ---
 ## Project Idea: From Fundamentals to Enterprise Complexity
 
@@ -62,10 +65,6 @@ This plan leaves **172.20.43.200 through 172.20.43.255** unused for future expan
 ## Topology and Secure Remote Access
 
 I connected the devices as required, 4 departments on RO2, dividing the RO2 LAN into 6 subnets, not done any configuration yet.
-
-## Topology
-
-![description](/assets/img/Pasted image 20260623101319.png)
 
 With the topology physically connected, I must now configure secure management. Remote access via **SSH** is preferred over Telnet because it encrypts all traffic, including passwords.
 

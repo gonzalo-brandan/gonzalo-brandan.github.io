@@ -6,11 +6,12 @@ tags: [redundancy, VLAN, NAT, HSRP, BGP, Cisco, Tutorial]
 comments: true
 toc: true
 layout: post
+image:
+  path: "/assets/img/Pasted image 20260605145741.png"
+  alt: "Redundant enterprise network topology"
 ---
 
 The goal of this post is to document the design decisions, the configurations, and the networking concepts that were applied throughout the lab. It was a useful way to reinforce topics like redundancy, VLAN segmentation, HSRP, BGP, NAT, and routing in a realistic Packet Tracer environment.
-
-![description](/assets/img/Pasted image 20260605145741.png)
 
 ## Lab objective
 

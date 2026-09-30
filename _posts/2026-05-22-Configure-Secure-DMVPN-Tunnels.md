@@ -6,10 +6,11 @@ tags: [ipsec, dmvpn, Cisco, Tutorial]
 comments: true
 toc: true
 layout: post
+image:
+  path: "/assets/img/Pasted image 20260522143349.png"
+  alt: "DMVPN lab topology"
 ---
 In this lab, I explore how to secure a DMVPN Phase 3 network with IPsec. DMVPN dynamically builds GRE tunnels between the hub and spokes, while IPsec encrypts the traffic running over them. I start by verifying the existing DMVPN setup, then configure IKE policies and IPsec protection on the hub and spokes, and finally verify that the security associations (SAs) are established and that spoke-to-spoke tunnels work as expected.
-
-![description](/assets/img/Pasted image 20260522143349.png)
 
 ![description](/assets/img/Pasted image 20260522143403.png)
 
