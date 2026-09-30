@@ -16,7 +16,7 @@ timezone:
 
 title: Gonzalo Brandan # the main title
 
-tagline: I like solving infrastructure problems, from the cable in the rack to the routing table. CCNP, based in Berlin. # it will display as the subtitle
+tagline: I like solving infrastructure problems. # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
   Articles and lab notes on Cisco networking, wireless, routing, switching, and my progress toward the CCNP certification.
