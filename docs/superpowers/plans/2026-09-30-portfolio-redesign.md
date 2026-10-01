@@ -4107,4 +4107,4 @@ Leave `bundle exec jekyll serve --livereload` running. Tell the user the branch 
 
 ---
 
-**Status 2026-10-01:** Task 9 (rack integration) was reworked during review; see "What was built" at the end of the design spec. Still to do before going live: Impressum and privacy policy, click-to-load comments, real-device testing, deciding whether `/lab/` becomes the homepage.
+**Status 2026-10-01:** Task 9 (rack integration) was reworked during review; see "What was built" at the end of the design spec. The portfolio is now the homepage (`/`); the Chirpy post list moved to `/blog/` and `/lab/` forwards to `/`. Still to do before going live: Impressum and privacy policy, click-to-load comments, real-device testing.

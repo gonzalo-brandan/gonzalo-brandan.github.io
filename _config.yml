@@ -146,6 +146,8 @@ pwa:
       # - "/example"  # URLs match `<SITE_URL>/example/*` will not be cached by the PWA
 
 paginate: 10
+# the classic blog list lives at /blog/ (the homepage is the portfolio)
+paginate_path: "/blog/page:num/"
 
 # The base URL of your site
 baseurl: ""

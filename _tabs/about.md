@@ -4,7 +4,7 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-**New:** [my portfolio page](/lab/): my CV, my lab write-ups, and an interactive 42U data center rack you can open up and explore.
+**New:** [my portfolio page](/): my CV, my lab write-ups, and an interactive 42U data center rack you can open up and explore.
 
 Hi, I'm Gonzalo. I like solving infrastructure problems, and I'm most at home where the physical and the logical meet: the rack, the cabling, the switch config and the routing table that ties it all together.
 
