@@ -1,0 +1,8 @@
+[
+{%- for p in site.posts -%}
+{%- comment -%} excerpt: the post's description, or its first real paragraph (posts often open with a heading or an image) {%- endcomment -%}
+{%- assign ex = p.description | default: "" -%}
+{%- if ex == "" -%}{%- assign chunks = p.content | split: "<p>" -%}{%- for ch in chunks offset: 1 -%}{%- assign t = ch | split: "</p>" | first | strip_html | normalize_whitespace -%}{%- if t.size > 60 -%}{%- assign ex = t -%}{%- break -%}{%- endif -%}{%- endfor -%}{%- endif -%}
+{"slug": {{ p.url | split: "/" | last | jsonify }}, "url": {{ p.url | relative_url | jsonify }}, "title": {{ p.title | jsonify }}, "date": {{ p.date | date: "%Y-%m-%d" | jsonify }}, "topic": {{ p.topic | default: p.categories.first | jsonify }}, "minutes": {{ p.content | number_of_words | divided_by: 220 | at_least: 1 }}, "excerpt": {{ ex | truncatewords: 34 | jsonify }}, "image": {% if p.image.path %}{{ p.image.path | relative_url | uri_escape | jsonify }}{% else %}null{% endif %}, "alt": {{ p.image.alt | default: p.title | jsonify }}, "tags": {{ p.tags | jsonify }}}{% unless forloop.last %},{% endunless %}
+{%- endfor -%}
+]
