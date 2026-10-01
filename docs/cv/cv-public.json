@@ -1,0 +1,58 @@
+{
+  "lang": "en",
+  "page_format": "a4",
+  "candidate": {
+    "name": "Gonzalo Brandan",
+    "location": "Berlin, Germany",
+    "email": "gonzalobrandan@outlook.de",
+    "linkedin": { "url": "https://www.linkedin.com/in/gonzalo-brandan/", "display": "linkedin.com/in/gonzalo-brandan" },
+    "github": { "url": "https://github.com/gonzalo-brandan", "display": "github.com/gonzalo-brandan" },
+    "portfolio": { "url": "https://gonzalobrandan.com", "display": "gonzalobrandan.com" }
+  },
+  "summary": "Networking professional with CCNP Enterprise, studying a part-time BSc in Computer Engineering. After 18 months running customer satisfaction for a 1,300-guest hostel, I completed CCNA and CCNP Enterprise training to move into IT. I document everything I build, speak Spanish, English and German, and I am looking for an entry-level IT role in Berlin, as close as possible to hands-on hardware and physical infrastructure: racking, cabling and troubleshooting.",
+  "experience": [
+    {
+      "company": "Mediateam IT Education Center",
+      "role": "CCNA + CCNP Enterprise Trainee",
+      "location": "Berlin",
+      "period": "09/2025 – 04/2026",
+      "bullets": [
+        "Hands-on training in Cisco network design, configuration and troubleshooting. About 70% of the course was lab work: VLANs, OSPF, EIGRP, NAT/PAT, DHCP, ACLs, VLSM and multi-site WAN designs.",
+        "Built a redundant enterprise network: two ISP links with BGP, HSRP on the edge and core, port-channels and spanning tree to the access layer, VLANs, DHCP, NAT/PAT and wireless. Tested failover and fixed missing default routes on the core switches.",
+        "Built an enterprise branch network: VLSM, router-on-a-stick, central DHCP with relay agents, multi-area OSPF and NAT overload. Fixed missing VLANs, native VLAN mismatches and address gaps that blocked OSPF.",
+        "Kept configs and change notes in Git and wrote up every lab on my blog."
+      ]
+    },
+    {
+      "company": "a&o Hostels",
+      "role": "Customer Service / Guest Relations Manager",
+      "location": "Berlin",
+      "period": "02/2024 – 07/2025",
+      "bullets": [
+        "Ran customer satisfaction for a 1,300-guest hostel: overbookings, payment problems, noise complaints and maintenance emergencies.",
+        "Handled 60–80 escalated cases a week by email and chat in German, English and Spanish, and answered most of them within 4 hours.",
+        "Wrote the response templates and the escalation process the team still uses. Repeat guests went up 11% year over year."
+      ]
+    }
+  ],
+  "projects": [
+    { "name": "Data Center Home Lab", "badge": "in progress, 2026", "description": "A small 20U rack that copies basic data center work: four Cisco Catalyst switches in a spine-leaf design with fiber and copper links, a labelled patch panel, a UPS with safe shutdown, out-of-band access and written runbooks for common failures." },
+    { "name": "Redundant Network Design Lab", "badge": "2025", "description": "Enterprise network with redundancy at every layer, documented from design to failover tests.", "tech": "BGP, HSRP, port-channels, STP, VLANs, NAT/PAT" },
+    { "name": "Enterprise Branch Connectivity Lab", "badge": "2025", "description": "A new branch office joined to a company network with a main site and one remote office.", "tech": "VLSM, 802.1Q, DHCP relay, multi-area OSPF, NAT" },
+    { "name": "Technical blog", "badge": "gonzalobrandan.com", "description": "Every lab I build, written up: the problem, the design, the configuration, the tests and what broke along the way." }
+  ],
+  "education": [
+    { "title": "BSc Computer Engineering (part-time, online)", "org": "Universitat Oberta de Catalunya, Barcelona", "year": "09/2024 – 09/2029 (expected)", "description": "Courses so far: math for engineering, programming fundamentals, computer architecture, networking basics." }
+  ],
+  "certifications": [
+    { "title": "CCNP Enterprise", "org": "Cisco" },
+    { "title": "CCNA", "org": "Cisco" },
+    { "title": "TELC German B2", "org": "telc" }
+  ],
+  "skills": [
+    { "category": "Networking", "items": "VLANs, OSPF, EIGRP, basic BGP, HSRP, STP, port-channels, NAT/PAT, DHCP, ACLs, VLSM, IPsec and DMVPN, Cisco IOS" },
+    { "category": "Tools", "items": "Cisco Packet Tracer, GNS3/EVE-NG (basic), Wireshark (basic), Git, Jira Service Management (basic)" },
+    { "category": "Systems", "items": "Linux (Ubuntu, Fedora; intermediate), RHEL and Ansible (learning), Windows, Intune and Entra ID (basic)" },
+    { "category": "Languages", "items": "Spanish (native), English (C1+), German (B2)" }
+  ]
+}
