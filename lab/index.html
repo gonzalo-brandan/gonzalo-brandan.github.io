@@ -771,20 +771,11 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
       </div>
       <div class="sec prose cols" id="enjoy" data-dev="">
         <div class="sec-head">
-          <span class="lab">[ What I enjoy ]</span>
-          <h2 class="h2">Hands on the hardware</h2>
+          <span class="lab">[ What I enjoy · How I work ]</span>
+          <h2 class="h2">Hands on the hardware, in it for the long run</h2>
         </div>
         <div class="sec-body">
-          <p>Give me a day on the floor over a day at a desk. I like visiting new facilities, meeting the people who run them, and working out how all the hardware fits together through the network.</p>
-          <p>I also have a soft spot for a well-dressed rack. Clean cabling and good labels make me happier than they probably should, which is why the rack on this page exists.</p>
-        </div>
-      </div>
-      <div class="sec prose cols" id="work-style" data-dev="">
-        <div class="sec-head">
-          <span class="lab">[ How I work ]</span>
-          <h2 class="h2">Calm at work, curious for the long run</h2>
-        </div>
-        <div class="sec-body">
+          <p>Give me a day on the floor over a day at a desk. I like visiting new facilities, meeting the people who run them, and working out how all the hardware fits together through the network. I also have a soft spot for a well-dressed rack: clean cabling and good labels make me happier than they probably should, which is why the rack on this page exists.</p>
           <p>I'm a long-term learner and I don't give up easily. Where others would have stopped after the third complication, I'm still as curious as on day one, and I keep looking for the solution. When something is new to me, I read, read, read.</p>
           <p>On the job I'm calm and focused. Around it I'm active, social and usually the one with the joke.</p>
         </div>
@@ -2845,7 +2836,7 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
     if (seen || coachShown) return;
     coachShown = true; setTimeout(() => { if (mode === 'explore') coach.classList.add('on'); }, reduce ? 0 : 1100);
   }
-  const secName = { top: 'the top', going: "Where I'm going", enjoy: 'What I enjoy', 'work-style': 'How I work', care: 'What I care about', now: 'Right now', looking: "What I'm looking for", latest: 'Latest write-ups', contact: 'Contact' };
+  const secName = { top: 'the top', going: "Where I'm going", enjoy: 'What I enjoy', care: 'What I care about', now: 'Right now', looking: "What I'm looking for", latest: 'Latest write-ups', contact: 'Contact' };
 
   function setMode(m) {
     if (m === mode) return;
