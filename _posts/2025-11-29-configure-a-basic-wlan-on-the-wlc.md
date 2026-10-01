@@ -1,4 +1,5 @@
 ---
+topic: Wireless
 title: "Configure a Basic WLAN on the WLC"
 date: 2025-11-29 16:00:00 +0000
 categories: networking

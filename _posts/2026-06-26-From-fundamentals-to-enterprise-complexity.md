@@ -1,4 +1,5 @@
 ---
+topic: Projects
 title: From Fundamentals to Enterprise Complexity
 date: 2026-06-25 16:00:00 +0000
 categories: Projects

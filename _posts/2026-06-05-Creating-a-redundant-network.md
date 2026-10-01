@@ -1,4 +1,5 @@
 ---
+topic: Networking
 title: "Creating a redundant network"
 date: 2026-06-04 16:00:00 +0000
 categories: networking
