@@ -196,7 +196,7 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
 .lab { font: 500 13px var(--f-mono); color: var(--paper-2); letter-spacing: 0.02em; }
 .big { margin: 0; font: 600 clamp(38px, 5vw, 76px)/0.98 var(--f-read); letter-spacing: -0.035em; text-wrap: balance; max-width: 13ch; }
 .lede { margin: 0; font-size: 20px; color: var(--paper-2); max-width: 46ch; text-wrap: pretty; }
-.read .hero { justify-items: center; text-align: center; } /* the opening is centred; every section after it is left-aligned */
+.read .hero { justify-items: start; } /* the opening lines up with every section after it */
 .lede b { color: var(--paper-ink); font-weight: 600; }
 .facts { display: flex; flex-wrap: wrap; gap: 8px 14px; font: 500 13px var(--f-mono); }
 .status { display: inline-flex; align-items: center; gap: 8px; font: 500 14px var(--f-read); }
@@ -586,7 +586,7 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
 @media (prefers-reduced-motion: reduce) { .statement span { transition: none; } .mq-track { transform: none !important; } }
 /* ---- Contact: holographic card ---- */
 .contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px 56px; align-items: center; }
-.contact-grid > div:last-child { display: grid; gap: 18px; align-content: start; justify-items: start; }
+.contact-grid > .contact-main { display: grid; gap: 18px; align-content: start; justify-items: start; }
 .holo-wrap { perspective: 1100px; }
 .holo { position: relative; width: 238px; aspect-ratio: 350 / 475; padding: 9px; border-radius: 14px; background: #f1f1ee;
   box-shadow: 0 0 0 1px rgb(255 255 255 / .5) inset, 0 2px 0 0 #fff inset, 0 30px 60px -20px rgb(0 0 0 / .8), 0 0 0 4px rgb(255 255 255 / .06);
@@ -624,8 +624,8 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
 .prose .sec-body p + p { margin-top: 0; }
 .prose .sec-body .ctas { margin-top: 8px; }
 .read .sec.cols .blog-all { margin-top: 6px; justify-self: start; }
-.contact-grid { grid-template-columns: minmax(200px, 30%) minmax(0, 1fr); column-gap: clamp(28px, 4vw, 64px); align-items: start; }
-.contact-grid .holo-wrap { justify-self: start; }
+.contact-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: clamp(28px, 4vw, 64px); align-items: center; }
+.contact-grid .holo-wrap { justify-self: start; } /* "Let's talk" on the left, the card just right of the middle */
 @media (max-width: 1000px) { .read .sec.cols, .contact-grid { grid-template-columns: minmax(0, 1fr); } }
 /* statement: centred in the middle of the page; buttons: one size, centred text */
 .statement { text-align: center; }
@@ -826,13 +826,7 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
       </div>
       <div class="sec" id="contact" data-dev="">
         <div class="contact-grid">
-          <div class="holo-wrap">
-            <div class="holo" id="holoCard">
-              <canvas class="holo-art" width="70" height="95" aria-hidden="true"></canvas>
-              <div class="holo-glare" aria-hidden="true"></div>
-            </div>
-          </div>
-          <div>
+          <div class="contact-main">
         <span class="lab">[ Contact ]</span>
         <h2 class="h2">Let's talk</h2>
         <div class="contact-list">
@@ -841,6 +835,12 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
           <a href="https://github.com/gonzalo-brandan" target="_blank" rel="noopener">GitHub</a>
           <a href="/assets/cv/Gonzalo-Brandan-CV.pdf" download>Download my CV (PDF)</a>
         </div>
+          </div>
+          <div class="holo-wrap">
+            <div class="holo" id="holoCard">
+              <canvas class="holo-art" width="70" height="95" aria-hidden="true"></canvas>
+              <div class="holo-glare" aria-hidden="true"></div>
+            </div>
           </div>
         </div>
       </div>
