@@ -15,7 +15,7 @@
 - All work happens on branch `redesign`. Never push to or merge into `main`; the user approves the merge separately.
 - Post URLs stay `/posts/:title/`; `/about/`, `/archives/`, `/tags/` and `/tags/:name/` keep their URLs. `/categories/...` goes away. `/feed.xml` keeps working but is not linked.
 - No CSS, JS, text, images or font files are copied from matthieugivelet.com. The font is Inter Tight, self-hosted as woff2 (weights 400, 500, 600, latin subset). No Google Fonts requests.
-- No JavaScript libraries. Every JS file is an ES module with one job.
+- No JavaScript libraries, with one exception: three.js r147 (MIT), self-hosted under `assets/js/three/`, used only by the rack (Task 9) and loaded lazily. Every JS file is an ES module with one job.
 - Colours: background `#FFFFFF`, text `#000000`, borders black at 10%, accent `#FFFB24`. Dark mode inverts background and text and keeps the accent.
 - Labels are written in square brackets, e.g. `[ Berlin ]`.
 - Every page shows all its content without JavaScript. Reveal starting states apply only when `<html>` has the `js` class.
@@ -4003,7 +4003,43 @@ EOF
 
 ---
 
-### Task 9: Final verification
+### Task 9: Rack integration — Read mode, locate LED, in-page reader, Explore mode
+
+Deliverable: the 3D rack lives on Home next to the text, as described in the spec section "Rack integration". Reference implementation: the clickable prototype (`lab/prototype.html`, reviewed by the user) and the full viewer in `lab/index.html`.
+
+**Files:**
+- Create: `_data/rack.yml`, `rack.json` (Liquid), `_includes/rack.html`, `assets/js/rack/` (`scene.js`, `devices.js`, `read-mode.js`, `reader.js`, `explore.js`, `palette.js`), `assets/js/three/` (three.min.js r147, OrbitControls, RoomEnvironment, GLTFLoader + LICENSE), `assets/models/*.glb` (from `lab/models/`), `assets/img/rack-still.webp`
+- Modify: `_layouts/home.html`, `_layouts/post.html` (mini-rack strip + TOC as rack units), `_sass/_components.scss`, `assets/js/main.js`, the five posts' front matter (`device:`)
+
+**Interfaces:**
+- Consumes: header/menu (Task 2), post layout and TOC (Task 3), Home sections (Task 4), archive rows (Task 5), motion tokens and reveal (Task 8).
+- Produces: `rack.json` = `{ devices: [{id, name, u, kind, section}], posts: [{url, title, date, device}] }`; events `rack:locate` (device id | null), `rack:open-post` (url), `rack:explore` (bool).
+
+- [ ] **Step 1: Data first.** Add `_data/rack.yml` and `device:` to the five posts. Generate `rack.json`. Test (Python, against `_site/`): every post in `rack.json` has a device that exists in `rack.yml`, and every device id is unique.
+- [ ] **Step 2: Still image + fallback.** `_includes/rack.html` renders the still image and an accessible device list (links to each device's posts). Test: the Home page shows the list with JavaScript off.
+- [ ] **Step 3: Lazy 3D.** `scene.js` loads three.js and creates the scene only when the rack container enters the viewport; pauses rendering when it leaves. Node test for the pure helpers (camera targets per section, device lookup by post URL).
+- [ ] **Step 4: Section camera.** `read-mode.js` watches the Home sections (IntersectionObserver) and moves the camera to the section's device; cut instead of fly under reduced motion.
+- [ ] **Step 5: Locate LED.** Hover/focus on an archive or Writing row dispatches `rack:locate`; the device's locate LED lights in `#FFFB24` and gets an outline; leaving clears it. Keyboard focus must behave the same as hover.
+- [ ] **Step 6: In-page reader.** Clicking a post row (without modifier keys) fetches the post page, swaps its `<article>` into the reader panel, pushes the post URL, shrinks the rack to the mini-rack strip, builds the TOC as rack units and shows "Next post · same device". Back/Esc restore Home at the same scroll position. Modified clicks, new tabs and no-JS keep normal navigation (reuse `shouldAnimateNavigation`). Node tests for URL/TOC helpers.
+- [ ] **Step 7: Explore mode.** "Enter rack" opens the full viewer (port from `lab/index.html`); Esc and "Back to reading" return to the same scroll position.
+- [ ] **Step 8: ⌘K palette.** Ctrl/⌘+K opens the palette; typing filters posts and sections; Enter opens the reader; `pull <part>` enters Explore mode. Node tests for command parsing.
+- [ ] **Step 9: Phone layout.** Below 900px the rack is the 2D elevation with "View in 3D". Check at 375px: no horizontal scroll.
+- [ ] **Step 10: Credits and licences.** Keep the 3D model credits list (CC BY 4.0 / CC0) visible from the rack; add three.js LICENSE.
+- [ ] **Step 11: Commit**
+
+```bash
+git add -A -- . ':!_drafts'
+git commit -m "$(cat <<'EOF'
+Add the 3D rack as the living index of Home and the posts
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+EOF
+)"
+```
+
+---
+
+### Task 10: Final verification
 
 Deliverable: the branch passes the same checks CI runs, looks right on phone and desktop in both themes, and nothing from Chirpy is left.
 
@@ -4040,7 +4076,7 @@ Expected: no matches. Remove anything it finds that belongs to Chirpy.
 
 With `bundle exec jekyll serve --livereload` running, check each of these pages at 375px and 1440px wide, in light and dark themes:
 
-`/`, `/work/`, `/archives/`, `/posts/Creating-a-redundant-network/`, `/posts/configure-a-basic-wlan-on-the-wlc/`, `/about/`, `/tags/`, `/tags/cisco/`, `/search/?q=vpn`, `/404.html`
+`/`, `/lab/`, `/work/`, `/archives/`, `/posts/Creating-a-redundant-network/`, `/posts/configure-a-basic-wlan-on-the-wlc/`, `/about/`, `/tags/`, `/tags/cisco/`, `/search/?q=vpn`, `/404.html`
 
 On each page, check that:
 - in the DevTools console, `document.documentElement.scrollWidth <= innerWidth` is `true` (no sideways scroll). Also check this at 320px on `/` and on the redundant network post;
@@ -4068,3 +4104,7 @@ EOF
 - [ ] **Step 7: Hand over**
 
 Leave `bundle exec jekyll serve --livereload` running. Tell the user the branch is ready to review at <http://127.0.0.1:4000/>, and list any differences from the reference noted in Step 5. Do not merge into `main` or push.
+
+---
+
+**Status 2026-10-01:** Task 9 (rack integration) was reworked during review; see "What was built" at the end of the design spec. Still to do before going live: Impressum and privacy policy, click-to-load comments, real-device testing, deciding whether `/lab/` becomes the homepage.
