@@ -9,7 +9,7 @@ title: Gonzalo Brandan
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>html,body{margin:0}</style>
-<title>Gonzalo Brandan · Lab</title>
+<title>Gonzalo Brandan</title>
 <meta name="description" content="Gonzalo Brandan, data center and network engineer in Berlin: CV, lab write-ups, and an interactive 42U data center rack you can open up and explore.">
 <link rel="preload" href="/assets/fonts/lab/big-shoulders-display-900.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/lab/ibm-plex-mono-500.woff2" as="font" type="font/woff2" crossorigin>
@@ -624,8 +624,8 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
 .prose .sec-body p + p { margin-top: 0; }
 .prose .sec-body .ctas { margin-top: 8px; }
 .read .sec.cols .blog-all { margin-top: 6px; justify-self: start; }
-.contact-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: clamp(28px, 4vw, 64px); align-items: center; }
-.contact-grid .holo-wrap { justify-self: start; } /* "Let's talk" on the left, the card just right of the middle */
+.contact-grid { grid-template-columns: minmax(200px, 30%) minmax(0, 1fr); column-gap: clamp(28px, 4vw, 64px); align-items: start; }
+.contact-grid .holo-wrap { justify-self: start; }
 @media (max-width: 1000px) { .read .sec.cols, .contact-grid { grid-template-columns: minmax(0, 1fr); } }
 /* statement: centred in the middle of the page; buttons: one size, centred text */
 .statement { text-align: center; }
@@ -653,6 +653,78 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
 .boot-log li.ok { color: #cfcfcf; }
 .boot-log li.ok span { color: #2bd96b; }
 @media (prefers-reduced-motion: reduce) { .boot-mark, .boot.ready .boot-mark { animation: none; clip-path: none; } .boot, .boot-bar i, .boot-in > *, .boot-log li { transition-duration: .01s !important; transition-delay: 0s !important; } }
+/* ---- Learn: hover a part, read about it in one place ---- */
+.hover-tag { display: grid; gap: 1px; max-width: none; padding: 6px 10px 6px 9px; border-radius: 6px; border: 1px solid #2a323c; border-left: 3px solid #ffd23f; background: rgb(10 13 17 / .94); box-shadow: 0 10px 30px rgb(0 0 0 / .4); white-space: nowrap; }
+.hover-tag b { font: 600 13.5px/1.25 var(--f-read); color: #fff; }
+.hover-tag span { font: 500 10.5px var(--f-mono); color: #9aa5b1; letter-spacing: .03em; }
+.coachline { position: absolute; z-index: 4; bottom: 16px; left: 50%; transform: translateX(-50%); display: none; max-width: calc(100% - 32px); overflow: hidden; text-overflow: ellipsis; padding: 9px 18px; border-radius: 999px; background: rgb(10 13 17 / .92); border: 1px solid #2a323c; font: 500 13.5px var(--f-read); color: #c9d1d9; white-space: nowrap; box-shadow: 0 10px 30px rgb(0 0 0 / .35); }
+.app.mode-explore .coachline { display: block; }
+.coachline b { color: #fff; font-weight: 600; }
+.coachline .y { color: #ffd23f; }
+@media (min-width: 1001px) { .app.mode-explore.sel .coachline { left: calc(50% - var(--insp-w) / 2); } }
+.app.term-open .coachline { display: none; }
+.hotspots .hs { margin: 0; height: auto; display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px 5px 9px; border-radius: 999px; border: 1px solid rgb(255 255 255 / .35); background: rgb(10 13 17 / .88); color: #fff; font: 600 12.5px/1 var(--f-read); white-space: nowrap; cursor: pointer; box-shadow: 0 6px 18px rgb(0 0 0 / .35); transition: background .15s, color .15s, border-color .15s; }
+.hotspots .hs i { width: 7px; height: 7px; border-radius: 50%; background: #ffd23f; box-shadow: 0 0 0 0 rgb(255 210 63 / .6); animation: lpPulse 1.8s ease-out infinite; }
+.hotspots .hs.seen { color: #c9d1d9; border-color: rgb(255 255 255 / .18); }
+.hotspots .hs.seen i { width: auto; height: auto; background: none; box-shadow: none; animation: none; color: #9aa5b1; }
+.hotspots .hs.seen i::before { content: '✓'; font: 600 10px var(--f-read); }
+.hotspots .hs:hover, .hotspots .hs:focus-visible, .hotspots .hs.on { background: #fff; color: #000; border-color: #fff; outline: none; }
+.hotspots .hs:hover i, .hotspots .hs.on i { background: #000; animation: none; color: #000; }
+@media (prefers-reduced-motion: reduce) { .hotspots .hs { animation: none; } }
+.lp-lead { font-size: 14px; }
+.lp-start { display: grid; gap: 3px; padding: 12px 14px; border-radius: 6px; border: 1px solid rgb(255 210 63 / .35); background: rgb(255 210 63 / .06); }
+.lp-start b { font: 600 15px/1.3 var(--f-read); color: #fff; }
+.lp-start span { font-size: 13px; color: var(--ink-2); }
+.lp-prog { display: grid; gap: 6px; font: 500 11px var(--f-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
+.lp-prog i { position: relative; height: 3px; border-radius: 2px; background: var(--line); overflow: hidden; }
+.lp-prog i::after { content: ''; position: absolute; inset: 0 auto 0 0; width: calc(var(--p) * 100%); background: #ffd23f; transition: width .4s; }
+.lp-list { display: grid; }
+.lp-item { display: flex; align-items: center; gap: 10px; padding: 10px 2px; background: none; border: 0; border-bottom: 1px solid var(--line); color: var(--ink); font: 500 14.5px var(--f-read); text-align: left; cursor: pointer; }
+.lp-item::before { content: ''; flex: none; width: 9px; height: 9px; border-radius: 50%; background: #ffd23f; }
+.lp-item.seen::before { background: transparent; border: 1.5px solid var(--muted); }
+.lp-item span { flex: 1; }
+.lp-item small { font: 500 10.5px var(--f-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.lp-item:hover, .lp-item:focus-visible { color: #ffd23f; outline: none; }
+.lp { display: grid; gap: 12px; animation: lpIn .18s ease-out; }
+@keyframes lpIn { from { opacity: .4; transform: translateY(4px); } }
+.lp-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.lp-top .eyebrow { color: #ffd23f; }
+.lp-back { background: none; border: 0; padding: 0; color: var(--ink-2); font: 500 12px var(--f-mono); cursor: pointer; }
+.lp-back:hover { color: #fff; }
+.lp h3 { margin: 0; font: 700 32px/1 var(--f-display); text-transform: uppercase; text-wrap: balance; color: #fff; }
+.insp .lp-what { margin: 0; color: var(--ink); font-size: 15.5px; line-height: 1.5; }
+.lp-row { display: grid; gap: 4px; padding-top: 11px; border-top: 1px solid var(--line); }
+.insp .lp-row p { font-size: 14px; line-height: 1.5; }
+.lp-facts { display: grid; grid-template-columns: auto 1fr; gap: 7px 14px; margin: 2px 0 0; padding: 12px 14px; border-radius: 6px; background: var(--panel-2); border: 1px solid var(--line); font-size: 13px; line-height: 1.4; }
+.lp-facts dt { font: 500 10.5px/1.75 var(--f-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.lp-facts dd { margin: 0; color: var(--ink); }
+@media (prefers-reduced-motion: reduce) { .lp { animation: none; } }
+.lp-group { display: grid; gap: 2px; }
+.lp-ffs { display: grid; gap: 6px; }
+.lp-ffs div { display: flex; flex-wrap: wrap; gap: 5px; }
+.lp-ffs div span { padding: 3px 8px; border-radius: 999px; border: 1px solid #333b45; background: rgb(255 255 255 / .04); font: 500 12px var(--f-read); color: var(--ink); white-space: nowrap; }
+.learn-pop { position: absolute; left: 0; top: 0; z-index: 6; width: 280px; max-height: calc(100% - 140px); overflow: auto; padding: 16px 18px 16px; border-radius: 10px; background: rgb(12 15 19 / .96); border: 1px solid #2a323c; box-shadow: 0 24px 60px rgb(0 0 0 / .5); color: var(--ink); will-change: transform; }
+.learn-pop[hidden] { display: none; }
+.learn-pop .lp { gap: 10px; }
+.learn-pop .lp h3 { font-size: 22px; }
+.learn-pop { padding: 13px 15px; }
+.learn-pop .lp-mini { gap: 8px; }
+.learn-pop .lp-tell { margin: 0; font-size: 13px; line-height: 1.45; color: var(--ink-2); }
+.learn-pop .lp-tell b { color: #fff; font-weight: 600; }
+.learn-pop .act { justify-self: start; }
+.learn-pop .lp-what { margin: 0; color: var(--ink); font-size: 14.5px; line-height: 1.5; }
+.learn-pop .lp-row p { margin: 0; color: var(--ink-2); font-size: 13.5px; line-height: 1.5; }
+.learn-pop .lp-facts { font-size: 12.5px; padding: 10px 12px; }
+.learn-pop .tip-line { font: 400 11.5px var(--f-mono); color: var(--muted); }
+.learn-pop .act { background: #fff; color: #000; border-color: #fff; }
+@media (min-width: 1001px) {
+  .app.mode-explore .insp { display: none !important; }
+  .app.mode-explore.sel .coachline { left: 50%; }
+  .app.mode-explore.sel .stage > .credits { right: 12px; }
+}
+@media (max-width: 1000px) { .learn-pop { display: none !important; } }
+.lp-group > .eyebrow { margin-top: 8px; color: var(--ink-2); }
+
 </style>
 </head>
 <body>
@@ -725,6 +797,7 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
         <button class="tb backbtn" type="button" id="backBtn">← About <span class="kbdh">Esc</span></button>
         <button class="tb" type="button" data-view="reset">Reset view</button>
         <button class="tb primary" type="button" id="tourBtn" aria-pressed="false">Play tour</button>
+        <button class="tb" type="button" id="benchBtn">Workbench</button>
       </div>
       <section class="term" id="term" role="dialog" aria-label="Terminal CV" hidden>
         <div class="term-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="ttl">gonzalo@thinkpad: ~ · RHEL</span><button type="button" id="termClose">exit</button></div>
@@ -749,7 +822,7 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
         </ul>
         <p>Models were resized and simplified for the web. Everything else in the scene is built in code.</p>
       </details>
-      <div class="hint">Drag to orbit · scroll to zoom · click to inspect · double-click to pull out or push back · try the laptop</div>
+      <div class="hint">Drag to look around · scroll to zoom</div>
     </div>
     <aside class="insp" id="insp" aria-live="polite"></aside>
     <section class="read" id="read" aria-label="About">
@@ -766,7 +839,8 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
           <h2 class="h2">Building the frontier, in Europe</h2>
         </div>
         <div class="sec-body">
-          <p>Technology keeps solving problems we thought were impossible a few years ago. It makes us better, smarter and faster, and it pushes our own limits. Right now that frontier is AI, and I honestly think we haven't seen its full potential yet. AI runs on hardware, networks and scale, and that's exactly the part I want to work on. And if it helps build Europe's digital sovereignty, even better.</p>
+          <p>AI is pushing infrastructure in interesting directions: more compute, faster networks, higher density, greater energy demands and increasingly complex operations. That's the part of the industry I want to understand from the ground up and help build.</p>
+          <p>I'm particularly interested in infrastructure projects that strengthen Europe's ability to develop and operate critical technology here.</p>
         </div>
       </div>
       <div class="sec prose cols" id="enjoy" data-dev="">
@@ -784,7 +858,7 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
           <h2 class="h2">Technology for people</h2>
         </div>
         <div class="sec-body">
-          <p>Outside of work, I care about the things that affect all of us: an open society, open source, a world where everyone can be who they are and love who they love, and respect for people and the choices they make. I value privacy, and I'd like to see a world that keeps getting better for everyone, not just for a few.</p>
+          <p>I care about open source, privacy, an open and inclusive society, and technology that genuinely improves people's lives. I try to bring those values into the way I work: respect people's choices, share knowledge, and build things that are useful.</p>
         </div>
       </div>
       <div class="statement" aria-label="Technology is only as fair as the people who build it."><p aria-hidden="true"><span>Technology</span> <span>is</span> <span>only</span> <span>as</span> <span>fair</span> <span>as</span> <span>the</span> <span>people</span> <span>who</span> <span>build</span> <span>it.</span></p></div>
@@ -826,6 +900,12 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
       </div>
       <div class="sec" id="contact" data-dev="">
         <div class="contact-grid">
+          <div class="holo-wrap">
+            <div class="holo" id="holoCard">
+              <canvas class="holo-art" width="70" height="95" aria-hidden="true"></canvas>
+              <div class="holo-glare" aria-hidden="true"></div>
+            </div>
+          </div>
           <div class="contact-main">
         <span class="lab">[ Contact ]</span>
         <h2 class="h2">Let's talk</h2>
@@ -835,12 +915,6 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
           <a href="https://github.com/gonzalo-brandan" target="_blank" rel="noopener">GitHub</a>
           <a href="/assets/cv/Gonzalo-Brandan-CV.pdf" download>Download my CV (PDF)</a>
         </div>
-          </div>
-          <div class="holo-wrap">
-            <div class="holo" id="holoCard">
-              <canvas class="holo-art" width="70" height="95" aria-hidden="true"></canvas>
-              <div class="holo-glare" aria-hidden="true"></div>
-            </div>
           </div>
         </div>
       </div>
@@ -943,13 +1017,13 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
   const SERVER_HW = {
     cpu0: ['CPU 0', '64 cores · 3.1 GHz · 360 W'], cpu1: ['CPU 1', '64 cores · 3.1 GHz · 360 W'],
     dimm: ['Memory (RAM)', '16 × 64 GB DDR5-4800 RDIMM · 1 TB total'], fans: ['Fan wall', '6 × 60 mm hot-swap fans · N+1 redundant'],
-    psu: ['Power supplies', '2 × 1,400 W 80 PLUS Titanium · A/B feeds'], nic: ['Network card', 'Dual-port 100 GbE QSFP28 · RoCE v2'],
+    psu: ['Power supplies', '2 × 1,400 W 80 PLUS Titanium · A/B feeds'], nic: ['Network card', 'Dual-port 100 GbE QSFP28'],
     drives: ['Storage (NVMe)', '8 × 3.84 TB NVMe U.2 · hot-swap'],
   };
   const OTHER_HW = {
     switch: {
       asic: ['Switch ASIC', 'Forwards traffic in hardware at line rate', ''],
-      optics: ['Optics', '4 × SFP uplinks · fiber', ''],
+      optics: ['Optics', '4 × 100G QSFP28 uplinks · fiber', ''],
       fans: ['Fan modules', '4 × hot-swap · front-to-back airflow', ''],
       psu: ['Power supplies', '2 × hot-swap · A and B feeds', ''] },
     ups: {
@@ -971,6 +1045,97 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
     if (d.kind === 'server') return SERVER_HW[key];
     if (d.kind === 'storage' && key && key.startsWith('sled')) return [`Drive · bay ${+key[4] * 8 + +key[5] + 1}`, '7.68 TB NVMe U.2 · hot-swap'];
     return OTHER_HW[d.kind] && OTHER_HW[d.kind][key];
+  }
+  // What each part is, for the Learn panel. Short on purpose (the blog goes deeper), and the same shape for
+  // every part: what it does, why it matters in a rack, how to spot it, then three facts.
+  // "In this unit" comes from compInfo, so it always matches the hardware that is modelled.
+  const PSU_INFO = { name: 'Power supplies', what: 'Turn AC power from the rack’s power strips (PDUs) into the 12 V DC the hardware runs on.',
+    why: 'There are two, fed from separate A and B power circuits, so one feed or one supply can fail and the unit keeps running.', ff: 'Hot-swap module, pulled out from the back', swap: 'Hot-swap, one at a time' };
+  const FAN_INFO = { name: 'Fans', what: 'Pull cold air in at the front and push hot air out at the back, across every part in between.',
+    why: 'Racks face each other in cold and hot aisles so no server breathes another’s exhaust. A failed fan is swapped while the unit keeps running.', ff: 'Hot-swap fan modules', swap: 'Hot-swap, one at a time' };
+  const LEARN = {
+    server: {
+      cpu0: { name: 'CPU (processor)', what: 'Runs the operating system and every application on the server. This server has two, one under each heatsink.',
+        why: 'The number of cores decides how many virtual machines or containers one server can carry, and the CPUs use most of its power.',
+        spot: 'Under the two big finned heatsinks in the middle. Click one to lift it and see the chip.', ff: 'Chip in an LGA socket, under a heatsink', swap: 'Power off; new thermal paste' },
+      dimm: { name: 'Memory (RAM)', what: 'Working space for the CPUs: the programs and data in use right now. It is cleared when the server turns off.',
+        why: 'On virtualisation hosts, memory usually runs out before CPU does. Server memory uses ECC, which finds and corrects bit errors.',
+        spot: 'The thin green sticks standing in rows on both sides of each CPU.', ff: 'DDR5 RDIMM, 288 pins', swap: 'Power off; open the slot latches' },
+      drives: { name: 'NVMe drives', what: 'Keep data when the power is off: the operating system, virtual machines and files.',
+        why: 'They load from the front, so a failed drive is swapped while the server keeps running. NVMe talks to the CPU directly, so it is very fast.',
+        spot: 'The eight trays behind the front panel, each with its own status light.', ff: 'U.2 2.5-inch drive in a tray', swap: 'Hot-swap from the front' },
+      nic: { name: 'Network card (NIC)', what: 'Connects the server to the network. Its two ports go to the two top-of-rack switches.',
+        why: 'With one link to each switch, a cable, a port or a whole switch can fail and the server stays online.',
+        spot: 'The green card at the back left, with two metal ports facing the rear.', ff: 'PCIe card with 2 QSFP28 ports', swap: 'Power off; lift out the riser' },
+      fans: { ...FAN_INFO, spot: 'The row of six square fans between the drives and the CPUs.' },
+      psu: { ...PSU_INFO, spot: 'The two labelled metal boxes at the back right.' },
+    },
+    storage: {
+      sled: { name: 'NVMe drive', what: 'One of 24 drives that hold the shared data for the servers in the rack.',
+        why: 'Data is spread across the drives with parity (RAID 6), so two can fail without losing anything, and a failed one is swapped while the array runs.',
+        spot: 'Every square tray on the front, each with a green and an amber light.', ff: 'U.2 NVMe drive in a hot-swap sled', swap: 'Hot-swap from the front' },
+    },
+    switch: {
+      asic: { name: 'Switch chip (ASIC)', what: 'Moves every packet: it looks up where each one has to go and forwards it in hardware, on all ports at the same time.',
+        why: 'How many ports a switch has, how fast they are and which features it supports is decided mostly by this one chip.',
+        spot: 'Under the wide finned heatsink in the middle. Click it to lift the heatsink.', ff: 'Large BGA chip on the main board', swap: 'Not replaceable: the switch is' },
+      optics: { name: 'Optical transceivers', what: 'Small plug-in modules that turn electrical signals into light, so the switch can use fiber cables to the spine switches.',
+        why: 'Because they plug in, the same port can take different cables and distances, from a few metres to many kilometres.',
+        spot: 'Inside the four larger ports at the front right, where the aqua fiber cables plug in.', ff: 'QSFP28 pluggable module', swap: 'Hot-swap' },
+      fans: { ...FAN_INFO, spot: 'The three modules at the back, two fans in each.' },
+      psu: { ...PSU_INFO, spot: 'The two labelled boxes at the back right.' },
+    },
+    appliance: {
+      cpu: { name: 'Firewall processor', what: 'Inspects every connection and decides what is allowed through, with built-in hardware that speeds up VPN encryption.',
+        why: 'Its speed sets how much traffic the firewall can filter and how many VPN tunnels it can carry at once.',
+        spot: 'Under the finned heatsink, next to the four memory sticks.', ff: 'x86 chip in a socket', swap: 'Not field-replaceable' },
+      ssd: { name: 'Boot SSDs', what: 'Hold the firewall’s operating system, its configuration and its logs.',
+        why: 'The two drives are mirrored (RAID 1), so one can fail without losing the configuration.',
+        spot: 'The two flat drives on the bracket at the front left.', ff: '2.5-inch SATA SSD', swap: 'Power off first' },
+      psu: { ...PSU_INFO, spot: 'The two labelled boxes at the back right.' },
+    },
+    gpu: {
+      gpu: { name: 'GPU modules', what: 'Do the maths behind AI training and inference: thousands of small cores working in parallel, with very fast memory (HBM) beside each chip.',
+        why: 'They use most of the server’s several kilowatts, which is why AI racks need much more power and cooling than ordinary ones.',
+        spot: 'Under the four tall heatsinks in a row. Click one to lift it and see the chip and its memory.', ff: 'Accelerator module (e.g. OAM) on a baseboard', swap: 'Power off; specialist work' },
+      gpulink: { name: 'GPU interconnect', what: 'Switch chips that link every GPU directly to every other GPU.',
+        why: 'Big AI models are split across GPUs that exchange data all the time. Going through the CPU would be far too slow.',
+        spot: 'The two smaller heatsinks just behind the GPUs.', ff: 'Switch chips on the GPU baseboard', swap: 'Part of the baseboard' },
+      nic8: { name: 'GPU network cards', what: 'One fast network card per GPU, so GPUs in different servers can work together as one cluster.',
+        why: 'AI clusters connect thousands of GPUs. This separate GPU network is often bigger than the rest of the data center network.',
+        spot: 'The four cards standing at the back left.', ff: 'PCIe card with an OSFP port, 400 Gb/s', swap: 'Power off first' },
+      fans: { ...FAN_INFO, spot: 'The five large fans across the front.' },
+      psu: { ...PSU_INFO, spot: 'The four labelled boxes at the back right, in two rows.', why: 'Four supplies on A and B feeds: the server keeps running if one feed fails, even at several kilowatts.' },
+    },
+    ups: {
+      batt: { name: 'Battery modules', what: 'Store energy so the rack keeps running when the mains power fails.',
+        why: 'They bridge the gap until a generator starts, or give the servers time to shut down cleanly. They wear out, so they are tested and replaced every few years.',
+        spot: 'The eight black modules that fill most of the UPS.', ff: 'Hot-swap tray of 12 V VRLA batteries', swap: 'Hot-swap, every 3 to 5 years' },
+      inv: { name: 'Inverter', what: 'Turns DC power from the batteries back into clean AC for the rack.',
+        why: 'In an online (double-conversion) UPS all the power goes through it all the time, so there is no gap when the mains fails.',
+        spot: 'The power board at the back, with the finned heatsink and the copper coils.', ff: 'Power board inside the UPS', swap: 'Service technician only' },
+    },
+  };
+  // the common form factors of each kind of part, across data centers (not only the one in this unit)
+  const FFS = {
+    server: { cpu0: ['LGA socket', 'BGA, soldered', 'PGA (older)'], dimm: ['RDIMM', 'LRDIMM', 'UDIMM', 'SO-DIMM'], drives: ['U.2 / U.3', 'M.2', 'EDSFF E1.S', 'EDSFF E3.S', 'PCIe add-in card'],
+      nic: ['PCIe card', 'OCP 3.0', 'Mezzanine', 'Onboard (LOM)'], fans: ['40 mm (1U)', '60 mm (2U)', '80 mm (4U)'], psu: ['CRPS module', 'Hot-swap 1U module', '48 V DC input'] },
+    storage: { sled: ['U.2 / U.3', 'EDSFF E1.S', 'EDSFF E3.S', '2.5" SAS/SATA', '3.5" HDD'] },
+    switch: { asic: ['Single chip (fixed switch)', 'Line cards (modular chassis)'], optics: ['SFP / SFP28', 'QSFP28', 'QSFP-DD', 'OSFP'], fans: ['40 mm (1U)', 'Hot-swap modules'], psu: ['Hot-swap 1U module', 'Fixed (small switches)'] },
+    appliance: { cpu: ['LGA socket', 'BGA, soldered'], ssd: ['2.5" SATA', 'M.2 SATA / NVMe', 'mSATA (older)'], psu: ['Hot-swap 1U module', 'Fixed (small appliances)'] },
+    gpu: { gpu: ['Accelerator module (OAM)', 'Vendor mezzanine module', 'PCIe card, double width'], gpulink: ['Switch chips on the baseboard', 'Direct GPU-to-GPU links'],
+      nic8: ['PCIe card', 'OCP 3.0', 'On the GPU baseboard'], fans: ['60 mm', '80 mm', 'Liquid cooling plates'], psu: ['CRPS module', '54 V busbar (OCP racks)'] },
+    ups: { batt: ['VRLA lead-acid modules', 'Lithium-ion modules', 'External battery cabinet'], inv: ['Board inside the UPS', 'Modular power modules'] },
+  };
+  // parts in the order the panel lists them; cpu1 and every drive sled share one entry
+  const LEARN_ORDER = { server: ['cpu0', 'dimm', 'drives', 'nic', 'fans', 'psu'], storage: ['sled'], switch: ['asic', 'optics', 'fans', 'psu'], appliance: ['cpu', 'ssd', 'psu'], gpu: ['gpu', 'gpulink', 'nic8', 'fans', 'psu'], ups: ['batt', 'inv'] };
+  const CHIP = { cpu0: 'CPU', dimm: 'RAM', drives: 'Drives', nic: 'NIC', fans: 'Fans', psu: 'PSU', sled: 'Drive', asic: 'ASIC', optics: 'Optics', cpu: 'CPU', ssd: 'SSDs', gpu: 'GPUs', gpulink: 'GPU links', nic8: 'GPU NICs', batt: 'Batteries', inv: 'Inverter' };
+  const lkey = key => !key ? null : key === 'cpu1' ? 'cpu0' : key.startsWith('sled') ? 'sled' : key;
+  function partIntro(id, key) {
+    const kind = DEV[id].kind, base = LEARN[kind] && LEARN[kind][lkey(key)], info = compInfo(id, key);
+    if (!base || !info) return null;
+    const name = key === 'cpu0' || key === 'cpu1' ? `${base.name}` : key.startsWith('sled') ? `${base.name} · ${info[0].split(' · ')[1]}` : base.name;
+    return { ...base, name, here: info[1], ffs: (FFS[kind] && FFS[kind][lkey(key)]) || [base.ff] };
   }
   const uRange = d => d.u[0] === d.u[1] ? `U${d.u[0]}` : `U${d.u[0]}–U${d.u[1]}`;
   const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
@@ -1112,44 +1277,97 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
     if (kind === 'storage') return 'storage';
     return TOPIC[kind] && TOPIC[kind][key];
   }
-  function noteHTML(id, key) {
-    const info = compInfo(id, key), topic = topicFor(id, key), n = topic && KNOW[topic];
-    const back = `<div class="actions"><button class="act" type="button" data-act="putback">Put it back</button></div>`;
-    if (!n) return '';
-    return `<article class="know">
-      <span class="eyebrow">Pulled out · ${esc(info[0])}</span>
-      <h3>${esc(n.title)}</h3>
-      <span class="hw">${esc(info[1])}</span>
-      ${n.intro.map(p => `<p>${esc(p)}</p>`).join('')}
-      <div class="group"><span class="eyebrow">What a technician checks</span><ul>${n.check.map(c => `<li>${esc(c)}</li>`).join('')}</ul></div>
-      ${back}
+  // ---------------- the Learn panel ----------------
+  // One place on the right explains whatever you point at inside an open unit: hover a part to read about it,
+  // click it to pin the explanation (the part slides out). With nothing pointed at, it lists the parts and how
+  // many you have explored.
+  const learn = { hover: null, list: null, bpin: null, seen: {} };
+  let benchOn = false;   // the workbench is open in the Learn panel
+  const seenSet = id => learn.seen[id] || (learn.seen[id] = new Set());
+  const partsOf = id => (LEARN_ORDER[DEV[id].kind] || []).filter(k => firstComp(id, k));
+  const firstComp = (id, k) => devObj[id] && devObj[id].comps.find(c => lkey(c.key) === k && (k !== 'sled' || c.key === 'sled12'));
+  const pinnedKey = id => lkey(state[id].comp);
+  function partCard(id, k) {
+    const c = firstComp(id, k), p = c && partIntro(id, c.key); if (!p) return '';
+    const pinned = pinnedKey(id) === k;
+    return `<article class="lp">
+      <div class="lp-top"><span class="eyebrow">${pinned ? 'Pulled out' : 'You’re pointing at'}</span>${pinned ? '<button type="button" class="lp-back" data-act="putback">← All parts</button>' : ''}</div>
+      <h3>${esc(p.name)}</h3>
+      <p class="lp-what">${esc(p.what)}</p>
+      <div class="lp-row"><span class="eyebrow">Why it matters</span><p>${esc(p.why)}</p></div>
+      <div class="lp-row"><span class="eyebrow">How to spot it</span><p>${esc(p.spot)}</p></div>
+      <div class="lp-ffs"><span class="eyebrow">Form factors</span><div>${p.ffs.map(f => `<span>${esc(f)}</span>`).join('')}</div></div>
+      <dl class="lp-facts"><dt>In this unit</dt><dd>${esc(p.here)}</dd><dt>Replacing it</dt><dd>${esc(p.swap)}</dd></dl>
+      ${pinned ? '<div class="actions"><button class="act" type="button" data-act="putback">Put it back</button></div>' : '<span class="tip-line">Click the part to pull it out and keep this open.</span>'}
     </article>`;
   }
   function renderInspector(id) {
-    const d = DEV[id];
-    const st = state[id];
-    const pulledNote = st.comp ? noteHTML(id, st.comp) : '';
-    const partsFor = keys => `<div class="group"><span class="eyebrow">Parts · click to pull one out</span><div class="comp-list">${keys.map(([n, k, m]) =>
-      `<button class="comp" type="button" data-comp="${k}" aria-pressed="${st.comp === k}"><span>${esc(m)}</span><span>${n}</span></button>`).join('')}</div></div>`;
-    const svc = SERVICE.has(d.kind) ? `
-      <div class="actions"><button class="act act-main" type="button" data-act="${st.ex ? 'home' : 'open'}">${st.ex ? 'Push it back in' : 'Pull it out'}</button></div>
-      ${st.ex ? '<span class="tip-line">Click a numbered part inside, or pick one below, to see what it does.</span>' : ''}` : '';
-    let body = '';
-    const partKeys = d.kind === 'storage' ? ['sled12'] : TOPIC[d.kind] ? Object.keys(TOPIC[d.kind]).filter(k => k !== 'cpu1') : []; // one entry for the two CPUs
-    const partName = k => d.kind === 'server' ? SERVER_HW[k][0] : d.kind === 'storage' ? 'Drive sled' : OTHER_HW[d.kind][k][0];
-    const partList = partKeys.length ? partsFor(partKeys.map(k => [partName(k), k, KNOW[topicFor(id, k)].title])) : '';
-    const about = ABOUT[d.kind];
-    body = about ? `<p>${esc(about[0])}</p><dl class="specs">${about[1].map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>` + partList : partList;
-    if (pulledNote) body = pulledNote + partList;
-    insp.innerHTML = `<button type="button" class="insp-close" data-close-insp>Close · Esc</button><div class="group"><span class="utag">${uRange(d)} · ${esc(d.name)}</span><h2>${esc(d.section)}</h2></div>${svc}${body}`;
-    const cm = document.getElementById('copyMail');
-    if (cm) cm.addEventListener('click', () => {
-      const m = document.getElementById('mail');
-      const done = ok => { cm.textContent = ok ? 'Copied' : 'Select and copy'; setTimeout(() => cm.textContent = 'Copy', 1800); };
-      try { navigator.clipboard.writeText(m.textContent).then(() => done(true), () => { getSelection().selectAllChildren(m); done(false); }); }
-      catch (e) { getSelection().selectAllChildren(m); done(false); }
-    });
+    const d = DEV[id], st = state[id], about = ABOUT[d.kind], parts = partsOf(id), seen = seenSet(id);
+    const head = `<button type="button" class="insp-close" data-close-insp>Close · Esc</button><div class="group"><span class="utag">${uRange(d)} · ${esc(d.name)}</span><h2>${esc(d.section)}</h2></div>`;
+    const lead = about ? `<p class="lp-lead">${esc(about[0].split(/(?<=\.)\s/)[0])}</p>` : '';
+    const k = st.ex && parts.length ? (learn.hover || pinnedKey(id)) : null;
+    let body;
+    if (k) body = partCard(id, k);
+    else if (!SERVICE.has(d.kind)) body = (about ? `<p>${esc(about[0])}</p><dl class="specs">${about[1].map(([a, b]) => `<dt>${esc(a)}</dt><dd>${esc(b)}</dd>`).join('')}</dl>` : '') + '<span class="tip-line">This unit stays in the rack. The servers, switches, firewall, storage, GPU server and UPS slide out.</span>';
+    else if (!st.ex) body = lead + '<div class="actions"><button class="act act-main" type="button" data-act="open">Slide it out</button></div>';
+    else {
+      const n = seen.size, all = n >= parts.length;
+      body = `${lead}
+        <div class="lp-start"><b>${all ? 'You’ve explored every part.' : 'Hover a label to learn what it is.'}</b><span>${all ? 'Push it back in and open another unit.' : 'Hover a label like “RAM” or “CPU”. Click a part to pull it out.'}</span></div>
+        <div class="lp-prog"><span>${n} of ${parts.length} parts explored</span><i style="--p:${(n / parts.length).toFixed(3)}"></i></div>
+        <div class="lp-list" role="list">${parts.map(pk => { const c = firstComp(id, pk), pi = partIntro(id, c.key); return `<button type="button" role="listitem" class="lp-item${seen.has(pk) ? ' seen' : ''}" data-comp="${c.key}" data-learn="${pk}"><span>${esc(pi.name.split(' · ')[0])}</span><small>${seen.has(pk) ? 'explored' : ''}</small></button>`; }).join('')}</div>
+        <div class="actions"><button class="act" type="button" data-act="home">Push it back in</button></div>`;
+    }
+    insp.innerHTML = head + body;
   }
+  // the workbench in the Learn panel: the item you point at, or the groups with what is left to explore
+  function benchCard(k) {
+    const b = BENCH_INFO[k], pinned = learn.bpin === k;
+    return `<article class="lp">
+      <div class="lp-top"><span class="eyebrow">${esc(b.g)}${pinned ? ' · up close' : ''}</span>${pinned ? '<button type="button" class="lp-back" data-bench-back>← Whole bench</button>' : ''}</div>
+      <h3>${esc(b.name)}</h3>
+      <p class="lp-what">${esc(b.what)}</p>
+      <div class="lp-row"><span class="eyebrow">Why it matters</span><p>${esc(b.why)}</p></div>
+      <div class="lp-row"><span class="eyebrow">How to tell it apart</span><p>${esc(b.tell)}</p></div>
+      <dl class="lp-facts">${b.facts.map(([a, v]) => `<dt>${esc(a)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
+      ${pinned ? '' : '<span class="tip-line">Click it to look closer and keep this open.</span>'}
+    </article>`;
+  }
+  function renderBench() {
+    const seen = seenSet('bench'), n = seen.size, all = n >= BENCH_KEYS.length, k = learn.hover || learn.bpin;
+    const head = `<button type="button" class="insp-close" data-close-insp>Close · Esc</button><div class="group"><span class="utag">Behind the racks · ${BENCH_KEYS.length} items</span><h2>Workbench</h2></div>`;
+    if (k) { insp.innerHTML = head + benchCard(k); return; }
+    const groups = [...BENCH_ROWS, ['Cables', BENCH_CABLES]];
+    insp.innerHTML = head + `<p class="lp-lead">Parts and cables you meet in a data center, laid out side by side so you can compare their sizes and connectors.</p>
+      <div class="lp-start"><b>${all ? 'You’ve explored the whole bench.' : 'Hover anything on the bench to learn what it is.'}</b><span>${all ? 'Press Esc to go back to the rack.' : 'Click an item to look closer.'}</span></div>
+      <div class="lp-prog"><span>${n} of ${BENCH_KEYS.length} explored</span><i style="--p:${(n / BENCH_KEYS.length).toFixed(3)}"></i></div>
+      ${groups.map(([g, keys]) => `<div class="lp-group"><span class="eyebrow">${esc(g)}</span><div class="lp-list">${keys.map(bk => `<button type="button" class="lp-item${seen.has(bk) ? ' seen' : ''}" data-bench-item="${bk}" data-learn="${bk}"><span>${esc(BENCH_INFO[bk].name)}</span><small>${seen.has(bk) ? 'explored' : ''}</small></button>`).join('')}</div></div>`).join('')}`;
+  }
+  function openBench() {
+    if (selected) select(null);
+    stopTour(); benchOn = true; learn.hover = learn.list = learn.bpin = null;
+    document.querySelector('.app').classList.add('sel');
+    hoverTag.hidden = true;
+    highlight(); renderBench(); flyTo(BENCH_VIEW());
+  }
+  function closeBench() {
+    benchOn = false; learn.hover = learn.list = learn.bpin = null;
+    document.querySelector('.app').classList.remove('sel');
+    highlight(); flyTo(VIEWS.reset());
+  }
+  function pinBench(k) {
+    learn.bpin = learn.bpin === k ? null : k; learn.hover = null;
+    if (learn.bpin) seenSet('bench').add(k);
+    highlight(); renderBench();
+    if (!learn.bpin) { flyTo(BENCH_VIEW()); return; }
+    const p = benchItems[k].getWorldPosition(new THREE.Vector3());
+    flyTo({ pos: p.clone().add(bench.localToWorld(new THREE.Vector3(0.06, 0.32, 0.3)).sub(bench.position)), tgt: p });
+  }
+  insp.addEventListener('click', e => {
+    if (!benchOn) return;
+    const it = e.target.closest('[data-bench-item]'); if (it) { pinBench(it.dataset.benchItem); return; }
+    if (e.target.closest('[data-bench-back]')) pinBench(learn.bpin);
+  });
   insp.addEventListener('click', e => {
     if (!selected || noGL) return;
     if (api.isTermOpen()) api.closeTerm();
@@ -1160,7 +1378,7 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
     const st = state[selected], a = b.dataset.act, lid = HASLID.has(DEV[selected].kind);
     if (a === 'open') { st.ex = 1; if (lid) st.op = 1; }
     else if (a === 'home') { if (!noGL) { closePanel(); return; } resetDev(st); }
-    else if (a === 'putback') { st.comp = null; st.compMesh = null; }
+    else if (a === 'putback') { st.comp = null; st.compMesh = null; learn.hover = null; }
     else if (a === 'ex') { st.ex = st.ex ? 0 : 1; if (!st.ex) resetDev(st); }
     else if (a === 'op') { st.op = st.op ? 0 : 1; if (st.op) st.ex = 1; else { st.xp = 0; st.comp = null; st.compMesh = null; } }
     else if (a === 'xp') { st.xp = st.xp ? 0 : 1; if (st.xp) { st.ex = 1; if (lid) st.op = 1; } }
@@ -1420,6 +1638,7 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
   const rim = new THREE.DirectionalLight('#6fa8ff', 0.6); rim.position.set(-3, 2, -3); scene.add(rim);
 
   // materials
+  const hovMat = new THREE.LineBasicMaterial({ color: '#ffd23f' });   // hover outline on units that slide out
   const M = {
     steel: new THREE.MeshStandardMaterial({ color: '#15181c', metalness: 0.65, roughness: 0.45 }),
     rail: new THREE.MeshStandardMaterial({ color: '#23282f', metalness: 0.7, roughness: 0.4 }),
@@ -1568,6 +1787,10 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
     // selection outline
     const edges = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(DW + 0.006, h + 0.004, DD + 0.004)), new THREE.LineBasicMaterial({ color: '#4ea6ff', transparent: true, opacity: 0 }));
     root.add(edges); o.edges = edges;
+    // hover outline: shows that this unit can be clicked and pulled out
+    o.hov = new THREE.Group(); o.hov.visible = false;
+    for (const g of [0.008, 0.012]) o.hov.add(new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(DW + g, h + g * 0.7, DD + g * 0.7)), hovMat));
+    root.add(o.hov);
     o.outer = new Set(root.children); // the chassis; everything added after this is inside the unit
     if (d.kind === 'server') buildServerInternals(o, id);
     if (d.kind === 'storage') buildSleds(o);
@@ -1575,7 +1798,7 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
     if (d.kind === 'ups') buildUpsInternals(o);
     if (d.kind === 'appliance') buildApplianceInternals(o);
     if (d.kind === 'gpu') buildGpuInternals(o);
-    root.traverse(m => { if (m.isMesh) { m.userData.dev = id; pickables.push(m); } });
+    root.traverse(m => { if (m.isMesh) { m.userData.dev = id; if (!m.userData.noPick) pickables.push(m); } });   // fine detail is left out: its part's hit box takes the click
     devObj[id] = o;
   }
 
@@ -1593,113 +1816,693 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
     return c;
   }
 
-  function buildServerInternals(o, id) {
-    const h = o.h, j = { cpu0: 'CPU 0', cpu1: 'CPU 1', dimm: 'RAM', fans: 'Fan wall', psu: 'Power supplies', nic: 'Network card', drives: 'NVMe drives' }, y0 = -h / 2 + 0.004, V = (x, y, z) => new THREE.Vector3(x, y, z);
-    comp(o, box(DW - 0.02, 0.002, DD - 0.12, M.board), V(0, y0, -0.02), V(0, 0, 0));
-    // CPUs with heatsinks
-    const cpuH = Math.min(0.05, h - 0.02);
-    comp(o, box(0.09, cpuH, 0.11, M.heat), V(-0.09, y0 + cpuH / 2 + 0.002, -0.05), V(-0.03, 0.22, 0), 'cpu0', j.cpu0, 'CPU 0', V(0, 0.1, 0));
-    comp(o, box(0.09, cpuH, 0.11, M.heat), V(0.09, y0 + cpuH / 2 + 0.002, -0.05), V(0.03, 0.22, 0), 'cpu1', j.cpu1, 'CPU 1', V(0, 0.1, 0));
-    // DIMM banks
-    const dimmH = Math.min(0.032, h - 0.02);
-    for (let s = -1; s <= 1; s += 2) for (let i = 0; i < 8; i++) {
-      const x = s * 0.09 + (i < 4 ? -0.068 : 0.052) + (i % 4) * 0.006;
-      comp(o, box(0.0022, dimmH, 0.12, M.dimm), V(x, y0 + dimmH / 2 + 0.002, -0.05), V(0, 0.13, 0), 'dimm', (s === -1 && i === 0) ? j.dimm : null, 'RAM', V(0, 0.1, 0));
+  // ---------------- server interior ----------------
+  // A vendor-neutral 2U, two-socket server laid out like the real thing, front to back: hot-swap U.2 drives,
+  // the drive backplane, a wall of six 60 mm fans, two CPU sockets with 2U heatsinks and eight DDR5 RDIMMs
+  // each, the voltage regulators around the sockets, then PCIe risers, an OCP 3.0 NIC and two hot-swap power
+  // supplies at the rear. Textures are painted once and shared by the four servers; parts you can hover sit
+  // inside invisible hit boxes, and the detail inside them is left out of picking (userData.noPick).
+  const SK = {};
+  const BW = DW - 0.024, BZ0 = -0.335, BZ1 = 0.135, BD = BZ1 - BZ0, CPZ = -0.025, CPX = 0.095;
+  function serverKit() {
+    if (SK.ready) return SK;
+    const aniso = renderer.capabilities.getMaxAnisotropy();
+    const cnv = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return [c, c.getContext('2d')]; };
+    const tex = c => { const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding; t.anisotropy = aniso; return t; };
+    let sd = 11; const R = () => ((sd = (sd * 16807) % 2147483647) / 2147483647);
+    const mono = (g, size, weight = 500) => { g.font = `${weight} ${size}px "IBM Plex Mono", monospace`; };
+    const sans = (g, size, weight = 600) => { g.font = `${weight} ${size}px "Inter Tight", "Helvetica Neue", Arial, sans-serif`; };
+    const barcode = (g, x, y, w, h) => { let cx = x; while (cx < x + w) { const bw = 1 + Math.floor(R() * 3); if (R() > 0.4) { g.fillStyle = '#111'; g.fillRect(cx, y, bw, h); } cx += bw + 1; } };
+    const matrix = (g, x, y, cell, n, col) => { g.fillStyle = col; for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) if (i === 0 || j === n - 1 || R() > 0.5) g.fillRect(x + i * cell, y + j * cell, cell, cell); };
+
+    // --- the motherboard: green PCB, signal traces, vias, white silkscreen, mounting holes, scattered SMD parts ---
+    {
+      const CW = 2048, CH = Math.round(CW * BD / BW), [c, g] = cnv(CW, CH);
+      const X = x => (x + BW / 2) / BW * CW, Z = z => (z - BZ0) / BD * CH, S = m => m / BW * CW;
+      g.fillStyle = '#0b3524'; g.fillRect(0, 0, CW, CH);
+      for (let i = 0; i < 9000; i++) { g.fillStyle = `rgba(255,255,255,${0.008 + R() * 0.014})`; g.fillRect(R() * CW, R() * CH, 2 + R() * 6, 2 + R() * 6); }
+      g.fillStyle = '#0d3b28'; for (const [x0, z0, x1, z1] of [[-0.2, -0.33, -0.04, -0.2], [0.07, -0.33, 0.2, -0.16], [-0.2, 0.06, 0.2, 0.13], [-0.03, -0.18, 0.03, 0.05]]) g.fillRect(X(x0), Z(z0), S(x1 - x0), Z(z1) - Z(z0));
+      // traces: parallel buses with 45° bends, the way a board is routed
+      const bus = (pts, n, gap, col = 'rgba(46,130,86,0.55)', w = 2.4) => {
+        g.strokeStyle = col; g.lineWidth = w; g.lineJoin = 'round';
+        for (let k = 0; k < n; k++) { g.beginPath(); pts.forEach(([x, z], i) => { const px = X(x) + k * gap, pz = Z(z) + k * gap * 0.35; i ? g.lineTo(px, pz) : g.moveTo(px, pz); }); g.stroke(); }
+      };
+      for (const s of [-1, 1]) {
+        const cx = s * CPX;
+        for (const side of [-1, 1]) for (let r = 0; r < 4; r++) bus([[cx + side * 0.03, CPZ - 0.05 + r * 0.03], [cx + side * 0.045, CPZ - 0.04 + r * 0.03], [cx + side * 0.08, CPZ - 0.04 + r * 0.03]], 6, 5);
+        bus([[cx - 0.02, CPZ - 0.06], [cx - 0.02, -0.15], [cx - 0.06 * s, -0.19], [cx - 0.06 * s, -0.3]], 10, 6);
+        bus([[cx + 0.02, CPZ + 0.06], [cx + 0.02, 0.09], [s * 0.18, 0.105], [s * 0.19, 0.12]], 8, 6);
+      }
+      bus([[-0.06, CPZ - 0.01], [0.06, CPZ - 0.01]], 14, 5, 'rgba(60,150,100,0.5)');          // links between the two CPUs
+      bus([[-0.01, -0.13], [-0.01, -0.2], [0.03, -0.24], [0.03, -0.3]], 8, 6);
+      for (let i = 0; i < 260; i++) { const x = -0.2 + R() * 0.4, z = -0.33 + R() * 0.46, l = 0.01 + R() * 0.04; g.strokeStyle = 'rgba(46,130,86,0.4)'; g.lineWidth = 1.6; g.beginPath(); g.moveTo(X(x), Z(z)); g.lineTo(X(x + l), Z(z)); g.lineTo(X(x + l + 0.006), Z(z + 0.006)); g.stroke(); }
+      for (let i = 0; i < 1400; i++) { const x = X(-0.2 + R() * 0.4), z = Z(-0.33 + R() * 0.46); g.fillStyle = '#b8a36a'; g.beginPath(); g.arc(x, z, 2.4, 0, 7); g.fill(); g.fillStyle = '#163f2b'; g.beginPath(); g.arc(x, z, 1, 0, 7); g.fill(); }
+      // small SMD parts: resistors, capacitors, little ICs
+      for (let i = 0; i < 2600; i++) { const x = X(-0.2 + R() * 0.4), z = Z(-0.33 + R() * 0.46), t = R(); g.fillStyle = t < 0.45 ? '#141516' : t < 0.75 ? '#c9b48c' : t < 0.9 ? '#8a6a3a' : '#5c5f63'; const v = R() > 0.5; g.fillRect(x, z, v ? 4 : 8, v ? 8 : 4); }
+      for (let i = 0; i < 70; i++) { const x = X(-0.19 + R() * 0.38), z = Z(-0.32 + R() * 0.44), sz = 14 + R() * 26; g.fillStyle = '#121314'; g.fillRect(x, z, sz, sz * (0.6 + R() * 0.6)); g.fillStyle = '#9a9a9a'; for (let k = 0; k < sz; k += 4) { g.fillRect(x + k, z - 3, 2, 3); } }
+      // mounting holes
+      for (const [x, z] of [[-0.2, -0.325], [0.2, -0.325], [-0.2, 0.125], [0.2, 0.125], [0, 0.125], [0, -0.325], [-CPX, -0.105], [CPX, -0.105], [-CPX, 0.055], [CPX, 0.055], [-0.03, -0.22]]) {
+        g.fillStyle = '#c8a64a'; g.beginPath(); g.arc(X(x), Z(z), 15, 0, 7); g.fill(); g.fillStyle = '#18191a'; g.beginPath(); g.arc(X(x), Z(z), 7, 0, 7); g.fill();
+        g.strokeStyle = '#dfe6e1'; g.lineWidth = 2; g.beginPath(); g.arc(X(x), Z(z), 22, 0, 7); g.stroke();
+      }
+      // silkscreen
+      g.fillStyle = '#e4ebe6'; g.strokeStyle = '#e4ebe6'; g.lineWidth = 2.5;
+      const txt = (t, x, z, size = 22, w = 600) => { mono(g, size, w); g.fillText(t, X(x), Z(z)); };
+      const frame = (x0, z0, x1, z1) => g.strokeRect(X(x0), Z(z0), S(x1 - x0), Z(z1) - Z(z0));
+      for (const s of [-1, 1]) {
+        const cx = s * CPX, n = s < 0 ? 1 : 2;
+        frame(cx - 0.042, CPZ - 0.056, cx + 0.042, CPZ + 0.056);
+        txt(`CPU${n}`, cx - 0.012, CPZ + 0.07, 30, 700);
+        'ABCDEFGH'.split('').forEach((l, k) => { const side = k < 4 ? -1 : 1, i = k % 4; txt(`${l}${n}`, cx + side * (0.051 + i * 0.0076) - 0.003, CPZ + 0.078, 15); });
+        g.beginPath(); g.moveTo(X(cx + 0.03), Z(CPZ - 0.085)); g.lineTo(X(cx + 0.036), Z(CPZ - 0.096)); g.lineTo(X(cx + 0.024), Z(CPZ - 0.096)); g.closePath(); g.stroke();
+      }
+      txt('PCIE RISER 1', -0.2, -0.205, 20); txt('OCP 3.0', -0.012, -0.21, 20); txt('PCH', -0.008, -0.155, 20); txt('BMC', 0.034, -0.215, 18); txt('TPM', 0.06, -0.11, 16);
+      txt('M.2 BOOT', -0.035, 0.112, 18); txt('CR2032', -0.04, -0.17, 15); txt('PSU PWR', 0.08, -0.14, 18); txt('INTRUSION', 0.15, 0.115, 14);
+      for (let i = 0; i < 6; i++) txt(`FAN${i + 1}`, -0.165 + i * 0.062, 0.128, 15);
+      for (const [t, x] of [['MCIO 0', -0.205], ['MCIO 1', -0.175], ['MCIO 2', 0.16], ['MCIO 3', 0.185]]) txt(t, x, 0.098, 12);
+      txt('MB-2S-G5   REV A02', -0.2, -0.29, 22, 700); txt('DO NOT TOUCH HEATSINK - HOT SURFACE', -0.07, -0.088, 12);
+      for (let i = 0; i < 120; i++) txt(`${'RCULJQ'[Math.floor(R() * 6)]}${Math.floor(R() * 900 + 10)}`, -0.2 + R() * 0.4, -0.32 + R() * 0.44, 10, 500);
+      g.fillStyle = '#f1f1ee'; g.fillRect(X(-0.198), Z(-0.275), S(0.05), Z(-0.258) - Z(-0.275)); barcode(g, X(-0.195), Z(-0.272), S(0.044), Z(-0.262) - Z(-0.272));
+      SK.board = tex(c);
     }
-    // fan wall
-    const fr = Math.min(0.018, h / 2 - 0.004);
-    for (let i = 0; i < 6; i++) {
-      const fan = new THREE.Mesh(new THREE.CylinderGeometry(fr, fr, 0.03, 20), M.fan); fan.rotation.x = Math.PI / 2;
-      comp(o, fan, V(-0.175 + i * 0.07, y0 + fr + 0.003, 0.12), V(0, 0.08, 0.2), 'fans', i === 2 ? j.fans : null, 'Fan wall', [V(0, 0.09, 0), V(0, 0, 0.06)]);
+
+    // --- DDR5 RDIMM: green PCB, ten DRAM packages with the register (RCD) in the middle, PMIC, gold fingers, label ---
+    {
+      const [c, g] = cnv(1024, 240);
+      g.fillStyle = '#1c5a37'; g.fillRect(0, 0, 1024, 240);
+      for (let i = 0; i < 400; i++) { g.fillStyle = 'rgba(70,150,100,0.35)'; g.fillRect(R() * 1024, 30 + R() * 160, 1 + R() * 20, 1); }
+      g.fillStyle = '#d6a842'; for (let x = 12; x < 1012; x += 7) if (Math.abs(x - 512 - 40) > 8) g.fillRect(x, 214, 5, 24);   // gold fingers, with the key notch
+      g.fillStyle = '#1c5a37'; g.fillRect(546, 208, 14, 32);
+      const chip = (x, y, w, h, t) => { g.fillStyle = '#151618'; g.fillRect(x, y, w, h); g.fillStyle = 'rgba(255,255,255,0.05)'; g.fillRect(x, y, w, 3); mono(g, 11); g.fillStyle = '#6d7075'; g.fillText(t, x + 6, y + h / 2 + 4); };
+      for (let i = 0; i < 10; i++) { const x = 40 + i * 92 + (i >= 5 ? 56 : 0); chip(x, 66, 70, 96, i % 2 ? 'D8BNW' : 'H5CG4'); }
+      chip(475, 74, 62, 70, 'RCD'); chip(14, 120, 22, 30, ''); chip(486, 166, 40, 22, 'SPD');
+      g.fillStyle = '#2b2e33'; g.fillRect(12, 70, 24, 40);    // PMIC with its inductor
+      for (let i = 0; i < 70; i++) { g.fillStyle = R() > 0.5 ? '#c9b48c' : '#141516'; g.fillRect(30 + R() * 960, R() > 0.5 ? 172 + R() * 30 : 40 + R() * 20, 6, 3); }
+      g.fillStyle = '#f4f4f2'; g.fillRect(612, 18, 330, 40); mono(g, 15, 600); g.fillStyle = '#111'; g.fillText('64GB 2Rx4 PC5-4800B-RB0', 622, 36); barcode(g, 622, 41, 190, 12); mono(g, 11); g.fillText('ECC RDIMM', 830, 52);
+      SK.dimm = tex(c);
     }
-    // PSUs
-    comp(o, box(0.07, Math.min(0.036, h - 0.012), 0.2, M.psu), V(0.175, y0 + 0.02, -0.24), V(0.16, 0.03, -0.12), 'psu', j.psu, 'PSU A/B', [V(0, 0.07, 0), V(0, 0.05, 0.3)]);
-    comp(o, box(0.07, Math.min(0.036, h - 0.012), 0.2, M.psu), V(0.175 - 0.075, y0 + 0.02, -0.24), V(0.12, 0.03, -0.18), 'psu', null, null, [V(0, 0.07, 0), V(0, 0.05, 0.3)]);
-    // NIC card
-    comp(o, box(0.14, 0.003, 0.09, M.card), V(-0.14, y0 + 0.028, -0.27), V(-0.12, 0.16, -0.12), 'nic', j.nic, 'NIC', V(0, 0.1, 0));
-    // drive bays
-    for (let i = 0; i < 8; i++) comp(o, box(0.045, Math.min(0.016, h * 0.4), 0.14, M.sled), V(-0.18 + i * 0.05, y0 + 0.012, 0.27), V(0, 0.02, 0.26 + (i % 2) * 0.04), 'drives', i === 3 ? j.drives : null, 'NVMe drives', V(0, 0, 0.2));
-  }
-  function buildSleds(o) {
-    const V = (x, y, z) => new THREE.Vector3(x, y, z);
-    for (let r = 0; r < 3; r++) for (let c = 0; c < 8; c++) {
-      const y = o.h / 2 - 0.035 - r * 0.052;
-      comp(o, box(0.048, 0.044, 0.3, M.sled), V(-0.182 + c * 0.052, y, 0.2), V(0, 0, 0), `sled${r}${c}`, null, '', V(0, 0, 0.32));
+
+    // --- CPU lid (IHS): nickel-plated, brushed, with laser marking ---
+    {
+      const [c, g] = cnv(256, 336);
+      const gr = g.createLinearGradient(0, 0, 256, 336); gr.addColorStop(0, '#d2d5d8'); gr.addColorStop(1, '#a9aeb3'); g.fillStyle = gr; g.fillRect(0, 0, 256, 336);
+      for (let y = 0; y < 336; y += 2) { g.fillStyle = `rgba(255,255,255,${R() * 0.08})`; g.fillRect(0, y, 256, 1); }
+      g.fillStyle = 'rgba(40,44,48,0.75)'; mono(g, 22, 700); g.fillText('2S-64C', 30, 70); mono(g, 17, 500); g.fillText('3.1GHZ  360W', 30, 100); g.fillText('G5  QS', 30, 126); g.fillText('X417A902', 30, 152);
+      matrix(g, 30, 190, 8, 12, 'rgba(40,44,48,0.75)');
+      SK.ihs = tex(c);
     }
-  }
-  function buildSwitchInternals(o) {
-    const h = o.h, y0 = -h / 2 + 0.004, V = (x, y, z) => new THREE.Vector3(x, y, z);
-    comp(o, box(DW - 0.02, 0.002, DD - 0.1, M.board), V(0, y0, 0), V(0, 0, 0));
-    comp(o, box(0.1, h - 0.014, 0.1, M.heat), V(0, y0 + (h - 0.014) / 2 + 0.002, 0.02), V(0, 0.2, 0), 'asic', 'Switch ASIC', 'BGP · EVPN · MLAG', V(0, 0.1, 0));
-    for (let i = 0; i < 4; i++) comp(o, box(0.02, 0.012, 0.08, M.optic), V(0.12 + i * 0.024, y0 + 0.012, 0.3), V(0, 0.07, 0.14), 'optics', i === 0 ? 'Optics' : null, '400G QSFP-DD', V(0, 0, 0.14));
-    for (let i = 0; i < 3; i++) comp(o, box(0.075, h - 0.012, 0.05, M.fan), V(-0.16 + i * 0.085, y0 + (h - 0.012) / 2, -0.32), V(0, 0.06, -0.14), 'fans', i === 1 ? 'Fan modules' : null, 'front-to-back', [V(0, 0.06, 0), V(0, 0.04, 0.26)]);
-    for (let i = 0; i < 2; i++) comp(o, box(0.06, h - 0.012, 0.18, M.psu), V(0.12 + i * 0.068, y0 + (h - 0.012) / 2, -0.26), V(0.08, 0.04, -0.12), 'psu', i === 0 ? 'PSU A/B' : null, '2 × 1,100 W', [V(0, 0.06, 0), V(0, 0.05, 0.28)]);
-  }
-  function buildUpsInternals(o) {
-    const h = o.h, y0 = -h / 2 + 0.004, V = (x, y, z) => new THREE.Vector3(x, y, z), bh = h - 0.03;
-    for (let r = 0; r < 2; r++) for (let c = 0; c < 4; c++) {
-      const b = box(0.085, bh, 0.15, M.batt);
-      const cap = box(0.02, 0.004, 0.02, M.battCap); cap.position.set(0.025, bh / 2 + 0.002, 0.05); b.add(cap);
-      comp(o, b, V(-0.15 + c * 0.1, y0 + bh / 2, 0.16 - r * 0.19), V((c - 1.5) * 0.03, 0.14 + r * 0.06, 0.06 - r * 0.08), 'batt', r === 0 && c === 1 ? 'Battery modules' : null, '8 hot-swap modules', V(0, 0.16, 0));
+
+    // --- U.2 NVMe drive label ---
+    {
+      const [c, g] = cnv(512, 352);
+      g.fillStyle = '#9ea4aa'; g.fillRect(0, 0, 512, 352);
+      for (let y = 0; y < 352; y += 2) { g.fillStyle = `rgba(255,255,255,${R() * 0.07})`; g.fillRect(0, y, 512, 1); }
+      g.fillStyle = '#f5f5f3'; g.fillRect(36, 34, 440, 284);
+      g.fillStyle = '#111'; sans(g, 40, 700); g.fillText('NVMe SSD', 58, 92); mono(g, 22, 600); g.fillText('3.84 TB   U.2 2.5" 15mm', 58, 130);
+      mono(g, 17); g.fillText('PCIe Gen4 x4  ·  1 DWPD', 58, 162); g.fillText('12V  2.0A    3.3Vaux 0.5A', 58, 190); g.fillText('S/N  N4U2A7F30188', 58, 218);
+      barcode(g, 58, 236, 260, 46); matrix(g, 380, 230, 6, 12, '#111');
+      g.strokeStyle = '#111'; g.lineWidth = 2; g.beginPath(); g.moveTo(420, 60); g.lineTo(444, 102); g.lineTo(396, 102); g.closePath(); g.stroke(); mono(g, 26, 700); g.fillText('!', 414, 98);
+      SK.drive = tex(c);
     }
-    comp(o, box(0.36, 0.004, 0.12, M.board), V(0, y0 + 0.01, -0.27), V(0, 0.2, -0.12), 'inv', 'Inverter board', 'double conversion', V(0, 0.12, 0));
-  }
-  function buildApplianceInternals(o) {
-    const h = o.h, y0 = -h / 2 + 0.004, V = (x, y, z) => new THREE.Vector3(x, y, z);
-    comp(o, box(DW - 0.02, 0.002, DD - 0.1, M.board), V(0, y0, 0), V(0, 0, 0));
-    comp(o, box(0.08, 0.04, 0.08, M.heat), V(-0.05, y0 + 0.022, 0), V(0, 0.18, 0), 'cpu', 'Firewall CPU', 'crypto offload', V(0, 0.1, 0));
-    for (let i = 0; i < 2; i++) comp(o, box(0.07, 0.009, 0.1, M.sled), V(-0.17 + i * 0.075, y0 + 0.008, 0.24), V(0, 0.08, 0.1), 'ssd', i === 0 ? 'Boot SSDs' : null, 'RAID 1', V(0, 0, 0.18));
-    for (let i = 0; i < 2; i++) comp(o, box(0.06, 0.04, 0.16, M.psu), V(0.12 + i * 0.068, y0 + 0.022, -0.25), V(0.08, 0.05, -0.1), 'psu', i === 0 ? 'PSU A/B' : null, 'A and B feeds', [V(0, 0.07, 0), V(0, 0.05, 0.28)]);
+
+    // --- power supply: label on top, perforated sides ---
+    {
+      const [c, g] = cnv(512, 1504);
+      g.fillStyle = '#8b9299'; g.fillRect(0, 0, 512, 1504);
+      for (let y = 0; y < 1504; y += 2) { g.fillStyle = `rgba(255,255,255,${R() * 0.06})`; g.fillRect(0, y, 512, 1); }
+      g.fillStyle = '#25292e'; for (let y = 40; y < 420; y += 22) for (let x = 40 + (y % 44 ? 11 : 0); x < 470; x += 22) { g.beginPath(); g.arc(x, y, 7, 0, 7); g.fill(); }   // vents at the rear end
+      g.fillStyle = '#f3f3f1'; g.fillRect(40, 520, 432, 860);
+      g.fillStyle = '#111'; sans(g, 46, 700); g.fillText('1400W', 64, 600); sans(g, 26, 600); g.fillText('AC POWER SUPPLY', 64, 640); mono(g, 20, 600); g.fillText('HOT-SWAP  ·  80 PLUS TITANIUM', 64, 676);
+      g.lineWidth = 2; g.strokeStyle = '#111'; g.strokeRect(64, 706, 384, 250); mono(g, 18);
+      [['INPUT', '100-240V~  10-8A  50/60Hz'], ['', '240V DC  6.6A'], ['OUTPUT', '+12V  116.7A'], ['', '+12Vsb  3.0A'], ['TEMP', '0-55°C']].forEach(([k, v], i) => { g.fillText(k, 76, 740 + i * 44); g.fillText(v, 188, 740 + i * 44); });
+      g.beginPath(); g.moveTo(256, 990); g.lineTo(306, 1076); g.lineTo(206, 1076); g.closePath(); g.lineWidth = 4; g.stroke(); sans(g, 54, 800); g.fillText('!', 247, 1066);
+      mono(g, 16); g.fillText('HAZARDOUS VOLTAGE INSIDE. NO USER', 72, 1120); g.fillText('SERVICEABLE PARTS. DO NOT OPEN.', 72, 1144);
+      barcode(g, 72, 1180, 300, 70); mono(g, 15); g.fillText('P/N PSU-1400-AC-T  REV 03', 72, 1278); matrix(g, 392, 1180, 6, 12, '#111');
+      SK.psuTop = tex(c);
+      const [c2, g2] = cnv(1504, 300);
+      g2.fillStyle = '#80878e'; g2.fillRect(0, 0, 1504, 300);
+      g2.fillStyle = '#25292e'; for (let y = 40; y < 270; y += 20) for (let x = 1000; x < 1470; x += 20) { g2.beginPath(); g2.arc(x + (y % 40 ? 10 : 0), y, 6, 0, 7); g2.fill(); }
+      g2.fillStyle = '#6e757c'; g2.fillRect(0, 140, 1504, 4);
+      SK.psuSide = tex(c2);
+    }
+
+    // --- drive backplane, M.2 boot drive, OCP NIC, perforated drive-cage top ---
+    {
+      const [c, g] = cnv(1024, 180);
+      g.fillStyle = '#0d3a26'; g.fillRect(0, 0, 1024, 180);
+      for (let i = 0; i < 120; i++) { g.strokeStyle = 'rgba(46,130,86,0.5)'; g.lineWidth = 2; g.beginPath(); const x = R() * 1024, y = R() * 180; g.moveTo(x, y); g.lineTo(x + 40 + R() * 80, y); g.stroke(); }
+      for (let i = 0; i < 300; i++) { g.fillStyle = R() > 0.5 ? '#141516' : '#c9b48c'; g.fillRect(R() * 1024, R() * 180, 6, 3); }
+      g.fillStyle = '#e4ebe6'; mono(g, 18, 700); g.fillText('BP-8xU.2 NVMe  REV B', 20, 30); mono(g, 15); for (let i = 0; i < 8; i++) g.fillText(`BAY ${i}`, 60 + i * 120, 168);
+      SK.backplane = tex(c);
+      const [m, mg] = cnv(512, 140);
+      mg.fillStyle = '#121416'; mg.fillRect(0, 0, 512, 140);
+      mg.fillStyle = '#d6a842'; for (let y = 10; y < 130; y += 7) if (Math.abs(y - 40) > 6) mg.fillRect(0, y, 18, 4);
+      mg.fillStyle = '#26292d'; mg.fillRect(60, 24, 110, 92); mg.fillRect(300, 24, 110, 92); mg.fillStyle = '#1d1f22'; mg.fillRect(190, 34, 80, 72);
+      mg.fillStyle = '#f2f2f0'; mg.fillRect(296, 30, 190, 80); mg.fillStyle = '#111'; mono(mg, 15, 600); mg.fillText('M.2 2280 NVMe', 306, 54); mg.fillText('480GB  BOOT', 306, 78); barcode(mg, 306, 86, 120, 16);
+      SK.m2 = tex(m);
+      const [o, og] = cnv(256, 384);
+      og.fillStyle = '#0f3524'; og.fillRect(0, 0, 256, 384);
+      for (let i = 0; i < 200; i++) { og.fillStyle = R() > 0.5 ? '#141516' : '#c9b48c'; og.fillRect(R() * 256, R() * 384, 5, 3); }
+      og.fillStyle = '#d6a842'; for (let x = 20; x < 236; x += 6) og.fillRect(x, 0, 4, 14);
+      og.fillStyle = '#e4ebe6'; mono(og, 16, 700); og.fillText('OCP 3.0  2x25GbE', 20, 360);
+      SK.ocp = tex(o);
+      const [n, ng] = cnv(512, 336);
+      ng.fillStyle = '#0f3a27'; ng.fillRect(0, 0, 512, 336);
+      for (let i = 0; i < 90; i++) { ng.strokeStyle = 'rgba(46,130,86,0.5)'; ng.lineWidth = 2; const x = R() * 512, y = R() * 336; ng.beginPath(); ng.moveTo(x, y); ng.lineTo(x + 30 + R() * 60, y); ng.lineTo(x + 40 + R() * 60, y + 10); ng.stroke(); }
+      for (let i = 0; i < 380; i++) { ng.fillStyle = R() > 0.5 ? '#141516' : '#c9b48c'; ng.fillRect(R() * 512, R() * 336, 6, 3); }
+      ng.fillStyle = '#d6a842'; for (let y = 60; y < 300; y += 6) if (Math.abs(y - 150) > 5) ng.fillRect(494, y, 18, 4);
+      ng.fillStyle = '#e4ebe6'; mono(ng, 18, 700); ng.fillText('2x100GbE QSFP28  PCIe 4.0 x16', 16, 322); mono(ng, 13); ng.fillText('P1', 40, 24); ng.fillText('P2', 150, 24);
+      ng.fillStyle = '#f2f2f0'; ng.fillRect(330, 250, 150, 44); barcode(ng, 338, 258, 110, 14); ng.fillStyle = '#111'; mono(ng, 11); ng.fillText('MAC 00:1B:21:7A:4C:E0', 338, 288);
+      SK.nic = tex(n);
+      const [p, pg] = cnv(512, 220);
+      pg.fillStyle = '#2b3038'; pg.fillRect(0, 0, 512, 220);
+      pg.fillStyle = '#12151a'; for (let y = 14; y < 210; y += 14) for (let x = 14 + (y % 28 ? 7 : 0); x < 500; x += 14) { pg.beginPath(); pg.arc(x, y, 4.2, 0, 7); pg.fill(); }
+      SK.perf = tex(p);
+    }
+
+    // shared materials
+    const std = (o) => new THREE.MeshStandardMaterial(o);
+    SK.mat = {
+      board: std({ map: SK.board, roughness: 0.62, metalness: 0.08, envMapIntensity: 0.35 }),
+      boardEdge: std({ color: '#0b3524', roughness: 0.7 }),
+      dimm: std({ map: SK.dimm, roughness: 0.5, metalness: 0.15, envMapIntensity: 0.4 }),
+      dimmEdge: std({ color: '#1c5a37', roughness: 0.6 }),
+      slot: std({ color: '#111214', roughness: 0.55, metalness: 0.1 }),
+      latch: std({ color: '#d8dadc', roughness: 0.45 }),
+      alu: std({ color: '#c4c9cf', roughness: 0.32, metalness: 0.9, envMapIntensity: 0.9 }),
+      copper: std({ color: '#c06a3a', roughness: 0.3, metalness: 1, envMapIntensity: 0.9 }),
+      screw: std({ color: '#1a1c1f', roughness: 0.4, metalness: 0.6 }),
+      screwTop: std({ color: '#b9bec4', roughness: 0.3, metalness: 0.9 }),
+      ihs: std({ map: SK.ihs, roughness: 0.28, metalness: 0.9, envMapIntensity: 0.8 }),
+      substrate: std({ color: '#1f4d33', roughness: 0.55 }),
+      socket: std({ color: '#1a1b1d', roughness: 0.5, metalness: 0.2 }),
+      loadPlate: std({ color: '#9da3a9', roughness: 0.35, metalness: 0.85, envMapIntensity: 0.7 }),
+      choke: std({ color: '#55595f', roughness: 0.45, metalness: 0.5 }),
+      cap: std({ color: '#2a2d31', roughness: 0.35, metalness: 0.7 }),
+      capTop: std({ color: '#c3c7cb', roughness: 0.3, metalness: 0.9 }),
+      chip: std({ color: '#141517', roughness: 0.45, metalness: 0.2 }),
+      sheet: std({ color: '#3b4048', roughness: 0.4, metalness: 0.75, envMapIntensity: 0.5 }),
+      perf: std({ map: SK.perf, roughness: 0.45, metalness: 0.7, envMapIntensity: 0.5 }),
+      plastic: std({ color: '#141518', roughness: 0.65, metalness: 0.05 }),
+      carrier: std({ color: '#23262b', roughness: 0.5, metalness: 0.5 }),
+      drive: std({ map: SK.drive, roughness: 0.4, metalness: 0.6, envMapIntensity: 0.6 }),
+      driveBody: std({ color: '#9ea4aa', roughness: 0.35, metalness: 0.8, envMapIntensity: 0.6 }),
+      psuTop: std({ map: SK.psuTop, roughness: 0.42, metalness: 0.65, envMapIntensity: 0.55 }),
+      psuSide: std({ map: SK.psuSide, roughness: 0.42, metalness: 0.7, envMapIntensity: 0.55 }),
+      psuEnd: std({ color: '#2a2e33', roughness: 0.5, metalness: 0.6 }),
+      backplane: std({ map: SK.backplane, roughness: 0.6, metalness: 0.1 }),
+      m2: std({ map: SK.m2, roughness: 0.5, metalness: 0.15 }),
+      ocp: std({ map: SK.ocp, roughness: 0.55, metalness: 0.1 }),
+      nic: std({ map: SK.nic, roughness: 0.55, metalness: 0.1 }),
+      cage: std({ color: '#c3c8cd', roughness: 0.3, metalness: 0.9, envMapIntensity: 0.8 }),
+      cable: std({ color: '#1d1f23', roughness: 0.6, metalness: 0.05 }),
+      tab: std({ color: '#2f7fd6', roughness: 0.5 }),
+      molex: std({ color: '#e7e0c6', roughness: 0.6 }),
+      gold: std({ color: '#d6a842', roughness: 0.3, metalness: 1 }),
+      hit: new THREE.MeshBasicMaterial({ visible: false }),
+    };
+    SK.ready = true;
+    return SK;
   }
 
-  // A generic 4U GPU server: four accelerator modules on one board, links between them,
-  // one network card per GPU at the rear, a fan wall at the front. Not modelled on any vendor's product.
+  function buildServerInternals(o, id) {
+    const K = serverKit(), Mt = K.mat, h = o.h, y0 = -h / 2 + 0.004, V = (x, y, z) => new THREE.Vector3(x, y, z);
+    const j = { cpu0: 'CPU 0', cpu1: 'CPU 1', dimm: 'RAM', fans: 'Fan wall', psu: 'Power supplies', nic: 'Network card', drives: 'NVMe drives' };
+    const deco = (m, parent = o.root) => { m.traverse(n => { if (n.isMesh) n.userData.noPick = true; }); parent.add(m); return m; };
+    const B = (w, hh, d, mat, x, y, z, parent) => deco(at(box(w, hh, d, mat), x, y, z), parent);
+    const inst = (geo, mat, list, parent = o.root) => {      // many identical small parts in one draw call
+      const im = new THREE.InstancedMesh(geo, mat, list.length), m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), s1 = new THREE.Vector3(1, 1, 1);
+      list.forEach(([x, y, z, ry = 0], i) => { q.setFromAxisAngle(new THREE.Vector3(0, 1, 0), ry); im.setMatrixAt(i, m4.compose(new THREE.Vector3(x, y, z), q, s1)); });
+      im.frustumCulled = false;   // instances spread beyond the base geometry's bounds
+      return deco(im, parent);
+    };
+    const yb = y0 + 0.003;   // top of the board
+
+    // motherboard: printed top, plain edges
+    const board = new THREE.Mesh(new THREE.BoxGeometry(BW, 0.003, BD), [Mt.boardEdge, Mt.boardEdge, Mt.board, Mt.boardEdge, Mt.boardEdge, Mt.boardEdge]);
+    comp(o, board, V(0, y0 + 0.0015, (BZ0 + BZ1) / 2), V(0, 0, 0));
+
+    // CPU sockets with their packages; the heatsinks above them are the hoverable parts
+    for (const s of [-1, 1]) {
+      const cx = s * CPX;
+      B(0.076, 0.004, 0.09, Mt.socket, cx, yb + 0.002, CPZ);
+      for (const dz of [-0.044, 0.044]) B(0.07, 0.0012, 0.004, Mt.loadPlate, cx, yb + 0.0046, CPZ + dz);
+      for (const dx of [-0.036, 0.036]) B(0.004, 0.0012, 0.092, Mt.loadPlate, cx + dx, yb + 0.0046, CPZ);
+      B(0.061, 0.0016, 0.077, Mt.substrate, cx, yb + 0.0048, CPZ);
+      const lid = new THREE.Mesh(new THREE.BoxGeometry(0.052, 0.0026, 0.068), [Mt.loadPlate, Mt.loadPlate, Mt.ihs, Mt.loadPlate, Mt.loadPlate, Mt.loadPlate]);
+      deco(at(lid, cx, yb + 0.007, CPZ));
+    }
+    // 2U heatsink: copper base, four heat pipes, dense aluminium fins parallel to the airflow, captive screws
+    const HS = { w: 0.078, d: 0.106, base: 0.007, fin: 0.047 };
+    const finGeo = new THREE.BoxGeometry(0.00042, HS.fin, 0.098), pipeGeo = new THREE.CylinderGeometry(0.0028, 0.0028, HS.w + 0.006, 14);
+    const screwGeo = new THREE.CylinderGeometry(0.0034, 0.0034, 0.009, 18), screwTopGeo = new THREE.CylinderGeometry(0.0022, 0.0022, 0.0012, 6);
+    for (const [s, key] of [[-1, 'cpu0'], [1, 'cpu1']]) {
+      const cx = s * CPX, H = HS.base + HS.fin, hit = new THREE.Mesh(new THREE.BoxGeometry(HS.w + 0.004, H, HS.d), Mt.hit);
+      const g = new THREE.Group(); g.position.y = -H / 2; hit.add(g);
+      B(HS.w, HS.base, HS.d, Mt.copper, 0, HS.base / 2, 0, g);
+      const fins = []; for (let i = 0; i < 44; i++) fins.push([-HS.w / 2 + 0.0009 + i * (HS.w - 0.0018) / 43, HS.base + HS.fin / 2, 0]);
+      inst(finGeo, Mt.alu, fins, g);
+      for (let k = 0; k < 4; k++) { const p = deco(new THREE.Mesh(pipeGeo, Mt.copper), g); p.rotation.z = Math.PI / 2; p.position.set(0, HS.base + 0.012 + (k % 2) * 0.016, -0.03 + k * 0.02); }
+      for (const [dx, dz] of [[-0.033, -0.049], [0.033, -0.049], [-0.033, 0.049], [0.033, 0.049]]) {
+        deco(at(new THREE.Mesh(screwGeo, Mt.screw), dx, HS.base + 0.0045, dz), g); deco(at(new THREE.Mesh(screwTopGeo, Mt.screwTop), dx, HS.base + 0.0095, dz), g);
+      }
+      B(HS.w + 0.002, 0.0012, 0.006, Mt.sheet, 0, HS.base + HS.fin - 0.0006, -0.046, g); B(HS.w + 0.002, 0.0012, 0.006, Mt.sheet, 0, HS.base + HS.fin - 0.0006, 0.046, g);
+      comp(o, hit, V(cx, yb + 0.0085 + H / 2, CPZ), V(s * 0.03, 0.22, 0), key, j[key], s < 0 ? 'CPU 0' : 'CPU 1', V(0, 0.1, 0));
+    }
+
+    // DIMM slots with latches, and the RDIMMs in them (8 per CPU, 4 on each side of the socket)
+    const slotGeo = new THREE.BoxGeometry(0.0062, 0.0065, 0.142), latchGeo = new THREE.BoxGeometry(0.0066, 0.009, 0.005);
+    const dimmGeo = new THREE.BoxGeometry(0.0013, 0.0312, 0.1333), dimmMats = [Mt.dimm, Mt.dimm, Mt.dimmEdge, Mt.gold, Mt.dimmEdge, Mt.dimmEdge];
+    const slots = [], latches = [];
+    for (const s of [-1, 1]) for (let k = 0; k < 8; k++) {
+      const side = k < 4 ? -1 : 1, x = s * CPX + side * (0.051 + (k % 4) * 0.0076);
+      slots.push([x, yb + 0.00325, CPZ]); latches.push([x, yb + 0.0045, CPZ - 0.0735], [x, yb + 0.0045, CPZ + 0.0735]);
+      comp(o, new THREE.Mesh(dimmGeo, dimmMats), V(x, yb + 0.0044 + 0.0156, CPZ), V(0, 0.13, 0), 'dimm', (s === -1 && k === 0) ? j.dimm : null, 'RAM', V(0, 0.1, 0));
+    }
+    inst(slotGeo, Mt.slot, slots); inst(latchGeo, Mt.latch, latches);
+
+    // voltage regulators around each socket: chokes, polymer capacitors, power stages
+    const chokes = [], caps = [], capTops = [], fets = [];
+    for (const s of [-1, 1]) for (const dz of [-0.067, 0.064]) for (let i = 0; i < 6; i++) {
+      const x = s * CPX - 0.03 + i * 0.012, z = CPZ + dz;
+      chokes.push([x, yb + 0.003, z]); fets.push([x, yb + 0.0007, z + (dz < 0 ? 0.008 : -0.008)]);
+      caps.push([x + 0.004, yb + 0.0035, z + (dz < 0 ? -0.008 : 0.008)], [x - 0.003, yb + 0.0035, z + (dz < 0 ? -0.008 : 0.008)]);
+    }
+    caps.forEach(([x, y, z]) => capTops.push([x, y + 0.0036, z]));
+    inst(new THREE.BoxGeometry(0.0078, 0.006, 0.0078), Mt.choke, chokes); inst(new THREE.BoxGeometry(0.005, 0.0012, 0.004), Mt.chip, fets);
+    inst(new THREE.CylinderGeometry(0.0022, 0.0022, 0.007, 14), Mt.cap, caps); inst(new THREE.CylinderGeometry(0.0021, 0.0021, 0.0004, 14), Mt.capTop, capTops);
+
+    // chipset (PCH) with a small finned heatsink, BMC, coin battery, M.2 boot drive
+    B(0.03, 0.002, 0.03, Mt.chip, 0, yb + 0.001, -0.135); B(0.032, 0.003, 0.032, Mt.alu, 0, yb + 0.0035, -0.135);
+    const pchFins = []; for (let i = 0; i < 9; i++) pchFins.push([-0.014 + i * 0.0035, yb + 0.0095, -0.135]);
+    inst(new THREE.BoxGeometry(0.0006, 0.009, 0.03), Mt.alu, pchFins);
+    B(0.014, 0.0014, 0.014, Mt.chip, 0.04, yb + 0.0007, -0.205);
+    deco(at(new THREE.Mesh(new THREE.CylinderGeometry(0.01, 0.01, 0.0032, 28), Mt.loadPlate), -0.025, yb + 0.0016, -0.182));
+    const m2 = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.0016, 0.022), [Mt.chip, Mt.chip, Mt.m2, Mt.chip, Mt.chip, Mt.chip]); deco(at(m2, -0.01, yb + 0.004, 0.098));
+    B(0.008, 0.004, 0.024, Mt.slot, -0.054, yb + 0.002, 0.098);
+
+    // MCIO connectors at the front of the board, and their cables to the drive backplane along the side walls
+    for (const s of [-1, 1]) for (const k of [0, 1]) {
+      const x = s * (0.19 - k * 0.026);
+      B(0.018, 0.007, 0.01, Mt.slot, x, yb + 0.0035, 0.102);
+      B(0.016, 0.0025, 0.006, Mt.tab, x, yb + 0.008, 0.1);
+      const pts = [V(x, yb + 0.008, 0.103), V(s * (0.198 + k * 0.006), yb + 0.012 + k * 0.006, 0.13), V(s * (0.204 + k * 0.004), yb + 0.02 + k * 0.008, 0.185), V(s * (0.17 - k * 0.04), yb + 0.032 + k * 0.004, 0.2), V(s * (0.13 - k * 0.04), yb + 0.034 + k * 0.004, 0.206)];
+      deco(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 40, 0.0022, 8, false), Mt.cable));
+    }
+
+    // fan wall: a sheet-metal cage holding six hot-swap 60 mm fans, each plugged into the board
+    B(0.38, 0.0015, 0.044, Mt.sheet, 0, yb + 0.0008, 0.16);
+    B(0.38, 0.003, 0.006, Mt.sheet, 0, yb + 0.064, 0.14);
+    for (let i = 0; i <= 6; i++) B(0.0015, 0.062, 0.042, Mt.sheet, -0.186 + i * 0.062, yb + 0.032, 0.16);
+    for (let i = 0; i < 6; i++) {
+      const fan = new THREE.Mesh(new THREE.BoxGeometry(0.058, 0.038, 0.058), M.fan); fan.rotation.x = Math.PI / 2;
+      comp(o, fan, V(-0.155 + i * 0.062, yb + 0.031, 0.16), V(0, 0.08, 0.2), 'fans', i === 2 ? j.fans : null, 'Fan wall', [V(0, 0.09, 0), V(0, 0, 0.06)]);
+      B(0.01, 0.005, 0.006, Mt.molex, -0.155 + i * 0.062, yb + 0.0025, 0.133);
+    }
+
+    // drive backplane, and the cage of eight front-loading U.2 drives
+    const bp = new THREE.Mesh(new THREE.BoxGeometry(0.338, 0.062, 0.002), [Mt.boardEdge, Mt.boardEdge, Mt.boardEdge, Mt.boardEdge, Mt.backplane, Mt.backplane]);
+    deco(at(bp, -0.01, yb + 0.034, 0.21));
+    for (let i = 0; i < 8; i++) { const x = -DW / 2 + (161 + i * 92) / 1024 * DW; B(0.016, 0.03, 0.006, Mt.slot, x, yb + 0.03, 0.214); }
+    for (const x of [-0.13, -0.05, 0.05, 0.13]) B(0.016, 0.008, 0.008, Mt.slot, x, yb + 0.036, 0.206);
+    B(0.02, 0.008, 0.008, Mt.molex, 0.155, yb + 0.02, 0.206);
+    const cageTop = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.0012, 0.142), [Mt.cage, Mt.cage, Mt.perf, Mt.cage, Mt.cage, Mt.cage]); deco(at(cageTop, -0.01, yb + 0.071, 0.288));
+    for (const x of [-0.181, 0.161]) B(0.0012, 0.07, 0.142, Mt.cage, x, yb + 0.035, 0.288);
+    const carrierGeo = new THREE.BoxGeometry(0.0335, 0.068, 0.146), driveGeo = new THREE.BoxGeometry(0.0152, 0.0665, 0.1);
+    for (let i = 0; i < 8; i++) {
+      const x = -DW / 2 + (161 + i * 92) / 1024 * DW, hit = new THREE.Mesh(carrierGeo, Mt.hit);
+      B(0.0335, 0.004, 0.146, Mt.carrier, 0, -0.032, 0, hit); B(0.0335, 0.004, 0.146, Mt.carrier, 0, 0.032, 0, hit);
+      B(0.0335, 0.068, 0.012, Mt.carrier, 0, 0, 0.067, hit);
+      deco(at(new THREE.Mesh(driveGeo, [Mt.drive, Mt.drive, Mt.driveBody, Mt.driveBody, Mt.driveBody, Mt.driveBody]), 0, 0, -0.012), hit);
+      comp(o, hit, V(x, yb + 0.036, 0.287), V(0, 0.02, 0.26 + (i % 2) * 0.04), 'drives', i === 3 ? j.drives : null, 'NVMe drives', V(0, 0, 0.2));
+    }
+
+    // rear left: PCIe riser with the dual-port 100 GbE card, and a free slot below it
+    const riser = new THREE.Mesh(new THREE.BoxGeometry(0.002, 0.05, 0.15), [Mt.backplane, Mt.backplane, Mt.boardEdge, Mt.boardEdge, Mt.boardEdge, Mt.boardEdge]);
+    deco(at(riser, -0.034, yb + 0.025, -0.27));
+    B(0.008, 0.007, 0.09, Mt.slot, -0.039, yb + 0.03, -0.27); B(0.008, 0.007, 0.09, Mt.slot, -0.039, yb + 0.012, -0.27);
+    B(0.16, 0.022, 0.0012, Mt.cage, -0.12, yb + 0.03, -0.355);
+    {
+      const hit = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.02, 0.1), Mt.hit);
+      const pcb = new THREE.Mesh(new THREE.BoxGeometry(0.146, 0.0016, 0.096), [Mt.boardEdge, Mt.boardEdge, Mt.nic, Mt.boardEdge, Mt.boardEdge, Mt.boardEdge]);
+      deco(at(pcb, 0, -0.006, 0), hit);
+      B(0.03, 0.003, 0.03, Mt.alu, -0.005, -0.0035, 0.005, hit);
+      const nf = []; for (let i = 0; i < 10; i++) nf.push([-0.018 + i * 0.0029, 0.0015, 0.005]);
+      inst(new THREE.BoxGeometry(0.0005, 0.008, 0.03), Mt.alu, nf, hit);
+      for (const dx of [-0.05, -0.02]) B(0.019, 0.0095, 0.052, Mt.cage, dx, -0.0005, -0.022, hit);
+      comp(o, hit, V(-0.118, yb + 0.032, -0.3), V(-0.12, 0.16, -0.12), 'nic', j.nic, 'NIC', V(0, 0.1, 0));
+    }
+
+    // rear centre: OCP 3.0 network module with two SFP28 cages at the back
+    const ocp = new THREE.Mesh(new THREE.BoxGeometry(0.068, 0.0016, 0.1), [Mt.boardEdge, Mt.boardEdge, Mt.ocp, Mt.boardEdge, Mt.boardEdge, Mt.boardEdge]);
+    deco(at(ocp, 0.024, yb + 0.006, -0.3));
+    B(0.016, 0.003, 0.016, Mt.chip, 0.024, yb + 0.0083, -0.29);
+    for (const dx of [-0.012, 0.012]) B(0.0145, 0.0095, 0.05, Mt.cage, 0.024 + dx, yb + 0.0115, -0.335);
+
+    // rear right: power distribution board and the two hot-swap supplies (A and B feeds)
+    const pdb = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.03, 0.002), Mt.backplane); deco(at(pdb, 0.145, yb + 0.018, -0.152));
+    B(0.022, 0.009, 0.008, Mt.molex, 0.1, yb + 0.006, -0.145); B(0.022, 0.009, 0.008, Mt.molex, 0.13, yb + 0.006, -0.145);
+    deco(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([V(0.1, yb + 0.008, -0.142), V(0.07, yb + 0.006, -0.12), V(0.04, yb + 0.004, -0.09)]), 20, 0.0026, 8, false), Mt.cable));
+    const psuMats = [Mt.psuSide, Mt.psuSide, Mt.psuTop, Mt.psuEnd, Mt.psuEnd, Mt.psuEnd];
+    for (const [k, x] of [[0, 0.18], [1, 0.108]]) comp(o, new THREE.Mesh(new THREE.BoxGeometry(0.068, 0.04, 0.2), psuMats), V(x, yb + 0.021, -0.257), V(k ? 0.12 : 0.16, 0.03, k ? -0.18 : -0.12), 'psu', k ? null : j.psu, k ? null : 'PSU A/B', [V(0, 0.07, 0), V(0, 0.05, 0.3)]);
+  }
+  // ---------------- shared building blocks for every device's interior ----------------
+  // Extra painted textures for the switches, firewall, storage, GPU server and UPS (made once, shared).
+  function deviceKit() {
+    const K = serverKit();
+    if (K.more) return K;
+    const aniso = renderer.capabilities.getMaxAnisotropy();
+    const cnv = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return [c, c.getContext('2d')]; };
+    const tex = c => { const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding; t.anisotropy = aniso; return t; };
+    let sd = 29; const R = () => ((sd = (sd * 16807) % 2147483647) / 2147483647);
+    const mono = (g, size, weight = 500) => { g.font = `${weight} ${size}px "IBM Plex Mono", monospace`; };
+    const sans = (g, size, weight = 600) => { g.font = `${weight} ${size}px "Inter Tight", "Helvetica Neue", Arial, sans-serif`; };
+    const barcode = (g, x, y, w, h) => { let cx = x; while (cx < x + w) { const bw = 1 + Math.floor(R() * 3); if (R() > 0.4) { g.fillStyle = '#111'; g.fillRect(cx, y, bw, h); } cx += bw + 1; } };
+    // a printed circuit board for a given area; silk() adds the device's own labels in board coordinates
+    K.pcbTex = (wm, z0, z1, cw, silk, base = '#0b3524') => {
+      const dm = z1 - z0, ch = Math.round(cw * dm / wm), [c, g] = cnv(cw, ch);
+      const X = x => (x + wm / 2) / wm * cw, Z = z => (z - z0) / dm * ch, S = m => m / wm * cw, k = cw * ch / 2e6;
+      g.fillStyle = base; g.fillRect(0, 0, cw, ch);
+      for (let i = 0; i < 6000 * k; i++) { g.fillStyle = `rgba(255,255,255,${0.008 + R() * 0.014})`; g.fillRect(R() * cw, R() * ch, 2 + R() * 6, 2 + R() * 6); }
+      for (let i = 0; i < 160 * k; i++) {
+        const x = R() * cw, y = R() * ch, n = 3 + Math.floor(R() * 8), len = 40 + R() * 260, dir = R() > 0.5;
+        g.strokeStyle = 'rgba(46,130,86,0.5)'; g.lineWidth = 2.2;
+        for (let j = 0; j < n; j++) { g.beginPath(); if (dir) { g.moveTo(x, y + j * 6); g.lineTo(x + len, y + j * 6); g.lineTo(x + len + 20, y + j * 6 + 20); } else { g.moveTo(x + j * 6, y); g.lineTo(x + j * 6, y + len); g.lineTo(x + j * 6 + 20, y + len + 20); } g.stroke(); }
+      }
+      for (let i = 0; i < 900 * k; i++) { const x = R() * cw, y = R() * ch; g.fillStyle = '#b8a36a'; g.beginPath(); g.arc(x, y, 2.4, 0, 7); g.fill(); g.fillStyle = '#163f2b'; g.beginPath(); g.arc(x, y, 1, 0, 7); g.fill(); }
+      for (let i = 0; i < 1800 * k; i++) { const t = R(); g.fillStyle = t < 0.45 ? '#141516' : t < 0.75 ? '#c9b48c' : t < 0.9 ? '#8a6a3a' : '#5c5f63'; const v = R() > 0.5; g.fillRect(R() * cw, R() * ch, v ? 4 : 8, v ? 8 : 4); }
+      g.fillStyle = '#e4ebe6'; g.strokeStyle = '#e4ebe6'; g.lineWidth = 2.5;
+      const txt = (t, x, z, size = 20, w = 600) => { mono(g, size, w); g.fillText(t, X(x), Z(z)); };
+      const frame = (x0, za, x1, zb) => g.strokeRect(X(x0), Z(za), S(x1 - x0), Z(zb) - Z(za));
+      const hole = (x, z) => { g.fillStyle = '#c8a64a'; g.beginPath(); g.arc(X(x), Z(z), 14, 0, 7); g.fill(); g.fillStyle = '#18191a'; g.beginPath(); g.arc(X(x), Z(z), 6, 0, 7); g.fill(); g.fillStyle = '#e4ebe6'; };
+      for (let i = 0; i < 60 * k * 4; i++) txt(`${'RCULJQ'[Math.floor(R() * 6)]}${Math.floor(R() * 900 + 10)}`, -wm / 2 + R() * wm, z0 + R() * dm, 10, 500);
+      silk({ g, X, Z, S, txt, frame, hole, R, barcode });
+      return tex(c);
+    };
+    // fan grilles: one fan, or two side by side in one module
+    const fanFace = n => {
+      const [c, g] = cnv(256 * n, 256);
+      g.fillStyle = '#121316'; g.fillRect(0, 0, 256 * n, 256);
+      for (let k = 0; k < n; k++) {
+        const cx = 128 + 256 * k, cy = 128;
+        g.fillStyle = '#060708'; g.beginPath(); g.arc(cx, cy, 112, 0, 7); g.fill();
+        g.fillStyle = '#1d1f23';
+        for (let b = 0; b < 7; b++) { const a = b / 7 * Math.PI * 2; g.beginPath(); g.moveTo(cx + Math.cos(a) * 30, cy + Math.sin(a) * 30); g.quadraticCurveTo(cx + Math.cos(a + 0.5) * 80, cy + Math.sin(a + 0.5) * 80, cx + Math.cos(a + 0.75) * 108, cy + Math.sin(a + 0.75) * 108); g.lineTo(cx + Math.cos(a + 0.35) * 108, cy + Math.sin(a + 0.35) * 108); g.quadraticCurveTo(cx + Math.cos(a + 0.15) * 70, cy + Math.sin(a + 0.15) * 70, cx + Math.cos(a - 0.25) * 30, cy + Math.sin(a - 0.25) * 30); g.fill(); }
+        g.fillStyle = '#26292e'; g.beginPath(); g.arc(cx, cy, 32, 0, 7); g.fill(); g.fillStyle = '#d9dcdf'; g.beginPath(); g.arc(cx, cy, 20, 0, 7); g.fill();
+        g.strokeStyle = '#3a3e44'; g.lineWidth = 4; for (const r of [52, 82, 108]) { g.beginPath(); g.arc(cx, cy, r, 0, 7); g.stroke(); }
+        for (let s = 0; s < 4; s++) { const a = s * Math.PI / 2 + Math.PI / 4; g.beginPath(); g.moveTo(cx + Math.cos(a) * 32, cy + Math.sin(a) * 32); g.lineTo(cx + Math.cos(a) * 110, cy + Math.sin(a) * 110); g.stroke(); }
+        g.fillStyle = '#2b2e33'; for (const [dx, dy] of [[-110, -110], [110, -110], [-110, 110], [110, 110]]) { g.beginPath(); g.arc(cx + dx * 0.92, cy + dy * 0.92, 7, 0, 7); g.fill(); }
+      }
+      return tex(c);
+    };
+    K.fan1 = fanFace(1); K.fan2 = fanFace(2);
+    // UPS battery module: black tray, label on top and front
+    {
+      const [c, g] = cnv(512, 900);
+      g.fillStyle = '#18191b'; g.fillRect(0, 0, 512, 900);
+      g.fillStyle = '#f1f1ee'; g.fillRect(40, 60, 432, 560);
+      g.fillStyle = '#111'; sans(g, 40, 800); g.fillText('BATTERY MODULE', 62, 126); mono(g, 24, 600); g.fillText('4 × 12V 9Ah  VRLA', 62, 170); g.fillText('48V DC  ·  HOT-SWAP', 62, 204);
+      g.lineWidth = 3; g.strokeStyle = '#111'; g.strokeRect(62, 232, 388, 2);
+      mono(g, 17); ['Replace with the same type only.', 'Do not open, crush or burn.', 'Recycle as lead-acid battery.', 'Contains sulphuric acid.'].forEach((t, i) => g.fillText(t, 62, 272 + i * 30));
+      for (let i = 0; i < 3; i++) { const x = 92 + i * 120; g.beginPath(); g.moveTo(x, 420); g.lineTo(x + 40, 490); g.lineTo(x - 40, 490); g.closePath(); g.stroke(); sans(g, 40, 800); g.fillText(['!', '⚡', '♻'][i], x - 12, 478); }
+      barcode(g, 62, 520, 300, 60); mono(g, 15); g.fillText('DATE 2025-11  LOT B7731', 62, 604);
+      g.fillStyle = '#b3261e'; g.fillRect(40, 680, 60, 20); g.fillStyle = '#111'; g.fillRect(412, 680, 60, 20);
+      K.battTop = tex(c);
+      const [f, fg] = cnv(512, 600);
+      fg.fillStyle = '#1b1c1f'; fg.fillRect(0, 0, 512, 600);
+      fg.fillStyle = '#26282c'; for (let y = 60; y < 300; y += 16) fg.fillRect(60, y, 392, 8);
+      fg.fillStyle = '#f1f1ee'; fg.fillRect(120, 360, 272, 90); fg.fillStyle = '#111'; mono(fg, 22, 700); fg.fillText('BATT MODULE', 140, 398); mono(fg, 17); fg.fillText('PULL TO REMOVE', 140, 430);
+      fg.fillStyle = '#3ddc84'; fg.beginPath(); fg.arc(430, 400, 9, 0, 7); fg.fill();
+      K.battFront = tex(f);
+    }
+    // switch ASIC and appliance CPU lids, a 2.5-inch SATA SSD label, a perforated drive-sled bezel
+    {
+      const [c, g] = cnv(256, 256);
+      const gr = g.createLinearGradient(0, 0, 256, 256); gr.addColorStop(0, '#cfd2d6'); gr.addColorStop(1, '#a5aab0'); g.fillStyle = gr; g.fillRect(0, 0, 256, 256);
+      for (let y = 0; y < 256; y += 2) { g.fillStyle = `rgba(255,255,255,${R() * 0.08})`; g.fillRect(0, y, 256, 1); }
+      g.fillStyle = 'rgba(40,44,48,0.75)'; mono(g, 24, 700); g.fillText('SW-12.8T', 30, 80); mono(g, 17); g.fillText('64x200G SERDES', 30, 112); g.fillText('2509  QS  A1', 30, 140);
+      K.asic = tex(c);
+      const [s, sg] = cnv(512, 704);
+      sg.fillStyle = '#2b2f35'; sg.fillRect(0, 0, 512, 704);
+      sg.fillStyle = '#f2f2f0'; sg.fillRect(40, 60, 432, 560);
+      sg.fillStyle = '#111'; sans(sg, 46, 800); sg.fillText('SATA SSD', 66, 130); mono(sg, 24, 600); sg.fillText('480 GB  ·  2.5" 7mm', 66, 172); mono(sg, 18); sg.fillText('6 Gb/s  ·  5V 1.5A', 66, 210); sg.fillText('S/N  SA48K2201933', 66, 244);
+      barcode(sg, 66, 280, 300, 80);
+      K.sata = tex(s);
+      const [b, bg] = cnv(256, 256);
+      bg.fillStyle = '#23272d'; bg.fillRect(0, 0, 256, 256);
+      bg.fillStyle = '#0b0d10'; for (let y = 14; y < 200; y += 13) for (let x = 14 + (y % 26 ? 7 : 0); x < 244; x += 14) { bg.beginPath(); bg.arc(x, y, 5, 0, 7); bg.fill(); }
+      bg.fillStyle = '#c9cdd2'; bg.fillRect(20, 214, 216, 26); bg.fillStyle = '#3ddc84'; bg.fillRect(26, 200, 10, 8); bg.fillStyle = '#ffb020'; bg.fillRect(44, 200, 10, 8);
+      K.bezel = tex(b);
+    }
+    // device boards
+    K.boards = {
+      switch: K.pcbTex(BW, -0.25, 0.35, 1536, ({ txt, frame, hole }) => {
+        frame(-0.07, 0.0, 0.03, 0.1); txt('U1  SW-ASIC', -0.07, -0.006, 22, 700);
+        for (let c = 0; c < 24; c++) txt(String(c * 2 + 1), -DW / 2 + (150 + c * 28 + Math.floor(c / 6) * 10) / 1024 * DW, 0.302, 11);
+        txt('QSFP 49-52', 0.15, 0.29, 14); txt('CPU MODULE', -0.2, -0.13, 18); txt('PSU1', 0.1, -0.16, 16); txt('PSU2', 0.17, -0.16, 16);
+        for (let i = 0; i < 3; i++) txt(`FAN${i + 1}`, -0.18 + i * 0.085, -0.24, 14);
+        txt('LEAF-48Y8C  MB REV 02', -0.2, 0.2, 20, 700); txt('CON', 0.05, -0.22, 14);
+        for (const [x, z] of [[-0.2, -0.24], [0.2, -0.24], [-0.2, 0.25], [0.2, 0.25], [-0.09, 0.05], [0.05, 0.05]]) hole(x, z);
+      }),
+      appliance: K.pcbTex(BW, -0.25, 0.3, 1536, ({ txt, frame, hole }) => {
+        frame(-0.1, -0.048, -0.02, 0.048); txt('CPU', -0.075, -0.056, 24, 700);
+        ['A1', 'A2', 'B1', 'B2'].forEach((l, i) => txt(l, -0.012 + i * 0.0076, -0.075, 12));
+        txt('NPU', 0.05, -0.04, 18); txt('SATA0', -0.2, 0.17, 14); txt('SATA1', -0.125, 0.17, 14); txt('LCD', -0.09, 0.27, 14);
+        for (let i = 0; i < 5; i++) txt(`FAN${i + 1}`, -0.19 + i * 0.085, 0.115, 13);
+        txt('ETH 1-6', 0.03, 0.27, 14); txt('HA  MGMT', -0.03, -0.22, 14); txt('FW-MB  REV C', 0.03, -0.12, 20, 700);
+        for (const [x, z] of [[-0.2, -0.24], [0.2, -0.24], [-0.2, 0.28], [0.2, 0.28], [-0.12, 0.06], [0.0, -0.06]]) hole(x, z);
+      }),
+      gpu: K.pcbTex(DW - 0.02, -0.2, 0.24, 1536, ({ txt, frame, hole }) => {
+        for (let c = 0; c < 4; c++) { frame(-0.15 + c * 0.1 - 0.046, 0.062, -0.15 + c * 0.1 + 0.046, 0.138); txt(`OAM ${c + 1}`, -0.15 + c * 0.1 - 0.044, 0.155, 18, 700); }
+        txt('LINK SW 0', -0.1, -0.07, 14); txt('LINK SW 1', 0.045, -0.07, 14); txt('HOST CPU', -0.12, -0.18, 16);
+        for (let i = 0; i < 4; i++) txt(`NIC${i}`, -0.19 + i * 0.05, -0.195, 12);
+        txt('GPU BASEBOARD  UBB-4  REV A', 0.02, -0.17, 18, 700);
+        for (const [x, z] of [[-0.205, -0.19], [0.205, -0.19], [-0.205, 0.23], [0.205, 0.23], [0, 0.03], [-0.1, 0.03], [0.1, 0.03]]) hole(x, z);
+      }, '#0a2c1f'),
+      ups: K.pcbTex(0.36, -0.335, -0.205, 1024, ({ txt, hole }) => {
+        txt('INVERTER  INV-3K  REV 05', -0.17, -0.214, 16, 700); txt('DC BUS 400V', 0.06, -0.214, 14); txt('L1', -0.18, -0.32, 14); txt('L2', -0.18, -0.27, 14);
+        txt('!  HIGH VOLTAGE', 0.08, -0.33, 14, 700); for (const [x, z] of [[-0.17, -0.33], [0.17, -0.33], [-0.17, -0.21], [0.17, -0.21]]) hole(x, z);
+      }),
+      mid: K.pcbTex(0.42, -0.088, 0.088, 1024, ({ txt }) => { txt('MIDPLANE  24x U.2', -0.2, -0.07, 18, 700); }),
+    };
+    const std = o => new THREE.MeshStandardMaterial(o), Mt = K.mat;
+    Object.assign(Mt, {
+      fan1: std({ map: K.fan1, roughness: 0.6, metalness: 0.1 }), fan2: std({ map: K.fan2, roughness: 0.6, metalness: 0.1 }),
+      battTop: std({ map: K.battTop, roughness: 0.6, metalness: 0.05 }), battFront: std({ map: K.battFront, roughness: 0.6, metalness: 0.05 }),
+      battSide: std({ color: '#18191b', roughness: 0.65, metalness: 0.05 }),
+      asic: std({ map: K.asic, roughness: 0.28, metalness: 0.9, envMapIntensity: 0.8 }),
+      sata: std({ map: K.sata, roughness: 0.45, metalness: 0.5 }),
+      bezel: std({ map: K.bezel, roughness: 0.5, metalness: 0.4 }),
+      bigCap: std({ color: '#1f2f55', roughness: 0.4, metalness: 0.2 }),
+      relay: std({ color: '#2457a6', roughness: 0.5 }),
+      red: std({ color: '#b3261e', roughness: 0.55 }),
+    });
+    for (const k of ['switch', 'appliance', 'gpu', 'ups', 'mid']) Mt['board_' + k] = std({ map: K.boards[k], roughness: 0.62, metalness: 0.08, envMapIntensity: 0.35 });
+    K.more = true;
+    return K;
+  }
+
+  // helpers bound to one device: decorative parts stay out of picking; hoverable parts are hit boxes
+  function kitTools(o) {
+    const K = deviceKit(), Mt = K.mat, V = (x, y, z) => new THREE.Vector3(x, y, z);
+    const deco = (m, parent = o.root) => { m.traverse(n => { if (n.isMesh) n.userData.noPick = true; }); parent.add(m); return m; };
+    const B = (w, hh, d, mat, x, y, z, parent) => deco(at(box(w, hh, d, mat), x, y, z), parent);
+    const inst = (geo, mat, list, parent = o.root) => {
+      const im = new THREE.InstancedMesh(geo, mat, list.length), m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), s1 = new THREE.Vector3(1, 1, 1);
+      list.forEach(([x, y, z, ry = 0], i) => { q.setFromAxisAngle(new THREE.Vector3(0, 1, 0), ry); im.setMatrixAt(i, m4.compose(new THREE.Vector3(x, y, z), q, s1)); });
+      im.frustumCulled = false;
+      return deco(im, parent);
+    };
+    const tube = (pts, r, mat, parent) => deco(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts.map(p => V(...p))), 36, r, 8, false), mat), parent);
+    const board = (w, d, mat) => new THREE.Mesh(new THREE.BoxGeometry(w, 0.003, d), [Mt.boardEdge, Mt.boardEdge, mat, Mt.boardEdge, Mt.boardEdge, Mt.boardEdge]);
+    // finned heatsink in an invisible hit box: base plate, optional heat pipes, fins parallel to the airflow
+    const heatsink = (w, d, base, fin, n, pipes = 0, baseMat = Mt.copper) => {
+      const H = base + fin, hit = new THREE.Mesh(new THREE.BoxGeometry(w + 0.002, H, d), Mt.hit), g = new THREE.Group(); g.position.y = -H / 2; hit.add(g);
+      B(w, base, d, baseMat, 0, base / 2, 0, g);
+      const fins = []; for (let i = 0; i < n; i++) fins.push([-w / 2 + 0.0008 + i * (w - 0.0016) / (n - 1), base + fin / 2, 0]);
+      inst(new THREE.BoxGeometry(0.00045, fin, d - 0.004), Mt.alu, fins, g);
+      for (let k = 0; k < pipes; k++) { const p = deco(new THREE.Mesh(new THREE.CylinderGeometry(0.0027, 0.0027, w + 0.006, 12), Mt.copper), g); p.rotation.z = Math.PI / 2; p.position.set(0, base + fin * (0.3 + 0.4 * (k % 2)), -d / 2 + 0.01 + k * (d - 0.02) / Math.max(1, pipes - 1)); }
+      return hit;
+    };
+    const fan = (w, hh, d, mat) => new THREE.Mesh(new THREE.BoxGeometry(w, hh, d), [Mt.plastic, Mt.plastic, Mt.plastic, Mt.plastic, mat, mat]);
+    const psu = (w, hh, d) => new THREE.Mesh(new THREE.BoxGeometry(w, hh, d), [Mt.psuSide, Mt.psuSide, Mt.psuTop, Mt.psuEnd, Mt.psuEnd, Mt.psuEnd]);
+    const chipLid = (x, y, z, w, d, lidMat) => { B(w + 0.016, 0.0016, d + 0.016, Mt.substrate, x, y + 0.0008, z); deco(at(new THREE.Mesh(new THREE.BoxGeometry(w, 0.0024, d), [Mt.loadPlate, Mt.loadPlate, lidMat, Mt.loadPlate, Mt.loadPlate, Mt.loadPlate]), x, y + 0.0028, z)); };
+    return { K, Mt, V, deco, B, inst, tube, board, heatsink, fan, psu, chipLid };
+  }
+
+  // Storage array: 24 front-loading NVMe sleds in a 3 × 8 grid, plugged into a midplane.
+  function buildSleds(o) {
+    const { Mt, V, B, deco, board } = kitTools(o), h = o.h, ch = Math.round(1024 * o.hU * U / DW);
+    const mid = board(0.42, 0.176, Mt.board_mid); mid.rotation.x = Math.PI / 2; deco(at(mid, 0, 0, 0.11));
+    const bodyGeo = new THREE.BoxGeometry(0.034, 0.034, 0.16), driveMats = [Mt.drive, Mt.drive, Mt.driveBody, Mt.driveBody, Mt.driveBody, Mt.driveBody];
+    for (let r = 0; r < 3; r++) for (let c = 0; c < 8; c++) {
+      const x = -DW / 2 + (120 + c * 118) / 1024 * DW, y = h / 2 - (114 + r * 120) / ch * h, hit = new THREE.Mesh(new THREE.BoxGeometry(0.046, 0.046, 0.24), Mt.hit);
+      B(0.044, 0.002, 0.23, Mt.carrier, 0, -0.022, -0.004, hit); B(0.002, 0.044, 0.23, Mt.carrier, -0.022, 0, -0.004, hit); B(0.002, 0.044, 0.23, Mt.carrier, 0.022, 0, -0.004, hit);
+      const bez = new THREE.Mesh(new THREE.BoxGeometry(0.046, 0.046, 0.008), [Mt.carrier, Mt.carrier, Mt.carrier, Mt.carrier, Mt.bezel, Mt.carrier]); deco(at(bez, 0, 0, 0.116), hit);
+      deco(at(new THREE.Mesh(bodyGeo, driveMats), 0, 0, 0.01), hit);
+      B(0.02, 0.008, 0.006, Mt.slot, 0, 0, -0.118, hit);
+      comp(o, hit, V(x, y, DD / 2 - 0.124), V(0, 0, 0), `sled${r}${c}`, null, '', V(0, 0, 0.32));
+    }
+  }
+
+  // Leaf switch (1U): 48 SFP28 cages and 4 QSFP28 uplinks at the front, the switch ASIC under a wide heatsink,
+  // a small x86 control-plane module, three fan modules and two power supplies at the rear.
+  function buildSwitchInternals(o) {
+    const { Mt, V, B, inst, deco, board, heatsink, fan, psu, chipLid, tube } = kitTools(o), h = o.h, y0 = -h / 2 + 0.004, yb = y0 + 0.003;
+    comp(o, board(BW, 0.6, Mt.board_switch), V(0, y0 + 0.0015, 0.05), V(0, 0, 0));
+    const fy = py => h / 2 - py / 103 * h, colX = c => -DW / 2 + (150 + c * 28 + Math.floor(c / 6) * 10 + 11) / 1024 * DW;
+    const top = [], bot = [], leds = [];
+    for (let c = 0; c < 24; c++) { top.push([colX(c), fy(16.5), 0.332]); bot.push([colX(c), (yb + fy(39.5) + 0.0044) / 2, 0.332]); leds.push([colX(c), fy(4), 0.354]); }
+    inst(new THREE.BoxGeometry(0.0135, 0.0088, 0.046), Mt.cage, top);
+    inst(new THREE.BoxGeometry(0.0135, fy(39.5) + 0.0044 - yb, 0.046), Mt.cage, bot);
+    // retimers and PHYs between the ports and the ASIC
+    const phys = []; for (let i = 0; i < 8; i++) phys.push([-0.17 + i * 0.038, yb + 0.0008, 0.27]);
+    inst(new THREE.BoxGeometry(0.012, 0.0016, 0.012), Mt.chip, phys);
+    // the switch ASIC: package under a copper-based heatsink (the hoverable part)
+    chipLid(-0.02, yb, 0.05, 0.055, 0.055, Mt.asic);
+    const hs = heatsink(0.1, 0.1, 0.004, 0.019, 46);
+    comp(o, hs, V(-0.02, yb + 0.0058 + 0.0115, 0.05), V(0, 0.2, 0), 'asic', 'Switch ASIC', 'BGP · EVPN · MLAG', V(0, 0.1, 0));
+    // power stages for the ASIC
+    const ch = []; for (let i = 0; i < 8; i++) ch.push([-0.065 + i * 0.012, yb + 0.003, -0.012]);
+    inst(new THREE.BoxGeometry(0.0078, 0.006, 0.0078), Mt.choke, ch);
+    // QSFP28 uplinks: cages at the front, transceivers inside them (hoverable, slide out to the front)
+    for (let s = 0; s < 4; s++) {
+      const x = -DW / 2 + (899 + (s % 2) * 44) / 1024 * DW, y = s < 2 ? fy(16) : fy(38);
+      B(0.0192, (s < 2 ? 0.0094 : y + 0.0047 - yb), 0.07, Mt.cage, x, s < 2 ? y : (y + 0.0047 + yb) / 2, 0.321);
+      const hit = new THREE.Mesh(new THREE.BoxGeometry(0.0186, 0.009, 0.074), Mt.hit);
+      B(0.0183, 0.0085, 0.07, Mt.alu, 0, 0, 0, hit); B(0.012, 0.0018, 0.03, Mt.tab, 0, 0.0045, 0.03, hit);
+      comp(o, hit, V(x, y, 0.32), V(0, 0.07, 0.14), 'optics', s === 0 ? 'Optics' : null, '100G QSFP28', V(0, 0, 0.14));
+    }
+    // control-plane module: x86 SoC with a small heatsink, an SO-DIMM and eMMC on a daughter board
+    const cm = board(0.09, 0.065, Mt.ocp); deco(at(cm, -0.15, yb + 0.007, -0.1));
+    for (const [dx, dz] of [[-0.04, -0.028], [0.04, -0.028], [-0.04, 0.028], [0.04, 0.028]]) B(0.004, 0.006, 0.004, Mt.loadPlate, -0.15 + dx, yb + 0.003, -0.1 + dz);
+    const soc = heatsink(0.028, 0.028, 0.002, 0.009, 12, 0, Mt.alu); deco(at(soc, -0.165, yb + 0.0085 + 0.0055, -0.1));
+    const so = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.0013, 0.069), [Mt.dimmEdge, Mt.dimmEdge, Mt.dimm, Mt.dimmEdge, Mt.dimmEdge, Mt.dimmEdge]); so.rotation.y = Math.PI / 2; deco(at(so, -0.125, yb + 0.011, -0.1));
+    B(0.012, 0.0012, 0.014, Mt.chip, -0.12, yb + 0.009, -0.12);
+    // fan modules (two 40 mm fans each) and power supplies at the rear, with their cables
+    for (let i = 0; i < 3; i++) comp(o, fan(0.075, h - 0.012, 0.05, Mt.fan2), V(-0.16 + i * 0.085, y0 + (h - 0.012) / 2, -0.32), V(0, 0.06, -0.14), 'fans', i === 1 ? 'Fan modules' : null, 'front-to-back', [V(0, 0.06, 0), V(0, 0.04, 0.26)]);
+    for (let i = 0; i < 3; i++) B(0.01, 0.004, 0.006, Mt.molex, -0.16 + i * 0.085, yb + 0.002, -0.285);
+    for (let i = 0; i < 2; i++) comp(o, psu(0.06, h - 0.012, 0.18), V(0.12 + i * 0.068, y0 + (h - 0.012) / 2, -0.26), V(0.08, 0.04, -0.12), 'psu', i === 0 ? 'PSU A/B' : null, '2 × 1,100 W', [V(0, 0.06, 0), V(0, 0.05, 0.28)]);
+    B(0.14, 0.012, 0.002, Mt.backplane, 0.154, yb + 0.006, -0.166);
+    B(0.016, 0.0135, 0.022, Mt.cage, 0.06, yb + 0.007, -0.344);
+    tube([[0.06, yb + 0.004, -0.33], [0.04, yb + 0.003, -0.25], [-0.05, yb + 0.003, -0.15]], 0.0014, Mt.cable);
+  }
+
+  // UPS (3U): eight hot-swap battery modules in two rows, and the inverter: an aluminium heatsink with IGBT
+  // power modules, bulk DC-bus capacitors, toroidal inductors and relays on a power board.
+  function buildUpsInternals(o) {
+    const { Mt, V, B, inst, deco, board, tube } = kitTools(o), h = o.h, y0 = -h / 2 + 0.004, bh = h - 0.03;
+    const battMats = [Mt.battSide, Mt.battSide, Mt.battTop, Mt.battSide, Mt.battFront, Mt.battSide];
+    for (let r = 0; r < 2; r++) for (let c = 0; c < 4; c++) {
+      const b = new THREE.Mesh(new THREE.BoxGeometry(0.085, bh, 0.15), battMats);
+      B(0.05, 0.004, 0.004, Mt.plastic, 0, bh / 2 - 0.012, 0.079, b); for (const dx of [-0.023, 0.023]) B(0.004, 0.004, 0.008, Mt.plastic, dx, bh / 2 - 0.012, 0.077, b);
+      B(0.03, 0.012, 0.006, Mt.slot, 0, -bh / 2 + 0.02, -0.078, b);
+      comp(o, b, V(-0.15 + c * 0.1, y0 + bh / 2, 0.16 - r * 0.19), V((c - 1.5) * 0.03, 0.14 + r * 0.06, 0.06 - r * 0.08), 'batt', r === 0 && c === 1 ? 'Battery modules' : null, '8 hot-swap modules', V(0, 0.16, 0));
+    }
+    B(0.42, 0.06, 0.002, Mt.backplane, 0, y0 + 0.03, -0.11);   // battery connection board behind the modules
+    // the inverter: one hit box around the whole power stage
+    const yb = y0 + 0.003, H = 0.075, hit = new THREE.Mesh(new THREE.BoxGeometry(0.36, H, 0.13), Mt.hit), g = new THREE.Group(); g.position.y = -H / 2; hit.add(g);
+    deco(at(board(0.36, 0.13, Mt.board_ups), 0, 0.0015, 0), g);
+    B(0.2, 0.006, 0.05, Mt.alu, -0.04, 0.006, -0.03, g);
+    const fins = []; for (let i = 0; i < 34; i++) fins.push([-0.138 + i * 0.006, 0.033, -0.03]);
+    inst(new THREE.BoxGeometry(0.0012, 0.048, 0.05), Mt.alu, fins, g);
+    for (let i = 0; i < 4; i++) { B(0.034, 0.012, 0.022, Mt.chip, -0.115 + i * 0.05, 0.009, 0.015, g); for (const dx of [-0.01, 0, 0.01]) B(0.004, 0.003, 0.004, Mt.screwTop, -0.115 + i * 0.05 + dx, 0.016, 0.015, g); }
+    const capG = new THREE.CylinderGeometry(0.011, 0.011, 0.045, 24), capT = new THREE.CylinderGeometry(0.0105, 0.0105, 0.001, 24);
+    for (const [x, z] of [[0.1, -0.035], [0.125, -0.035], [0.15, -0.035], [0.1, 0.0], [0.125, 0.0], [0.15, 0.0]]) { deco(at(new THREE.Mesh(capG, Mt.bigCap), x, 0.025, z), g); deco(at(new THREE.Mesh(capT, Mt.capTop), x, 0.048, z), g); }
+    for (const z of [-0.035, 0.02]) { const t = deco(new THREE.Mesh(new THREE.TorusGeometry(0.015, 0.0065, 12, 32), Mt.copper), g); t.position.set(0.168 + (z < 0 ? 0 : 0), 0.024, z); t.position.x = -0.165; }
+    for (let i = 0; i < 3; i++) B(0.012, 0.014, 0.018, Mt.relay, 0.06 + i * 0.016, 0.01, 0.045, g);
+    B(0.03, 0.02, 0.025, Mt.molex, 0.155, 0.012, 0.045, g);
+    comp(o, hit, V(0, yb + H / 2, -0.27), V(0, 0.2, -0.12), 'inv', 'Inverter board', 'double conversion', V(0, 0.12, 0));
+    // DC cables from the battery board to the inverter, and the control board behind the display
+    tube([[-0.05, yb + 0.012, -0.112], [-0.06, yb + 0.01, -0.16], [-0.04, yb + 0.012, -0.2]], 0.0035, Mt.red);
+    tube([[-0.03, yb + 0.012, -0.112], [-0.04, yb + 0.01, -0.16], [-0.02, yb + 0.012, -0.2]], 0.0035, Mt.cable);
+    const ctl = board(0.16, 0.05, Mt.ocp); ctl.rotation.x = Math.PI / 2; deco(at(ctl, 0.0, 0.01, 0.345));
+  }
+
+  // Firewall (2U): x86 CPU under a passive heatsink with four DIMMs, a crypto/network processor, two mirrored
+  // 2.5-inch boot SSDs, a front I/O board with six RJ45 ports, a row of fans and two rear power supplies.
+  function buildApplianceInternals(o) {
+    const { Mt, V, B, inst, deco, board, heatsink, fan, psu, chipLid, tube } = kitTools(o), h = o.h, y0 = -h / 2 + 0.004, yb = y0 + 0.003;
+    comp(o, board(BW, 0.55, Mt.board_appliance), V(0, y0 + 0.0015, 0.025), V(0, 0, 0));
+    chipLid(-0.06, yb + 0.004, 0.0, 0.045, 0.045, Mt.ihs);
+    B(0.07, 0.004, 0.08, Mt.socket, -0.06, yb + 0.002, 0.0);
+    const hs = heatsink(0.075, 0.09, 0.006, 0.04, 36, 2);
+    comp(o, hs, V(-0.06, yb + 0.0085 + 0.023, 0.0), V(0, 0.18, 0), 'cpu', 'Firewall CPU', 'crypto offload', V(0, 0.1, 0));
+    const dimmGeo = new THREE.BoxGeometry(0.0013, 0.0312, 0.1333), dimmMats = [Mt.dimm, Mt.dimm, Mt.dimmEdge, Mt.gold, Mt.dimmEdge, Mt.dimmEdge], slots = [];
+    for (let i = 0; i < 4; i++) { const x = -0.012 + i * 0.0076; slots.push([x, yb + 0.00325, 0.0]); deco(at(new THREE.Mesh(dimmGeo, dimmMats), x, yb + 0.0044 + 0.0156, 0.0)); }
+    inst(new THREE.BoxGeometry(0.0062, 0.0065, 0.142), Mt.slot, slots);
+    chipLid(0.07, yb, -0.01, 0.03, 0.03, Mt.asic); deco(at(heatsink(0.04, 0.04, 0.003, 0.014, 18, 0, Mt.alu), 0.07, yb + 0.0052 + 0.0085, -0.01));
+    const vr = []; for (let i = 0; i < 6; i++) vr.push([-0.085 + i * 0.01, yb + 0.003, -0.06]);
+    inst(new THREE.BoxGeometry(0.0078, 0.006, 0.0078), Mt.choke, vr);
+    // boot SSDs on a sheet-metal bracket
+    B(0.16, 0.0015, 0.11, Mt.sheet, -0.135, yb + 0.004, 0.24);
+    const ssdMats = [Mt.carrier, Mt.carrier, Mt.sata, Mt.carrier, Mt.carrier, Mt.carrier];
+    for (let i = 0; i < 2; i++) comp(o, new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.007, 0.1), ssdMats), V(-0.17 + i * 0.075, yb + 0.0085, 0.24), V(0, 0.08, 0.1), 'ssd', i === 0 ? 'Boot SSDs' : null, 'RAID 1', V(0, 0, 0.18));
+    tube([[-0.17, yb + 0.006, 0.188], [-0.16, yb + 0.003, 0.16], [-0.12, yb + 0.003, 0.12]], 0.0016, Mt.red); tube([[-0.095, yb + 0.006, 0.188], [-0.1, yb + 0.003, 0.16], [-0.11, yb + 0.003, 0.12]], 0.0016, Mt.red);
+    // front I/O board with six RJ45 jacks behind the front ports, and the status display
+    const io = board(0.13, 0.065, Mt.ocp); deco(at(io, 0.078, 0.0155, 0.322));
+    for (const [dx, dz] of [[-0.06, -0.028], [0.06, -0.028], [-0.06, 0.028], [0.06, 0.028]]) B(0.004, 0.0155 - yb, 0.004, Mt.loadPlate, 0.078 + dx, (0.0155 + yb) / 2, 0.322 + dz);
+    const jacks = []; for (let k = 0; k < 6; k++) jacks.push([0.0279 + k * 0.0189, 0.0233, 0.343]);
+    inst(new THREE.BoxGeometry(0.016, 0.0135, 0.022), Mt.cage, jacks);
+    B(0.13, 0.03, 0.006, Mt.plastic, -0.078, 0.025, 0.35);
+    deco(at(new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.0006, 0.08), Mt.tab), -0.078, 0.005, 0.31)).rotation.x = 0.35;
+    // fan row
+    for (let i = 0; i < 5; i++) deco(at(fan(0.04, 0.04, 0.028, Mt.fan1), -0.17 + i * 0.085, yb + 0.02, 0.15));
+    // rear: HA and management ports, power supplies
+    for (const x of [0.02, -0.01]) B(0.016, 0.0135 + 0.0364 - 0.003, 0.022, Mt.cage, x, (0.007 + yb) / 2, -0.344);
+    for (let i = 0; i < 2; i++) comp(o, psu(0.06, 0.04, 0.16), V(0.12 + i * 0.068, yb + 0.021, -0.25), V(0.08, 0.05, -0.1), 'psu', i === 0 ? 'PSU A/B' : null, 'A and B feeds', [V(0, 0.07, 0), V(0, 0.05, 0.28)]);
+    B(0.14, 0.03, 0.002, Mt.backplane, 0.154, yb + 0.016, -0.168);
+  }
+
+  // A generic 4U GPU server: four accelerator modules (OAM style) on one baseboard under tall heatsinks, two
+  // link switches between them, a host CPU with its memory, one network card per GPU at the rear, a fan wall
+  // at the front and four power supplies in two rows. Not modelled on any vendor's product.
   function buildGpuInternals(o) {
-    const h = o.h, y0 = -h / 2 + 0.004, V = (x, y, z) => new THREE.Vector3(x, y, z);
-    const boardMat = new THREE.MeshStandardMaterial({ color: '#0b1a12', metalness: 0.1, roughness: 0.9, envMapIntensity: 0.15 }), dieMat = new THREE.MeshStandardMaterial({ color: '#15171b', metalness: 0.7, roughness: 0.25, envMapIntensity: 0.6 });
+    const { Mt, V, B, inst, deco, board, heatsink, psu, tube } = kitTools(o), h = o.h, y0 = -h / 2 + 0.004;
+    const dieMat = new THREE.MeshStandardMaterial({ color: '#15171b', metalness: 0.7, roughness: 0.25, envMapIntensity: 0.6 });
     const hbmMat = new THREE.MeshStandardMaterial({ color: '#6f757d', metalness: 0.85, roughness: 0.35, envMapIntensity: 0.5 });
-    const subMat = new THREE.MeshStandardMaterial({ color: '#13241b', metalness: 0.2, roughness: 0.75, envMapIntensity: 0.2 });
-    const sinkMat = new THREE.MeshStandardMaterial({ color: '#9aa3ad', metalness: 0.9, roughness: 0.35, envMapIntensity: 0.7 });
-    const add = (m, x, y, z) => { m.position.set(x, y, z); o.root.add(m); return m; };
     const boardY = y0 + 0.012; o.boardY = boardY;
-    add(box(DW - 0.02, 0.003, 0.44, boardMat), 0, boardY, 0.02);
-    // 4 GPU modules in a row. The package (die + HBM stacks) stays on the board; the heatsink lifts off.
+    deco(at(board(DW - 0.02, 0.44, Mt.board_gpu), 0, boardY, 0.02));
+    for (const [x, z] of [[-0.2, -0.19], [0.2, -0.19], [-0.2, 0.23], [0.2, 0.23]]) B(0.006, boardY - y0, 0.006, Mt.loadPlate, x, (boardY + y0) / 2, z);
+    // four GPU modules: package (die and HBM stacks) on a module board; the heatsink lifts off
     const sinkH = 0.075;
     for (let c = 0; c < 4; c++) {
       const x = -0.15 + c * 0.1, z = 0.1, py = boardY + 0.003;
-      add(box(0.085, 0.004, 0.07, subMat), x, py, z);
-      add(box(0.03, 0.003, 0.03, dieMat), x, py + 0.0035, z);
-      for (const dx of [-0.028, 0.028]) for (let k = 0; k < 3; k++) add(box(0.01, 0.004, 0.013, hbmMat), x + dx, py + 0.004, z - 0.018 + k * 0.018);
-      const sink = box(0.088, sinkH, 0.072, sinkMat);
-      const fins = new THREE.Mesh(new THREE.PlaneGeometry(0.072, sinkH - 0.01), new THREE.MeshStandardMaterial({ map: finTex(), metalness: 0.9, roughness: 0.4 }));
-      fins.rotation.y = Math.PI / 2; fins.position.set(0.0445, 0, 0); sink.add(fins);
+      B(0.092, 0.003, 0.076, Mt.ocp, x, py - 0.0005, z);
+      B(0.085, 0.004, 0.07, Mt.substrate, x, py + 0.002, z);
+      deco(at(new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.003, 0.03), dieMat), x, py + 0.0055, z));
+      for (const dx of [-0.028, 0.028]) for (let k = 0; k < 3; k++) deco(at(new THREE.Mesh(new THREE.BoxGeometry(0.01, 0.004, 0.013), hbmMat), x + dx, py + 0.006, z - 0.018 + k * 0.018));
+      const sink = heatsink(0.088, 0.072, 0.009, sinkH - 0.009, 44, 4);
       comp(o, sink, V(x, py + 0.006 + sinkH / 2, z), V((c - 1.5) * 0.02, 0.2, 0.06), 'gpu', c === 1 ? 'GPU module' : null, '4 × GPU · HBM', [V(0, 0.2, 0), V(0, 0.08, -0.2)]);
     }
-    // interconnect chips behind the GPUs
-    for (const x of [-0.07, 0.07]) comp(o, box(0.05, 0.018, 0.04, M.heat), V(x, boardY + 0.011, -0.04), V(0, 0.14, 0), 'gpulink', x < 0 ? 'GPU interconnect' : null, 'links all 4 GPUs', V(0, 0.1, 0));
-    // one network card per GPU at the rear left, each with a cage at the back wall
+    // link switches between the GPUs
+    for (const x of [-0.07, 0.07]) comp(o, heatsink(0.05, 0.04, 0.003, 0.016, 18, 0, Mt.alu), V(x, boardY + 0.0015 + 0.0095, -0.04), V(0, 0.14, 0), 'gpulink', x < 0 ? 'GPU interconnect' : null, 'links all 4 GPUs', V(0, 0.1, 0));
+    // host CPU and its memory
+    deco(at(heatsink(0.07, 0.08, 0.006, 0.05, 32, 2), -0.09, boardY + 0.0015 + 0.004 + 0.028, -0.13));
+    const dimmGeo = new THREE.BoxGeometry(0.0013, 0.0312, 0.1333), dimmMats = [Mt.dimm, Mt.dimm, Mt.dimmEdge, Mt.gold, Mt.dimmEdge, Mt.dimmEdge], slots = [];
+    for (let i = 0; i < 6; i++) { const x = -0.035 + i * 0.0076; slots.push([x, boardY + 0.0048, -0.13]); deco(at(new THREE.Mesh(dimmGeo, dimmMats), x, boardY + 0.006 + 0.0156, -0.13)); }
+    inst(new THREE.BoxGeometry(0.0062, 0.0065, 0.142), Mt.slot, slots);
+    // one network card per GPU, standing in a riser, with an OSFP cage at the rear wall
+    const nicMats = [Mt.nic, Mt.nic, Mt.boardEdge, Mt.boardEdge, Mt.boardEdge, Mt.boardEdge];
     for (let i = 0; i < 4; i++) {
-      const nic = box(0.035, 0.05, 0.11, M.card);
-      const cage = box(0.022, 0.016, 0.02, M.optic); cage.position.set(0, 0.012, -0.06); nic.add(cage);
-      comp(o, nic, V(-0.175 + i * 0.05, boardY + 0.03, -0.26), V(0, 0.1, -0.08), 'nic8', i === 1 ? '4 × 400G network cards' : null, 'InfiniBand / Ethernet', [V(0, 0, 0.3), V(0, 0.16, 0)]);
+      const hit = new THREE.Mesh(new THREE.BoxGeometry(0.035, 0.05, 0.11), Mt.hit);
+      deco(at(new THREE.Mesh(new THREE.BoxGeometry(0.0016, 0.045, 0.106), nicMats), -0.004, 0, 0), hit);
+      const hs = []; for (let k = 0; k < 9; k++) hs.push([0.006, -0.012 + k * 0.003, 0.01]);
+      B(0.002, 0.03, 0.04, Mt.alu, 0.0015, 0, 0.01, hit); inst(new THREE.BoxGeometry(0.012, 0.0006, 0.04), Mt.alu, hs, hit);
+      B(0.022, 0.016, 0.03, Mt.cage, 0, 0.012, -0.045, hit);
+      comp(o, hit, V(-0.175 + i * 0.05, boardY + 0.03, -0.26), V(0, 0.1, -0.08), 'nic8', i === 1 ? '4 × 400G network cards' : null, 'InfiniBand / Ethernet', [V(0, 0, 0.3), V(0, 0.16, 0)]);
+      B(0.008, 0.008, 0.09, Mt.slot, -0.175 + i * 0.05, boardY + 0.005, -0.26);
     }
-    // fan wall at the front
+    // fan wall at the front (60 mm × 5, as on the faceplate) in a sheet-metal cage
     const fr = 0.034;
+    B(DW - 0.03, 0.002, 0.06, Mt.sheet, 0, boardY + 0.002, 0.28); B(DW - 0.03, 0.003, 0.06, Mt.sheet, 0, boardY + 0.084, 0.28);
     for (let c = 0; c < 5; c++) {
-      const fan = new THREE.Mesh(new THREE.CylinderGeometry(fr, fr, 0.05, 24), M.fan); fan.rotation.x = Math.PI / 2;
-      comp(o, fan, V(-0.168 + c * 0.084, boardY + 0.045, 0.28), V(0, 0.02, 0.22), 'fans', c === 2 ? 'Fan wall' : null, 'front to back', V(0, 0, 0.2));
+      const fanM = new THREE.Mesh(new THREE.CylinderGeometry(fr, fr, 0.05, 24), M.fan); fanM.rotation.x = Math.PI / 2;
+      comp(o, fanM, V(-0.168 + c * 0.084, boardY + 0.045, 0.28), V(0, 0.02, 0.22), 'fans', c === 2 ? 'Fan wall' : null, 'front to back', V(0, 0, 0.2));
     }
-    // 4 power supplies at the rear right
-    for (let i = 0; i < 4; i++) comp(o, box(0.045, 0.04, 0.2, M.psu), V(0.04 + i * 0.05, boardY + 0.024, -0.22), V(0, 0.14, -0.1), 'psu', i === 0 ? '4 × power supply' : null, 'A and B feeds', [V(0, 0.07, 0), V(0, 0.03, 0.4)]);
-  }
-  let finTexCache = null;
-  function finTex() {
-    if (finTexCache) return finTexCache;
-    const c = document.createElement('canvas'); c.width = 64; c.height = 256; const g = c.getContext('2d');
-    g.fillStyle = '#b8a877'; g.fillRect(0, 0, 64, 256);
-    for (let y = 0; y < 256; y += 6) { g.fillStyle = '#6f6445'; g.fillRect(0, y, 64, 2); }
-    finTexCache = new THREE.CanvasTexture(c); finTexCache.encoding = THREE.sRGBEncoding;
-    return finTexCache;
+    // four power supplies in two rows, as on the rear panel, and their cables to the baseboard
+    [0.3, 0.65, 0.3, 0.65].forEach((f, i) => comp(o, psu(0.045, 0.04, 0.2), V(0.04 + i * 0.05, -h / 2 + f * h, -0.22), V(0, 0.14, -0.1), 'psu', i === 0 ? '4 × power supply' : null, 'A and B feeds', [V(0, 0.07, 0), V(0, 0.03, 0.4)]));
+    for (const x of [0.06, 0.11, 0.16]) tube([[x, boardY + 0.01, -0.115], [x - 0.01, boardY + 0.012, -0.07], [x - 0.03, boardY + 0.006, -0.02]], 0.0035, Mt.cable);
   }
 
   const FACE = {
@@ -1956,19 +2759,8 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
     const o = devObj[id], kind = DEV[id].kind;
     for (const c of o.comps) {
       const k = c.key;
-      if (kind === 'server' && k === 'dimm') dress(c.mesh, 'ram.glb', geoSize(c.mesh));
-      else if (kind === 'server' && k === 'drives') dress(c.mesh, 'sata.glb', geoSize(c.mesh));
-      else if (kind === 'server' && k === 'nic') { const s = geoSize(c.mesh); s.y = 0.03; dress(c.mesh, 'nic.glb', s); }
-      else if (kind === 'gpu' && k === 'nic8') { c.mesh.children.forEach(ch => { if (ch.isMesh) ch.visible = false; }); dress(c.mesh, 'nic.glb', geoSize(c.mesh)); }
-      else if (kind === 'appliance' && k === 'ssd') { const s = geoSize(c.mesh); s.y = 0.006; dress(c.mesh, 'm2.glb', s); }
-      else if (kind === 'server' && k === 'fans') dress(c.mesh, 'fan.glb', new THREE.Vector3(0.066, 0.03, 0.066)); // ~70 mm fans, as in a 2U server
+      if (kind === 'server' && k === 'fans') dress(c.mesh, 'fan.glb', geoSize(c.mesh)); // 60 mm fans, as in a 2U server
       else if (kind === 'gpu' && k === 'fans') dress(c.mesh, 'fan.glb', new THREE.Vector3(0.08, 0.05, 0.08));
-      else if (kind === 'server' && (k === 'cpu0' || k === 'cpu1')) {
-        // the CPU sits on the board under its heatsink and shows when the heatsink is pulled
-        const s = geoSize(c.mesh);
-        loadModel('cpu.glb').then(scene => { const h = fitModel(scene, new THREE.Vector3(0.062, 0.004, 0.062)); h.position.set(c.base.x, c.base.y - s.y / 2 + 0.004, c.base.z); o.root.add(h); })
-          .catch(e => console.warn('3D model not loaded: cpu.glb', e));
-      }
     }
   }
   if (window.bootStep) Promise.allSettled(Object.values(gltfCache)).then(() => window.bootStep('models'));
@@ -2004,6 +2796,127 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
   screen.position.set(0, 0.11, 0.0045); hinge.add(screen); cartParts.push(screen);
   const glow = new THREE.PointLight('#5dffb0', 0.12, 0.6); glow.position.set(0, 0.12, 0.08); hinge.add(glow);
   cartParts.forEach(m => { m.userData.cart = true; pickables.push(m); });
+
+  // ---------------- workbench: form factors side by side ----------------
+  // A technician's bench next to the crash cart: an anti-static mat with parts laid out in labelled rows
+  // ("knolling"), and a pegboard of cable types. Hover an item to read about it in the Learn panel; the
+  // bench gets its own short explanations with one extra line, how to tell an item apart from its neighbours.
+  const BENCH_INFO = {
+    ddr4: { g: 'Memory', name: 'DDR4 RDIMM', what: 'Server memory from the previous generation, still in many data centers.', why: 'DDR4 and DDR5 cannot be mixed: the notch in the gold edge stops a stick going into the wrong slot.', tell: 'The notch sits off-centre.', facts: [['Speed', 'up to 3,200 MT/s'], ['Pins', '288'], ['Voltage', '1.2 V']] },
+    ddr5: { g: 'Memory', name: 'DDR5 RDIMM', what: 'Memory for current server CPUs, with its own power chip (PMIC) on the stick.', why: 'About twice the bandwidth of DDR4, which matters as CPUs get more cores.', tell: 'The notch is near the centre, and a small power chip sits at one end.', facts: [['Speed', '4,800–6,400 MT/s'], ['Pins', '288'], ['Voltage', '1.1 V']] },
+    sodimm: { g: 'Memory', name: 'SO-DIMM', what: 'A small memory stick for laptops, appliances and the control boards inside network gear.', why: 'You find it in firewalls, switches and edge boxes rather than in normal servers.', tell: 'About half the length of a server stick.', facts: [['Length', '69.6 mm'], ['Used in', 'laptops, appliances']] },
+    sata25: { g: 'Storage', name: '2.5" SATA SSD', what: 'A solid-state drive on the older SATA interface.', why: 'Cheap and common as a boot drive, but limited to about 550 MB/s.', tell: '7 mm thin, with a SATA connector: an L-shaped data plug next to the power plug.', facts: [['Speed', '≈ 550 MB/s'], ['Interface', 'SATA 6 Gb/s']] },
+    u2: { g: 'Storage', name: 'U.2 NVMe SSD', what: 'An enterprise NVMe drive in the 2.5-inch shape, hot-swappable from the front of a server.', why: 'Many times faster than SATA, and replaced without opening the server.', tell: 'Same footprint as a 2.5" SSD, but 15 mm thick, with a wider connector (SFF-8639).', facts: [['Speed', 'up to ≈ 7 GB/s'], ['Interface', 'PCIe 4.0 x4']] },
+    m2: { g: 'Storage', name: 'M.2 2280 SSD', what: 'A bare stick-shaped SSD that screws flat onto a board.', why: 'Used in servers as a boot drive, often two mirrored on a small card. Not hot-swap.', tell: 'A small board, 22 × 80 mm, with its chips showing.', facts: [['Size', '22 × 80 mm'], ['Interface', 'NVMe or SATA']] },
+    e1s: { g: 'Storage', name: 'EDSFF E1.S', what: 'A newer, ruler-like drive shape made for dense servers.', why: 'Cools better and fits more drives per server than U.2, so new designs are moving to it.', tell: 'Long and narrow, usually in its own metal case.', facts: [['Size', '31.5 × 111 mm'], ['Interface', 'PCIe NVMe']] },
+    hdd35: { g: 'Storage', name: '3.5" hard disk', what: 'A spinning hard disk: large capacity at a low cost per terabyte.', why: 'Still the choice for backups and archives, where capacity matters more than speed.', tell: 'The biggest and heaviest drive, 26 mm thick.', facts: [['Capacity', 'up to ≈ 30 TB'], ['Speed', '≈ 250 MB/s']] },
+    socket: { g: 'CPU', name: 'LGA socket', what: 'The CPU holder on the motherboard: thousands of tiny spring contacts under a metal frame.', why: 'The most fragile part of a server. One bent contact can ruin the whole board.', tell: 'A black frame with a metal load plate. When empty, it always keeps its plastic cover.', facts: [['Contacts', '≈ 4,700'], ['Handling', 'cover on, never touch the pins']] },
+    cpu: { g: 'CPU', name: 'Server CPU', what: 'The processor package: chips on a substrate under a metal lid that spreads the heat.', why: 'The lid passes heat to the heatsink, so fresh thermal paste and even screw pressure matter.', tell: 'A flat square with a metal lid and no pins: the contacts are in the socket.', facts: [['Cores', 'up to 128 per socket'], ['Power', '≈ 200–400 W']] },
+    x1: { g: 'PCIe', name: 'PCIe x1 card', what: 'The shortest expansion card, with one PCIe lane.', why: 'Enough for small jobs, like a serial port or a basic network card.', tell: 'The shortest gold edge, about 25 mm.', facts: [['Lanes', '1'], ['Bandwidth', '≈ 2 GB/s (Gen4)']] },
+    x8: { g: 'PCIe', name: 'PCIe x8 card', what: 'A mid-length card with eight lanes, typical for network and storage cards.', why: 'Eight Gen4 lanes carry about 16 GB/s, enough for two 100 Gb/s ports.', tell: 'A gold edge about half as long as an x16 card.', facts: [['Lanes', '8'], ['Bandwidth', '≈ 16 GB/s (Gen4)']] },
+    x16: { g: 'PCIe', name: 'PCIe x16 card', what: 'The full-length slot, used by GPUs and the fastest network cards.', why: 'Sixteen lanes are the most a single slot offers.', tell: 'The longest gold edge, about 89 mm.', facts: [['Lanes', '16'], ['Bandwidth', '≈ 32 GB/s (Gen4)']] },
+    ocp: { g: 'PCIe', name: 'OCP 3.0 network card', what: 'A standard network card shape that slides in from the back of the server.', why: 'It is swapped without opening the lid, and keeps the normal PCIe slots free.', tell: 'A small card with its ports on the short edge.', facts: [['Standard', 'Open Compute Project'], ['Lanes', 'up to x16']] },
+    sfp: { g: 'Optics', name: 'SFP transceiver', what: 'A small plug-in module for 1 Gb/s links.', why: 'Still used for management networks and older equipment.', tell: 'The smallest module, about 14 mm wide.', facts: [['Speed', '1 Gb/s'], ['Lanes', '1']] },
+    sfp28: { g: 'Optics', name: 'SFP28 transceiver', what: 'The same size as SFP, but 25 Gb/s.', why: 'The usual speed for a server-to-switch link today.', tell: 'Looks exactly like an SFP. Only the label tells them apart.', facts: [['Speed', '25 Gb/s'], ['Lanes', '1']] },
+    qsfp28: { g: 'Optics', name: 'QSFP28 transceiver', what: 'A quad-size module: four 25 Gb/s lanes for 100 Gb/s.', why: 'The standard uplink from leaf switches to spine switches.', tell: 'About 18 mm wide, clearly wider than an SFP.', facts: [['Speed', '100 Gb/s'], ['Lanes', '4 × 25 Gb/s']] },
+    osfp: { g: 'Optics', name: 'OSFP transceiver', what: 'A larger module for 400 and 800 Gb/s, with cooling fins on top.', why: 'Used in AI clusters, where every GPU gets its own 400 or 800 Gb/s link.', tell: 'Bigger than a QSFP, with a finned top.', facts: [['Speed', '400–800 Gb/s'], ['Lanes', '8']] },
+    cat6a: { g: 'Cables', name: 'Cat6A copper cable', what: 'Twisted-pair copper cable with RJ45 plugs.', why: 'For management networks and links up to 10 Gb/s over 100 m.', tell: 'A round cable with a clear RJ45 plug and a latch.', facts: [['Speed', 'up to 10 Gb/s'], ['Reach', '100 m']] },
+    dac: { g: 'Cables', name: 'DAC (direct attach copper)', what: 'A thick copper cable with the transceivers built into both ends.', why: 'The cheapest and lowest-power way to connect a server to a switch in the same rack.', tell: 'Thick black cable with a metal module on each end, no separate optic.', facts: [['Speed', '25–400 Gb/s'], ['Reach', 'up to ≈ 3 m']] },
+    aoc: { g: 'Cables', name: 'AOC (active optical cable)', what: 'Fiber with the transceivers fixed on both ends.', why: 'Reaches further than a DAC and is thinner, so it suits links between racks.', tell: 'A thin cable, often orange, with modules on both ends.', facts: [['Speed', '25–400 Gb/s'], ['Reach', 'up to ≈ 30 m']] },
+    lcom4: { g: 'Cables', name: 'LC-LC fiber, OM4', what: 'A multimode fiber patch cord with duplex LC connectors.', why: 'The standard for links inside a data hall, up to a few hundred metres.', tell: 'Aqua cable with two small square connectors clipped together.', facts: [['Type', 'multimode'], ['Reach', '≈ 100–400 m']] },
+    lcos2: { g: 'Cables', name: 'LC-LC fiber, OS2', what: 'A single-mode fiber patch cord.', why: 'For long links between buildings and sites, up to tens of kilometres.', tell: 'Yellow cable, usually with blue connectors.', facts: [['Type', 'single-mode'], ['Reach', '10 km and more']] },
+    mpo: { g: 'Cables', name: 'MPO-12 fiber trunk', what: 'One connector carrying twelve fibers at once.', why: 'Used by 100 and 400 Gb/s optics and for trunks between patch panels, so fewer cables have to be run.', tell: 'A wide, flat rectangular connector on an aqua cable.', facts: [['Fibers', '12'], ['Used for', '100G/400G, trunks']] },
+    c13: { g: 'Cables', name: 'C13/C14 power cord', what: 'The standard power cord from the rack PDU to a server or switch.', why: 'Rated 10 A. Each power supply gets its own cord, on the A or the B feed.', tell: 'The familiar “kettle” plug shape.', facts: [['Rating', '10 A'], ['Used for', 'servers, switches']] },
+    c19: { g: 'Cables', name: 'C19/C20 power cord', what: 'A heavier power cord for high-power equipment.', why: 'Rated 16 A, for GPU servers, large switches and the PDU feeds themselves.', tell: 'A larger rectangular plug with its pins side by side.', facts: [['Rating', '16 A'], ['Used for', 'GPU servers, PDUs']] },
+  };
+  const BENCH_ROWS = [['Memory', ['ddr4', 'ddr5', 'sodimm']], ['Storage', ['sata25', 'u2', 'm2', 'e1s', 'hdd35']], ['CPU', ['socket', 'cpu']], ['PCIe', ['x1', 'x8', 'x16', 'ocp']], ['Optics', ['sfp', 'sfp28', 'qsfp28', 'osfp']]];
+  const BENCH_CABLES = ['cat6a', 'dac', 'aoc', 'lcom4', 'lcos2', 'mpo', 'c13', 'c19'];
+  const BENCH_KEYS = [...BENCH_ROWS.flatMap(r => r[1]), ...BENCH_CABLES];
+  const bench = new THREE.Group(); bench.position.set(0, 0, 5.57); bench.rotation.y = Math.PI; scene.add(bench);   // against the front edge of the room, behind the starting camera, facing the rack
+  const benchItems = {};   // key -> its hit box
+  let benchTop = null;
+  (() => {
+    const K = deviceKit(), Mt = K.mat, aniso = renderer.capabilities.getMaxAnisotropy();
+    const cnv = (w, h, draw) => { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding; t.anisotropy = aniso; return t; };
+    const add = (m, x, y, z, parent = bench) => { m.position.set(x, y, z); parent.add(m); return m; };
+    const B = (w, h, d, mat, x, y, z, parent) => add(box(w, h, d, mat), x, y, z, parent);
+    const top6 = (w, h, d, topMat, side) => new THREE.Mesh(new THREE.BoxGeometry(w, h, d), [side, side, topMat, side, side, side]);
+    // the bench: grey steel frame, a work top, a blue-grey ESD mat with its ground snap, and a pegboard
+    const frame = new THREE.MeshStandardMaterial({ color: '#2b3038', metalness: 0.7, roughness: 0.45, envMapIntensity: 0.4 });
+    benchTop = B(1.6, 0.04, 0.8, new THREE.MeshStandardMaterial({ color: '#3a4048', metalness: 0.35, roughness: 0.55, envMapIntensity: 0.35 }), 0, 0.88, 0);
+    for (const [x, z] of [[-0.76, -0.36], [0.76, -0.36], [-0.76, 0.36], [0.76, 0.36]]) B(0.04, 0.86, 0.04, frame, x, 0.43, z);
+    B(1.5, 0.03, 0.03, frame, 0, 0.18, -0.36); B(1.5, 0.03, 0.03, frame, 0, 0.18, 0.36);
+    const matTex = cnv(512, 256, g => { g.fillStyle = '#34424e'; g.fillRect(0, 0, 512, 256); for (let i = 0; i < 4000; i++) { g.fillStyle = `rgba(255,255,255,${Math.random() * 0.025})`; g.fillRect(Math.random() * 512, Math.random() * 256, 2, 2); } g.strokeStyle = 'rgba(255,255,255,0.08)'; g.lineWidth = 2; for (let x = 0; x < 512; x += 64) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, 256); g.stroke(); } for (let y = 0; y < 256; y += 64) { g.beginPath(); g.moveTo(0, y); g.lineTo(512, y); g.stroke(); } });
+    B(1.42, 0.003, 0.7, new THREE.MeshStandardMaterial({ map: matTex, roughness: 0.92, envMapIntensity: 0.2 }), 0, 0.9015, 0.02);
+    add(new THREE.Mesh(new THREE.CylinderGeometry(0.008, 0.008, 0.004, 16), Mt.loadPlate), 0.66, 0.904, 0.33);
+    const peg = cnv(1024, 448, g => { g.fillStyle = '#30353d'; g.fillRect(0, 0, 1024, 448); g.fillStyle = '#101317'; for (let y = 16; y < 448; y += 24) for (let x = 16; x < 1024; x += 24) { g.beginPath(); g.arc(x, y, 3.6, 0, 7); g.fill(); } });
+    B(1.6, 0.7, 0.02, new THREE.MeshStandardMaterial({ map: peg, roughness: 0.75, metalness: 0.3, envMapIntensity: 0.3 }), 0, 1.25, -0.41);
+    for (const x of [-0.79, 0.79]) B(0.03, 0.72, 0.03, frame, x, 1.25, -0.4);
+    // printed labels on the mat and above the hooks
+    const plaque = (text, w) => { const t = cnv(512, 112, g => { g.fillStyle = '#0d1014'; g.fillRect(0, 0, 512, 112); g.fillStyle = '#f2f2f0'; g.font = '700 50px "IBM Plex Mono", monospace'; g.fillText(text, 22, 74); }); const m = new THREE.Mesh(new THREE.PlaneGeometry(w, w * 112 / 512), new THREE.MeshBasicMaterial({ map: t })); m.rotation.x = -Math.PI / 2; return m; };
+    // a DDR4 texture: same as DDR5 but with the notch off-centre and a DDR4 label
+    const ddr4Tex = cnv(1024, 240, g => { g.drawImage(K.dimm.image, 0, 0); g.fillStyle = '#d6a842'; g.fillRect(538, 214, 24, 24); g.fillStyle = '#1c5a37'; g.fillRect(612, 206, 16, 34); g.fillStyle = '#f4f4f2'; g.fillRect(612, 18, 330, 40); g.fillStyle = '#111'; g.font = '600 15px "IBM Plex Mono", monospace'; g.fillText('32GB 2Rx4 PC4-3200AA-RB2', 622, 42); });
+    const hddTex = cnv(512, 352, g => { g.fillStyle = '#b4b9be'; g.fillRect(0, 0, 512, 352); g.fillStyle = '#f5f5f3'; g.fillRect(30, 30, 300, 290); g.fillStyle = '#111'; g.font = '800 40px "Inter Tight", sans-serif'; g.fillText('HDD 3.5"', 52, 96); g.font = '600 22px "IBM Plex Mono", monospace'; g.fillText('20 TB  7200 RPM', 52, 140); g.fillText('SATA 6Gb/s  512e', 52, 172); g.fillStyle = '#8f959b'; for (const [x, y] of [[380, 60], [460, 60], [380, 290], [460, 290]]) { g.beginPath(); g.arc(x, y, 10, 0, 7); g.fill(); } });
+    const e1sTex = cnv(512, 140, g => { g.fillStyle = '#9ea4aa'; g.fillRect(0, 0, 512, 140); g.fillStyle = '#7e858c'; for (let x = 20; x < 360; x += 14) g.fillRect(x, 16, 7, 108); g.fillStyle = '#f2f2f0'; g.fillRect(380, 26, 112, 88); g.fillStyle = '#111'; g.font = '700 22px "IBM Plex Mono", monospace'; g.fillText('E1.S', 396, 64); g.font = '500 16px monospace'; g.fillText('7.68TB', 396, 92); });
+    const hit = (key, obj, x, z) => {   // lay an item on the mat with an invisible hit box around it
+      const bb = new THREE.Box3().setFromObject(obj), s = bb.getSize(new THREE.Vector3());
+      add(obj, x + s.x / 2, 0.903 + s.y / 2, z);
+      const hb = add(new THREE.Mesh(new THREE.BoxGeometry(s.x + 0.012, Math.max(s.y, 0.006) + 0.008, s.z + 0.012), Mt.hit), x + s.x / 2, 0.903 + s.y / 2, z);
+      hb.userData.bench = key; benchItems[key] = hb;
+      return s;
+    };
+    const card = len => { const g = new THREE.Group(); g.add(top6(len, 0.0016, 0.068, Mt.nic, Mt.boardEdge)); add(box(len * 0.55 * (len < 0.1 ? 0.6 : 1), 0.0018, 0.008, Mt.gold), -len * 0.18, 0, 0.038, g); add(box(0.0015, 0.004, 0.12, Mt.loadPlate), len / 2 + 0.002, 0, -0.02, g); add(box(0.022, 0.003, 0.022, Mt.chip), 0, 0.002, -0.005, g); return g; };
+    const optic = (len, w, h, tab, finned) => { const g = new THREE.Group(); g.add(box(len, h, w, finned ? Mt.sheet : Mt.alu)); if (finned) for (let i = 0; i < 9; i++) add(box(len * 0.55, 0.002, 0.0006, Mt.alu), -len * 0.15, h / 2 + 0.001, -w / 2 + 0.002 + i * (w - 0.004) / 8, g); add(box(0.03, 0.002, Math.min(w * 0.6, 0.012), new THREE.MeshStandardMaterial({ color: tab, roughness: 0.5 })), len / 2 + 0.012, h / 2 - 0.001, 0, g); return g; };
+    const MAKE = {
+      ddr4: () => top6(0.1333, 0.0013, 0.0312, new THREE.MeshStandardMaterial({ map: ddr4Tex, roughness: 0.5 }), Mt.dimmEdge),
+      ddr5: () => top6(0.1333, 0.0013, 0.0312, Mt.dimm, Mt.dimmEdge),
+      sodimm: () => top6(0.0696, 0.0013, 0.03, Mt.dimm, Mt.dimmEdge),
+      sata25: () => top6(0.1, 0.007, 0.0699, Mt.sata, Mt.carrier),
+      u2: () => top6(0.1, 0.015, 0.0699, Mt.drive, Mt.driveBody),
+      m2: () => top6(0.08, 0.0015, 0.022, Mt.m2, Mt.chip),
+      e1s: () => top6(0.1185, 0.0095, 0.0318, new THREE.MeshStandardMaterial({ map: e1sTex, metalness: 0.7, roughness: 0.35 }), Mt.driveBody),
+      hdd35: () => top6(0.147, 0.0261, 0.1016, new THREE.MeshStandardMaterial({ map: hddTex, metalness: 0.7, roughness: 0.35 }), Mt.driveBody),
+      socket: () => { const g = new THREE.Group(); g.add(box(0.076, 0.004, 0.09, Mt.socket)); for (const dz of [-0.044, 0.044]) add(box(0.07, 0.0012, 0.004, Mt.loadPlate), 0, 0.0026, dz, g); for (const dx of [-0.036, 0.036]) add(box(0.004, 0.0012, 0.092, Mt.loadPlate), dx, 0.0026, 0, g); add(box(0.058, 0.0008, 0.07, new THREE.MeshStandardMaterial({ color: '#1b1c1f', roughness: 0.4, transparent: true, opacity: 0.85 })), 0, 0.0034, 0, g); return g; },
+      cpu: () => { const g = new THREE.Group(); g.add(box(0.0615, 0.0016, 0.0775, Mt.substrate)); add(top6(0.052, 0.0026, 0.068, Mt.ihs, Mt.loadPlate), 0, 0.002, 0, g); return g; },
+      x1: () => card(0.07), x8: () => card(0.12), x16: () => card(0.17),
+      ocp: () => { const g = new THREE.Group(); g.add(top6(0.115, 0.0016, 0.076, Mt.ocp, Mt.boardEdge)); for (const dz of [-0.012, 0.012]) add(box(0.05, 0.0095, 0.0145, Mt.cage), 0.035, 0.005, dz, g); return g; },
+      sfp: () => optic(0.056, 0.0137, 0.0085, '#2f7fd6'), sfp28: () => optic(0.056, 0.0137, 0.0085, '#e8e4d8'),
+      qsfp28: () => optic(0.072, 0.0184, 0.0085, '#2f7fd6'), osfp: () => optic(0.1, 0.0229, 0.013, '#e8e4d8', true),
+    };
+    BENCH_ROWS.forEach(([name, keys], r) => {
+      const z = -0.24 + r * 0.118; let x = -0.5;
+      add(plaque(name.toUpperCase(), 0.1), -0.6, 0.9035, z);
+      for (const k of keys) { const s = hit(k, MAKE[k](), x, z); x += s.x + 0.05; }
+    });
+    // cables hanging from pegboard hooks: a loop over the hook and two tails, a plug on each end
+    const CAB = { cat6a: ['#2f6fd6', 0.0034, 'rj45'], dac: ['#15171a', 0.0045, 'qsfp'], aoc: ['#e07a18', 0.0028, 'qsfp'], lcom4: ['#35c6c9', 0.0019, 'lc'], lcos2: ['#e8c62e', 0.0019, 'lcb'], mpo: ['#35c6c9', 0.0032, 'mpo'], c13: ['#141518', 0.004, 'c13'], c19: ['#141518', 0.0052, 'c19'] };
+    const plugOf = (type) => {
+      const g = new THREE.Group(), s = (c, r = 0.5, m = 0.1, o) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: r, metalness: m }, o || {}));
+      if (type === 'rj45') { add(box(0.012, 0.02, 0.011, s('#dfe8f0', 0.2, 0, { transparent: true, opacity: 0.8 })), 0, 0, 0, g); add(box(0.014, 0.016, 0.013, s('#2f6fd6')), 0, 0.017, 0, g); }
+      else if (type === 'qsfp') { add(box(0.0184, 0.072, 0.0085, Mt.alu), 0, 0, 0, g); add(box(0.012, 0.03, 0.002, Mt.tab), 0, -0.045, 0.004, g); }
+      else if (type === 'lc' || type === 'lcb') { for (const dx of [-0.003, 0.003]) add(box(0.0055, 0.03, 0.0055, s(type === 'lcb' ? '#2f6fd6' : '#e8e4d8')), dx, 0, 0, g); }
+      else if (type === 'mpo') add(box(0.013, 0.04, 0.008, s('#2a8a8c')), 0, 0, 0, g);
+      else add(box(type === 'c19' ? 0.03 : 0.024, 0.045, type === 'c19' ? 0.022 : 0.018, Mt.plastic), 0, 0, 0, g);
+      return g;
+    };
+    BENCH_CABLES.forEach((k, i) => {
+      const [col, r, type] = CAB[k], x = -0.665 + i * 0.19, y = 1.5, z = -0.385, len = 0.34, g = new THREE.Group(); g.position.set(x, y, z); bench.add(g);
+      const pts = [[-0.028, -len, 0.006]]; for (let j = 0; j <= 20; j++) { const a = Math.PI * j / 20; pts.push([-Math.cos(a) * 0.028, Math.sin(a) * 0.028, 0.012]); } pts.push([0.028, -len * 0.82, 0.012]);
+      g.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts.map(p => new THREE.Vector3(...p))), 60, r, 8, false), new THREE.MeshStandardMaterial({ color: col, roughness: 0.55, envMapIntensity: 0.3 })));
+      add(plugOf(type), -0.028, -len - 0.02, 0.006, g); add(plugOf(type), 0.028, -len * 0.82 - 0.02, 0.012, g);
+      add(box(0.005, 0.005, 0.035, Mt.loadPlate), 0, 0.03, 0.0, g);
+      const lab = plaque(BENCH_INFO[k].name.split(' (')[0].replace(' fiber', '').replace(' copper cable', '').replace(' power cord', ''), 0.16); lab.rotation.x = 0; add(lab, x, 1.57, -0.398);
+      const hb = add(new THREE.Mesh(new THREE.BoxGeometry(0.09, len + 0.1, 0.04), Mt.hit), 0, -len / 2 + 0.01, 0.01, g); hb.userData.bench = k; benchItems[k] = hb;
+    });
+    add(plaque('CABLES', 0.12), -0.72, 1.62, -0.398).rotation.x = 0;
+    for (const x of [-0.6, 0.6]) { B(0.02, 0.02, 0.42, frame, x, 1.74, -0.2); B(0.02, 0.16, 0.02, frame, x, 1.67, -0.4); }
+    B(1.3, 0.03, 0.06, frame, 0, 1.73, 0.0);
+    B(1.24, 0.006, 0.04, new THREE.MeshBasicMaterial({ color: '#fff6e6' }), 0, 1.713, 0.0);
+    const lamp = new THREE.SpotLight('#fff3e2', 2.4, 3.2, 0.95, 0.65, 1.2); lamp.position.set(0, 1.7, 0.02); bench.add(lamp);
+    lamp.target.position.set(0, 0.9, 0.02); bench.add(lamp.target);
+    bench.traverse(m => { if (m.isMesh && !m.userData.bench) m.userData.bench = '*'; if (m.isMesh) pickables.push(m); });
+  })();
+  const BENCH_VIEW = () => ({ pos: bench.localToWorld(new THREE.Vector3(0, 1.98, 1.3)), tgt: bench.localToWorld(new THREE.Vector3(0, 1.06, -0.12)) });   // the mat and the pegboard in one view
 
   let cursorOn = true;
   // The screen copies the terminal element box by box (it's laid out off-screen at 640 × 400 until it opens),
@@ -2393,18 +3306,11 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
   controls.addEventListener('start', () => { camGoal.pos = null; camTween = null; if (touring) pauseTourOnUser(); });
 
   // ---------------- selection & picking ----------------
-  const hlMat = new THREE.LineBasicMaterial({ color: '#4ea6ff' });
+  const hlMat = new THREE.LineBasicMaterial({ color: '#ffd23f' });
   let hlLines = [];
-  function highlight() {
-    for (const l of hlLines) l.parent && l.parent.remove(l);
-    hlLines = [];
-    if (!selected) return;
-    const st = state[selected];
-    if (!st.comp) return;
-    for (const c of devObj[selected].comps) if (c.key === st.comp && (!st.compMesh || st.compMesh === c.mesh)) {
-      const l = new THREE.LineSegments(new THREE.EdgesGeometry(c.mesh.geometry), hlMat); c.mesh.add(l); hlLines.push(l);
-    }
-  }
+  // Parts inside a unit and items on the bench are not outlined: the name at the cursor and the Learn panel
+  // say what you point at. Only whole units on the rack get the yellow outline (see hoverOutline).
+  function highlight() { for (const l of hlLines) l.parent && l.parent.remove(l); hlLines = []; }
   function pullComp(id, key, mesh) {
     const st = state[id], d = DEV[id];
     if (st.comp === key && (!mesh || st.compMesh === mesh)) { st.comp = null; st.compMesh = null; }
@@ -2412,13 +3318,14 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
       st.ex = 1; if (HASLID.has(d.kind)) st.op = 1;
       st.comp = key;
       st.compMesh = SINGLE.has(key) ? (mesh || devObj[id].comps.find(c => c.key === key).mesh) : null;
+      seenSet(id).add(lkey(key));
     }
     highlight(); renderInspector(id); focusCam(id);
   }
   function select(id, fly) {
     if (api.isTermOpen()) api.closeTerm();
     if (selected && selected !== id) resetDev(state[selected]);
-    selected = id;
+    selected = id; learn.hover = learn.list = null; if (id) { benchOn = false; learn.bpin = null; }
     document.querySelector('.app').classList.toggle('sel', !!id);
     if (api.aimOffset) api.aimOffset();
     document.querySelectorAll('.slot[data-dev]').forEach(b => b.setAttribute('aria-pressed', b.dataset.dev === id));
@@ -2456,6 +3363,7 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
     ray.setFromCamera(ndc, camera);
     const hit = ray.intersectObjects(pickables, false).find(h => h.object.visible);
     if (hit && hit.object.userData.cart) return { cart: true };
+    if (hit && hit.object.userData.bench) return { bench: hit.object.userData.bench, mesh: hit.object };
     return hit ? { dev: hit.object.userData.dev, comp: hit.object.userData.comp || null, mesh: hit.object } : null;
   }
   const isOpen = id => { const s = state[id]; return s.cop > 0.5 || s.cxp > 0.5 || (DEV[id].kind === 'storage' && s.cex > 0.5); };
@@ -2467,6 +3375,7 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
     stopTour();
     if (!h) return;
     if (h.cart) { openTerm(); return; }
+    if (h.bench) { if (!benchOn) openBench(); else if (h.bench !== '*') pinBench(h.bench); return; }
     if (h.dev === selected && h.comp && isOpen(h.dev)) pullComp(h.dev, h.comp, h.mesh);
     else if (h.dev !== selected) { select(h.dev, false); if (api.openDevice) api.openDevice(h.dev); else focusCam(h.dev); }
     else if (!state[h.dev].ex && api.openDevice) api.openDevice(h.dev);
@@ -2486,36 +3395,55 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
     if (e.pointerType !== 'mouse') return;
     const h = pick(e), id = h && h.dev; canvas.style.cursor = h ? 'pointer' : 'grab';
     if (api.readHover) api.readHover(id || null);
-    if (h && (h.cart || id)) { showHoverCard(h, e); return; }
-    if (id) { const r = stage.getBoundingClientRect(); hoverTag.hidden = false;
-      const ci = h.comp && id === selected && isOpen(id) ? compInfo(id, h.comp) : null;
-      hoverTag.textContent = ci ? `${ci[0]} · click to read my notes` : (api.hoverLabel ? api.hoverLabel(id) : `${uRange(DEV[id])} · ${DEV[id].section.split(' · ')[0]}`); hoverTag.style.left = (e.clientX - r.left) + 'px'; hoverTag.style.top = (e.clientY - r.top) + 'px'; }
-    else hoverTag.hidden = true;
-  });
-  canvas.addEventListener('pointerleave', () => { hoverTag.hidden = true; hoverKey = ''; if (api.readHover) api.readHover(null); });
-  // Hover card: what you're pointing at, next to the cursor. Devices show their role, one line about what they do and
-  // their key specs; parts inside an open device show what the part is; the laptop says what it's for.
-  let hoverKey = '';
-  function showHoverCard(h, e) {
-    const id = h.dev, part = !h.cart && h.comp && id === selected && isOpen(id) ? compInfo(id, h.comp) : null;
-    const key = h.cart ? 'cart' : part ? id + ':' + h.comp : id;
-    if (key !== hoverKey) {
-      hoverKey = key;
-      if (h.cart) hoverTag.innerHTML = `<div class="ht-top">Crash-cart laptop</div><p>My CV as a terminal: experience, skills and projects, typed out like a shell.</p><div class="ht-go">Click to log in</div>`;
-      else if (part) hoverTag.innerHTML = `<div class="ht-role">${esc(DEV[id].name.split(' ').pop())} · part</div><div class="ht-top">${esc(part[0])}</div><p>${esc(part[1])}</p><div class="ht-go">Click to pull it out</div>`;
-      else {
-        const d = DEV[id], about = ABOUT[d.kind], line = about ? about[0].split(/(?<=\.)\s/)[0] : '';
-        hoverTag.innerHTML = `<div class="ht-role">${esc(d.section)}</div><div class="ht-top">${esc(d.name)}<span>${uRange(d)}</span></div>${line ? `<p>${esc(line)}</p>` : ''}
-          ${about ? `<dl>${about[1].slice(0, 3).map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>` : ''}
-          <div class="ht-go">${id === selected ? 'Open on the right' : SERVICE.has(d.kind) ? 'Click to slide it out' : 'Click for details'}</div>`;
-      }
+    if (h && h.bench) {               // the workbench: outline it from afar; at the bench, items work like parts
+      hoverOutline(null); benchHov = true;
+      const item = benchOn && h.bench !== '*' ? h.bench : null;
+      if (benchOn) learnHover(item);
+      nameTag(item ? BENCH_INFO[item] : null, e, false, learn.bpin === item ? 'click to step back' : 'click to look closer');
+      return;
     }
+    benchHov = false;
+    if (benchOn) { learnHover(null); hoverTag.hidden = true; return; }
+    const inside = !!id && id === selected && isOpen(id), part = inside && h.comp ? partIntro(id, h.comp) : null;
+    // a unit you can slide out gets a yellow outline; inside an open unit, the parts do
+    hoverOutline(!inside && id && SERVICE.has(DEV[id].kind) && !(id === selected && state[id].ex) ? id : null);
+    learnHover(null);   // inside a unit, only the text labels open the card; the parts themselves stay quiet
+    nameTag(part, e, part && pinnedKey(id) === lkey(h.comp));
+  });
+  canvas.addEventListener('pointerleave', () => { hoverTag.hidden = true; hoverOutline(null); learnHover(null); benchHov = false; if (api.readHover) api.readHover(null); });
+  let benchHov = false;
+  let hovDev = null;
+  function hoverOutline(id) {
+    if (id === hovDev) return;
+    if (hovDev) devObj[hovDev].hov.visible = false;
+    hovDev = id; if (id) devObj[id].hov.visible = true;
+  }
+  api.hoverDev = () => hovDev;
+  const benchHovered = () => benchHov;
+  // Hovering a label shows its card straight away; leaving the label closes it straight away (a clicked part stays pinned).
+  let learnT = 0, overPanel = false;
+  function learnHover(k) { clearTimeout(learnT); setLearn(k); }   // the card closes the moment you leave the label
+  function setLearn(k) {
+    if (k === learn.hover) return;
+    learn.hover = k;
+    if (k && (selected || benchOn)) seenSet(benchOn ? 'bench' : selected).add(k);
+    highlight(); renderLearn();
+  }
+  const renderLearn = () => { if (benchOn) renderBench(); else if (selected) renderInspector(selected); };
+  insp.addEventListener('mouseenter', () => { overPanel = true; clearTimeout(learnT); });
+  insp.addEventListener('mouseleave', () => { overPanel = false; setList(null); if (learn.hover) learnT = setTimeout(() => setLearn(null), 900); });
+  document.getElementById('benchBtn').addEventListener('click', () => { if (mode !== 'explore') enterExplore(null); openBench(); });
+  // in the parts list, hovering a name outlines that part in 3D
+  const setList = k => { if (k !== learn.list) { learn.list = k; highlight(); } };
+  insp.addEventListener('mouseover', e => { const b = e.target.closest('[data-learn]'); setList(b ? b.dataset.learn : null); });
+  // the name of the part, next to the cursor
+  function nameTag(part, e, pinned, hint) {
+    if (!part || isDesk()) { hoverTag.hidden = true; return; }
+    const html = `<b>${esc(part.name)}</b><span>${hint || (pinned ? 'click to put it back' : 'click to pull it out')}</span>`;
+    if (hoverTag.dataset.k !== html) { hoverTag.dataset.k = html; hoverTag.innerHTML = html; }
     hoverTag.hidden = false;
-    const r = stage.getBoundingClientRect(), W = hoverTag.offsetWidth, H = hoverTag.offsetHeight;
-    let x = e.clientX - r.left + 18, y = e.clientY - r.top + 18;
-    if (x + W > r.width - 12) x = e.clientX - r.left - W - 18;   // flip to the left of the cursor near the right edge
-    if (y + H > r.height - 12) y = e.clientY - r.top - H - 18;   // and above it near the bottom
-    hoverTag.style.left = Math.max(8, x) + 'px'; hoverTag.style.top = Math.max(8, y) + 'px';
+    const r = stage.getBoundingClientRect();
+    hoverTag.style.left = (e.clientX - r.left + 16) + 'px'; hoverTag.style.top = (e.clientY - r.top + 16) + 'px';
   }
 
   // ---------------- guided tour ----------------
@@ -2675,16 +3603,40 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
         for (let x = 0; x < W; x += 6) px(x, H - 3, '#4a4a4a', 3, 1);
       }
       scene();
-      let blink = false;
-      const drawLeds = () => { blink = !blink; lights.forEach(([x, y, k]) => { if (k === 'tip') px(x, y, blink ? '#ffffff' : '#444444'); else if (rnd() < 0.08) px(x, y, rnd() < 0.75 ? '#e8e8e8' : '#3a3a3a'); }); };
+      const drawLeds = () => lights.forEach(([x, y, k]) => { if (k === 'win' && rnd() < 0.08) px(x, y, rnd() < 0.75 ? '#e8e8e8' : '#3a3a3a'); });   // windows flicker; the tower stays still
       drawLeds();
-      let visible = false;
+      let visible = false;   // the windows flicker and shooting stars cross while the card is on screen
       new IntersectionObserver(es => { visible = es[0].isIntersecting; }, { root: readEl }).observe(card);
+      if (!reduce) setInterval(() => { if (visible && mode === 'read') drawLeds(); }, 450);
+      // shooting stars: now and then a streak crosses the sky, passing behind the tower and the moon
+      const SKY = 40, base = g.getImageData(0, 0, W, SKY), bd = base.data;
+      const isSky = (x, y) => x >= 0 && x < W && y >= 0 && y < SKY && bd[(y * W + x) * 4] < 50;
+      const tail = ['#ffffff', '#d4d4d4', '#a0a0a0', '#6a6a6a', '#3e3e3e'];
+      let star = null, nextStar = 1500, lastT = 0;
+      function meteor(t) {
+        requestAnimationFrame(meteor);
+        if (!visible || mode !== 'read' || t - lastT < 40) return;
+        lastT = t;
+        if (!star) {
+          if (t < nextStar) return;
+          const dx = rnd() < 0.5 ? -1 : 1;
+          star = { dx, x: dx < 0 ? 30 + Math.floor(rnd() * 38) : 2 + Math.floor(rnd() * 38), y: Math.floor(rnd() * 14), n: 0, len: 12 + Math.floor(rnd() * 10) };
+        }
+        g.putImageData(base, 0, 0);
+        const st = star; st.n++;
+        for (let k = 0; k < tail.length; k++) {
+          const i = st.n - k; if (i < 0) continue;
+          const x = st.x + st.dx * i, y = st.y + Math.floor(i * 0.55);
+          if (i <= st.len && isSky(x, y)) px(x, y, tail[k]);
+        }
+        if (st.n > st.len + tail.length) { star = null; g.putImageData(base, 0, 0); nextStar = t + 2500 + rnd() * 4500; }
+      }
+      if (!reduce) requestAnimationFrame(meteor);
       // pixel-noise mask: the foil shows through scattered pixels over the art, never over the text panel
       const m = document.createElement('canvas'); m.width = W; m.height = H; const mg = m.getContext('2d');
       for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) if (rnd() > 0.45) { mg.fillStyle = `rgba(0,0,0,${0.55 + rnd() * 0.45})`; mg.fillRect(x, y, 1, 1); }
-      const glare = card.querySelector('.holo-glare'), url = `url(${m.toDataURL()})`;
-      glare.style.webkitMaskImage = url; glare.style.maskImage = url;
+      const url = `url(${m.toDataURL()})`;
+      const glare = card.querySelector('.holo-glare'); glare.style.webkitMaskImage = url; glare.style.maskImage = url;
       // tilt towards the cursor; the sheen and the highlight follow it
       const set = (x, y) => {
         card.style.setProperty('--rx', ((0.5 - y) * 18).toFixed(2) + 'deg'); card.style.setProperty('--ry', ((x - 0.5) * 18).toFixed(2) + 'deg');
@@ -2692,7 +3644,7 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
         card.style.setProperty('--bx', (x * 100).toFixed(1) + '%'); card.style.setProperty('--by', (y * 100).toFixed(1) + '%');
       };
       if (!reduce) {
-        card.addEventListener('pointermove', e => { const r = card.getBoundingClientRect(); set((e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height); });
+        card.addEventListener('pointermove', e => { card.classList.add('on'); const r = card.getBoundingClientRect(); set((e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height); });
         card.addEventListener('pointerenter', () => card.classList.add('on'));
         card.addEventListener('pointerleave', () => { card.classList.remove('on'); set(0.5, 0.5); });
       }
@@ -2808,7 +3760,7 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
     const W = stage.clientWidth || 1;
     if (m === 'read') return (0.644 + 1) / 2 - 0.5;                // centre of the right 35.6 %
     if (m === 'reader') return 115 / W - 0.5;                      // centre of the 230 px strip
-    return selected ? ((W - 380) / 2) / W - 0.5 : 0;               // centre of the stage, or left of the open panel
+    return 0;                                                      // the whole stage: the Learn card floats beside the part
   }
   let offCur = targetOffset('read'), offFrom = offCur, offTo = offCur, offT = 1;
   api.aimOffset = () => { if (mode === 'explore') aimOffset('explore'); };
@@ -2823,24 +3775,14 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
 
   const toastEl = document.createElement('div'); toastEl.className = 'toast'; toastEl.setAttribute('role', 'status'); document.querySelector('.main').appendChild(toastEl);
   function toast(msg) { toastEl.textContent = msg; toastEl.classList.add('on'); clearTimeout(toastEl._t); toastEl._t = setTimeout(() => toastEl.classList.remove('on'), 2200); }
-  const coach = document.createElement('div'); coach.className = 'coach'; coach.setAttribute('role', 'note');
-  coach.innerHTML = `<b>You're inside the rack.</b><ul><li>Drag to look around. Click a device, then a part inside it, to read my notes.</li><li><kbd>Esc</kbd> takes you back to the page.</li></ul><button type="button">Got it</button>`;
-  stage.appendChild(coach);
-  const coachDone = () => { coach.classList.remove('on'); try { sessionStorage.setItem('rackCoach', '1'); } catch (e) { /* storage blocked: show it again next time */ } };
-  coach.querySelector('button').addEventListener('click', coachDone);
-  controls.addEventListener('start', () => { if (coach.classList.contains('on')) coachDone(); });
-  function showCoach() {
-    let seen = false; try { seen = sessionStorage.getItem('rackCoach') === '1'; } catch (e) { /* no storage */ }
-    if (seen || coachShown) return;
-    coachShown = true; setTimeout(() => { if (mode === 'explore') coach.classList.add('on'); }, reduce ? 0 : 1100);
-  }
+  function showCoach() {}   // the hint line at the bottom of the rack says what to do; no pop-up needed
   const secName = { top: 'the top', going: "Where I'm going", enjoy: 'What I enjoy', care: 'What I care about', now: 'Right now', looking: "What I'm looking for", latest: 'Latest write-ups', contact: 'Contact' };
 
   function setMode(m) {
     if (m === mode) return;
     const from = mode;
     if (from === 'read') readScroll = readEl.scrollTop;
-    if (from === 'explore') { for (const id in state) resetDev(state[id]); if (api.isTermOpen()) api.closeTerm(); stopTour(); selected = null; appEl.classList.remove('sel'); highlight(); coach.classList.remove('on'); document.querySelectorAll('.slot[data-dev]').forEach(b => b.setAttribute('aria-pressed', 'false')); }
+    if (from === 'explore') { benchOn = false; learn.bpin = null; for (const id in state) resetDev(state[id]); if (api.isTermOpen()) api.closeTerm(); stopTour(); selected = null; appEl.classList.remove('sel'); highlight(); document.querySelectorAll('.slot[data-dev]').forEach(b => b.setAttribute('aria-pressed', 'false')); }
     if (m === 'explore') exploreFrom = from;
     mode = m;
     appEl.classList.add('is-switching'); clearTimeout(switchTimer); switchTimer = setTimeout(() => appEl.classList.remove('is-switching'), reduce ? 0 : 750);
@@ -3007,13 +3949,14 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
     if (e.key !== 'Escape') return;
     if (!pal.hidden) { palClose(); return; }
     if (api.isTermOpen()) return; // the terminal handles its own Escape
-    if (mode === 'reader') closePost(); else if (mode === 'blog') { leaveBlogUrl(); setMode('read'); } else if (mode === 'explore' && !touring) { if (selected) closePanel(); else exitExplore(); }
+    if (mode === 'reader') closePost(); else if (mode === 'blog') { leaveBlogUrl(); setMode('read'); } else if (mode === 'explore' && !touring) { if (selected || benchOn) closePanel(); else exitExplore(); }
   });
 
   // in Read and Reader mode the 3D is a figure: hover shows its posts, click enters the rack
   api.readPick = h => {
     if (mode === 'explore') return false;
     if (h && h.cart) { openTermAnywhere(); return true; }
+    if (h && h.bench) { enterExplore(null); openBench(); return true; }
     if (h && h.dev) { enterExplore(h.dev); openDevice(h.dev); } // a click on one device goes straight to it
     return true;
   };
@@ -3050,7 +3993,7 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
   insp.addEventListener('click', onStart); startEl.addEventListener('click', onStart);
   insp.addEventListener('click', e => { if (e.target.closest('[data-close-insp]')) closePanel(); });
   // closing the panel pushes the device back in and returns to the whole rack
-  function closePanel() { select(null); flyTo(VIEWS.reset()); }
+  function closePanel() { if (benchOn) { closeBench(); return; } select(null); flyTo(VIEWS.reset()); }
   document.querySelectorAll('[data-enter]').forEach(b => b.addEventListener('click', () => enterExplore(null)));
   // the terminal CV: switch to the rack, fly to the laptop and open it
   document.querySelectorAll('[data-term]').forEach(b => b.addEventListener('click', openTermAnywhere));
@@ -3078,52 +4021,105 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
   }
   api.openDevice = openDevice;
 
-  // numbered hotspots on the parts that have a note
+  // A text label on every part ("RAM", "CPU"…) with a yellow dot; hover it to read about that part.
   const hsLayer = document.createElement('div'); hsLayer.className = 'hotspots'; stage.appendChild(hsLayer);
   let hsDev = null, hs = [];
   const hsTmp = new THREE.Vector3();
   function buildHotspots(id) {
     hsDev = id; hs = []; hsLayer.innerHTML = '';
-    if (!id || !HOT[DEV[id].kind]) return;
-    HOT[DEV[id].kind].forEach(([key, name], i) => {
-      const c = devObj[id].comps.find(x => x.key === key); if (!c) return;
-      const b = document.createElement('button'); b.type = 'button'; b.className = 'hs';
-      b.innerHTML = `<span class="n">${i + 1}</span><span class="t">${esc(name)}</span>`;
-      b.setAttribute('aria-label', `${name}: read my notes`);
-      b.addEventListener('click', () => { stopTour(); pullComp(id, key, null); });
-      hsLayer.appendChild(b); hs.push({ b, c, key });
-    });
+    if (!id || !LEARN_ORDER[DEV[id].kind]) return;
+    for (const k of partsOf(id)) {
+      const c = firstComp(id, k), name = partIntro(id, c.key).name.split(' · ')[0];
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'hs'; b.innerHTML = `<i aria-hidden="true"></i>${esc(CHIP[k] || name)}`;
+      b.setAttribute('aria-label', `${name}: learn what it is`);
+      b.addEventListener('mouseenter', () => learnHover(k)); b.addEventListener('mouseleave', () => learnHover(null));
+      b.addEventListener('click', () => { stopTour(); pullComp(id, c.key, null); });
+      hsLayer.appendChild(b); hs.push({ b, c, k });
+    }
   }
-  // step bar: where am I in the journey
-  const steps = document.createElement('ol'); steps.className = 'steps'; steps.setAttribute('aria-label', 'How the rack works');
-  const STEPS = {
-    parts: ['Click any hardware', 'Pick a numbered part', 'See what it does'],
-    info: ['Click any hardware', 'Read what it does on the right', 'Try a device you can slide out'],
-  };
-  let stepSet = '', stepNow = 0;
-  const setSteps = k => { if (k === stepSet) return; stepSet = k; stepNow = 0; steps.innerHTML = STEPS[k].map((t, i) => `<li><span>${i + 1}</span>${t}</li>`).join(''); };
-  setSteps('parts');
-  stage.appendChild(steps);
+  // one line at the bottom that always says what you can do next
+  // The Learn card: a popup beside the label or item you point at. It replaces the sidebar on desktop.
+  const pop = document.createElement('div'); pop.className = 'learn-pop'; pop.hidden = true; pop.setAttribute('role', 'dialog'); pop.setAttribute('aria-live', 'polite'); stage.appendChild(pop);
+  let popKey = '';
+  const popTmp = new THREE.Vector3();
+  // short cards for the popup: a name, one sentence, two facts
+  function popPart(id, k) {
+    const c = firstComp(id, k), p = c && partIntro(id, c.key); if (!p) return '';
+    const pinned = pinnedKey(id) === k;
+    return `<article class="lp lp-mini"><h3>${esc(p.name)}</h3><p class="lp-what">${esc(p.what.split(/(?<=\.)\s/)[0])}</p>
+      <div class="lp-ffs"><span class="eyebrow">Form factors</span><div>${p.ffs.map(f => `<span>${esc(f)}</span>`).join('')}</div></div>
+      <dl class="lp-facts"><dt>In this unit</dt><dd>${esc(p.here)}</dd></dl>
+      ${pinned ? '<span class="tip-line">Pulled out · click the part to put it back</span>' : ''}</article>`;
+  }
+  function popBench(k) {
+    const b = BENCH_INFO[k];
+    return `<article class="lp lp-mini"><span class="eyebrow">${esc(b.g)}</span><h3>${esc(b.name)}</h3><p class="lp-what">${esc(b.what)}</p>
+      <p class="lp-tell"><b>Tell it apart:</b> ${esc(b.tell)}</p>
+      <dl class="lp-facts">${b.facts.slice(0, 2).map(([a, v]) => `<dt>${esc(a)}</dt><dd>${esc(v)}</dd>`).join('')}</dl></article>`;
+  }
+  function popState() {   // what the card should show, and the 3D point it belongs to
+    if (benchOn) { const k = learn.hover; return k ? { key: 'b:' + k + ':' + (learn.bpin === k), html: popBench(k), at: benchItems[k], chip: null } : null; }
+    if (!selected) return null;
+    const st = state[selected], sd = DEV[selected];
+    if (!SERVICE.has(sd.kind)) return null;   // units that stay in the rack have no labels, so no card
+    const k = st.ex ? learn.hover : null; if (!k) return null;   // only while a label (or bench item) is hovered; clicking never opens it
+    const c = firstComp(selected, k), h = hs.find(x => x.k === k);
+    return c ? { key: 'p:' + selected + ':' + k + ':' + (pinnedKey(selected) === k), html: popPart(selected, k), at: c.mesh, chip: h && !h.b.hidden ? h.b : null } : null;
+  }
+  function placePop() {
+    if (!isDesk()) { pop.hidden = true; return; }
+    const ps = popState();
+    if (!ps) { if (!pop.hidden) { pop.hidden = true; popKey = ''; } return; }
+    if (ps.key !== popKey) { popKey = ps.key; pop.innerHTML = ps.html; }
+    pop.hidden = false;
+    const W = stage.clientWidth, H = stage.clientHeight, pw = pop.offsetWidth, ph = pop.offsetHeight, sr = stage.getBoundingClientRect();
+    let cx, top, bot;
+    if (ps.chip) { const r = ps.chip.getBoundingClientRect(); cx = r.left - sr.left + r.width / 2; top = r.top - sr.top; bot = r.bottom - sr.top; }
+    else { ps.at.getWorldPosition(popTmp); popTmp.project(camera); cx = (popTmp.x + 1) / 2 * W; top = bot = (1 - popTmp.y) / 2 * H; }
+    let x = cx - pw / 2, y = top - ph - 10;                // centred above the label…
+    if (y < 56) y = bot + 10;                              // …or below it when there is no room above
+    x = Math.max(12, Math.min(W - pw - 12, x)); y = Math.min(H - ph - 64, y);
+    pop.style.transform = `translate(${x.toFixed(0)}px, ${y.toFixed(0)}px)`;
+  }
+  pop.addEventListener('mouseenter', () => { overPanel = true; clearTimeout(learnT); });
+  pop.addEventListener('mouseleave', () => { overPanel = false; });
+  pop.addEventListener('click', e => {
+    if (e.target.closest('[data-bench-back]')) { pinBench(learn.bpin); return; }
+    if (e.target.closest('[data-act="putback"]') && selected) { const st = state[selected]; st.comp = null; st.compMesh = null; learn.hover = null; highlight(); renderInspector(selected); focusCam(selected); }
+  });
+  const coachLine = document.createElement('div'); coachLine.className = 'coachline'; coachLine.setAttribute('aria-live', 'polite'); stage.appendChild(coachLine);
+  let coachHTML = '';
+  const setCoach = html => { if (html !== coachHTML) { coachHTML = html; coachLine.innerHTML = html; } };
   const prevFrame = api.onFrame;
   api.onFrame = dt => {
     prevFrame(dt);
-    if (mode !== 'explore') { if (hsLayer.childElementCount) buildHotspots(null); return; }
+    if (mode !== 'explore') { if (hsLayer.childElementCount) buildHotspots(null); if (!pop.hidden) pop.hidden = true; return; }
     if (selected !== hsDev) buildHotspots(selected);
-    const st = selected && state[selected];
-    const ready = st && (st.cop > 0.9 || (DEV[selected].kind === 'storage' && st.cex > 0.95));
-    const W = stage.clientWidth, H = stage.clientHeight;
+    const st = selected && state[selected], sd = selected && DEV[selected];
+    const ready = st && (st.cop > 0.9 || (sd.kind === 'storage' && st.cex > 0.95));
+    const W = stage.clientWidth, H = stage.clientHeight, seen = selected ? seenSet(selected) : null, pin = st && pinnedKey(selected);
+    const shown = [];
     for (const h of hs) {
       if (!ready) { h.b.hidden = true; continue; }
-      h.c.mesh.getWorldPosition(hsTmp); hsTmp.y += 0.02; hsTmp.project(camera);
-      const x = (hsTmp.x + 1) / 2 * W, y = (1 - hsTmp.y) / 2 * H;
-      const off = hsTmp.z > 1 || y < 50 || y > H - 60 || (isDesk() ? (x < 20 || x > W - 390) : (x < 10 || x > W - 10));
-      h.b.hidden = off;
-      if (!off) { h.b.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`; h.b.classList.toggle('on', st.comp === h.key); }
+      h.c.mesh.getWorldPosition(hsTmp); hsTmp.project(camera);
+      const x = (hsTmp.x + 1) / 2 * W; let y = (1 - hsTmp.y) / 2 * H;
+      const off = hsTmp.z > 1 || y < 50 || y > H - 60 || x < 10 || x > W - 10;
+      h.b.hidden = off; if (off) continue;
+      // labels that would overlap (RAM right beside CPU, say) step apart vertically
+      const w = h.w || (h.w = h.b.offsetWidth || 60);
+      for (let pass = 0; pass < 4; pass++) { const hit = shown.find(o => Math.abs(o.x - x) < (o.w + w) / 2 + 6 && Math.abs(o.y - y) < 30); if (!hit) break; y = hit.y + (y >= hit.y ? 32 : -32); }
+      shown.push({ x, y, w });
+      h.b.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) translate(-50%, -50%)`; h.b.classList.toggle('on', pin === h.k || learn.hover === h.k);
     }
-    const sd = selected && DEV[selected];
-    setSteps(!sd || HOT[sd.kind] ? 'parts' : 'info');
-    const s = !sd ? 1 : HOT[sd.kind] ? (st.comp ? 3 : 2) : 2;
-    if (s !== stepNow) { stepNow = s; [...steps.children].forEach((li, i) => { li.className = i + 1 < s ? 'done' : i + 1 === s ? 'on' : ''; }); }
+    placePop();
+    const hd = api.hoverDev(), parts = selected ? partsOf(selected) : [];
+    if (benchOn) { const n = seenSet('bench').size; setCoach(n >= BENCH_KEYS.length ? 'You’ve explored the whole bench · <b>Esc</b> to go back to the rack' : `<b>Workbench</b> · <span class="y">hover anything</span> to learn what it is · ${n} of ${BENCH_KEYS.length} explored · <b>Esc</b> to go back`); }
+    else if (!selected && benchHovered()) setCoach('<b>Workbench</b> · parts and cables side by side · <span class="y">click to look closer</span>');
+    else if (!selected) setCoach(hd ? `<b>${esc(DEV[hd].name)}</b> · ${esc(DEV[hd].section)} · <span class="y">click to slide it out</span>` : 'Hover the rack: units you can open light up in <span class="y">yellow</span> · or open the <b>Workbench</b>');
+    else if (!SERVICE.has(sd.kind)) setCoach(hd ? `<b>${esc(DEV[hd].name)}</b> · <span class="y">click to open it instead</span>` : 'This unit stays in the rack · try a server, switch, firewall, storage, GPU server or the UPS');
+    else if (!ready) setCoach('Sliding it out…');
+    else if (seen.size >= parts.length) setCoach(`You’ve explored every part of <b>${esc(sd.name)}</b> · <b>Esc</b> to push it back and open another`);
+    else setCoach(`<b>${esc(sd.name)}</b> · <span class="y">hover a label</span> to learn what it is · ${seen.size} of ${parts.length} explored · <b>Esc</b> to push it back`);
   };
 
   // notes link to the real work; a write-up opened from the rack comes back to the same part
@@ -3183,7 +4179,7 @@ button.comp[aria-pressed="true"] span:first-child { color: var(--uid); }
       o.root.position.z = devZ + EXT * E;
       if (o.lid) { const lift = hasLid ? O : 0; o.lid.position.set(0, o.lidBase.y + lift * 0.1, o.lidBase.z - lift * 0.02); o.lid.material.opacity = 1 - lift; o.lid.material.depthWrite = lift < 0.05; o.lid.visible = lift < 0.999; } // the lid rises and fades out while the device opens
       // Parts inside a closed unit can't be seen, so they are only drawn while it is out or opening.
-      if (hasLid) { const inside = !!(s.ex || s.op || s.cex > 0.001 || s.cop > 0.001); for (const ch of o.root.children) if (!o.outer.has(ch)) ch.visible = inside; } // models load late, so check every frame (cheap)
+      if (hasLid || kind === 'storage') { const inside = !!(s.ex || s.op || s.cex > 0.001 || s.cop > 0.001 || pulled); for (const ch of o.root.children) if (!o.outer.has(ch)) ch.visible = inside; } // models load late, so check every frame (cheap)
       for (const c of o.comps) {
         const want = c.key && s.comp === c.key && (!s.compMesh || s.compMesh === c.mesh) ? 1 : 0;
         if (want < c.cur || (ready && settled)) c.cur = mv(c.cur, want, 0.7);
