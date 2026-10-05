@@ -1,6 +1,6 @@
 ---
 topic: Security
-title: "Configuring Secure DMVPN Tunnels"
+title: "Encrypting DMVPN tunnels between a head office and its branches"
 date: 2026-05-22 16:00:00 +0000
 categories: networking
 tags: [ipsec, dmvpn, Cisco, Tutorial]
@@ -11,91 +11,91 @@ image:
   path: "/assets/img/Pasted image 20260522143349.png"
   alt: "DMVPN lab topology"
 ---
-In this lab, I explore how to secure a DMVPN Phase 3 network with IPsec. DMVPN dynamically builds GRE tunnels between the hub and spokes, while IPsec encrypts the traffic running over them. I start by verifying the existing DMVPN setup, then configure IKE policies and IPsec protection on the hub and spokes, and finally verify that the security associations (SAs) are established and that spoke-to-spoke tunnels work as expected.
+DMVPN connects a head office (the hub) with branches (the spokes) over the internet, and lets branches talk to each other directly, without going through the hub. But on its own, DMVPN doesn't encrypt anything: the GRE tunnels it builds travel across the internet in plain text.
+
+So in this lab I add IPsec on top. DMVPN builds the tunnels, and IPsec locks them.
 
 ![description](/assets/img/Pasted image 20260522143403.png)
 
-IPsec functionality is essential for a DMVPN implementation.
+## Step 1: Check that DMVPN works
 
-## Step 1: Verify DMVPN operation
-
-I will ping the loopback addresses of R2 and R3 from R1 and use the `show dmvpn` command.
+Before adding encryption, I make sure the tunnels are up. From R1 (the hub) I ping the loopbacks of R2 and R3 and run `show dmvpn`.
 
 ![description](/assets/img/Pasted image 20260522144705.png)
 
-## Step 2: Secure DMVPN Phase 3 tunnels
+## Step 2: Add IPsec
 
-First, I need to create the IKE policy that defines the hash algorithm, encryption type, key exchange method, Diffie-Hellman group, and authentication method.
+Securing the tunnels takes four pieces of config, then one line to apply them.
 
-IKE (Internet Key Exchange) is the protocol that **sets up and manages the secure “handshake”** between two devices before an IPsec VPN tunnel can protect real traffic.
+### 1. The IKE policy
+
+Before two routers encrypt anything, they need to agree on *how*: which encryption, which hash, which key exchange. That "handshake" is IKE.
 
 ![description](/assets/img/Pasted image 20260522145107.png)
 
-This configuration block sets the **IKE Phase 1 parameters** on R1 so that when it communicates with R3, both routers agree on the same hash, encryption method, Diffie-Hellman group, and authentication method to build the secure control channel.
+This is policy number **99**. The number just identifies it and sets its priority: lower numbers are tried first.
 
-I created an IKE/ISAKMP policy with the number **99**, which uniquely identifies the policy and assigns it a priority (higher numbers = lower priority).
+### 2. The pre-shared key
 
-Next, I will create the pre-shared key and peer address. I will use `0.0.0.0` to match multiple peer addresses and use `DMVPN@key#` as the key.
+Both sides prove who they are with the same key, here `DMVPN@key#`. The address `0.0.0.0` means "accept this key from any peer", which is what you want on a hub with many spokes.
 
 ![description](/assets/img/Pasted image 20260522191941.png)
 
-Now I will configure the IPsec transform set.
+### 3. The transform set
+
+This says how the actual traffic will be protected.
 
 ![description](/assets/img/Pasted image 20260522192345.png)
 
-There are two tunnel modes available: transport mode and tunnel mode.
+IPsec has two modes:
 
-- **Tunnel mode**: The entire original packet is encapsulated inside a new IP packet, so only the VPN endpoints’ IP addresses are visible on the network.
+- **Tunnel mode**: the whole original packet is wrapped inside a new one. Only the two VPN routers' addresses are visible.
+- **Transport mode**: only the data is encrypted. The original sender and receiver addresses stay visible.
 
-- **Transport mode**: Only the payload of the original packet is encrypted, while the original sender and receiver IP addresses remain visible and unchanged.
+### 4. The IPsec profile
 
-Next, I create an **IPsec profile** that bundles the IPsec protection settings and can later be applied to a tunnel interface.
+A profile is a template: "whatever tunnel I'm applied to, protect it with the transform set `DMVPN_TRANS`."
 
 ![description](/assets/img/Pasted image 20260522192833.png)
 
-The **IPsec profile** acts like a template that says: “when you apply me to a tunnel, protect that tunnel using the transform set `DMVPN_TRANS`.”
+### Apply it to the tunnel
 
-The command used to apply the IPsec profile to an interface is:
+One command on the tunnel interface:
 
 `tunnel protection ipsec profile <profile-name>`
 
 ![description](/assets/img/Pasted image 20260522193644.png)
 
-At this point, the routers are running EIGRP, but because R2 and R3 are not yet configured with IPsec, they fail to establish both the EIGRP neighbor adjacency and the IPsec security associations.
+At this point the hub is encrypting, but R2 and R3 aren't yet. They don't understand each other, so both the EIGRP neighbours and the IPsec sessions fail. Expected.
 
-I will now configure IPsec properly on R2 and R3. Since the hub’s interface uses a dynamic IP address, I will use `0.0.0.0 0.0.0.0` as the peer address. Otherwise, I would use the hub’s public IP address directly.
+### Same on the spokes
 
-On R2 and R3:
+On R2 and R3 I add the same config. The hub's interface has a dynamic IP, so the spokes also use `0.0.0.0 0.0.0.0` as the peer address. If the hub had a fixed public IP, I'd use that instead.
 
 ![description](/assets/img/Pasted image 20260522194949.png)
 
-**Tip:** To help me remember these four steps, I think of it this way: I use the `crypto isakmp` command twice (for policies and pre-shared keys) and the `crypto ipsec` command twice (for the transform set and the profile), and then I apply the IPsec profile to the tunnel interface.
+**How I remember it:** `crypto isakmp` twice (the policy and the key), `crypto ipsec` twice (the transform set and the profile), then apply the profile to the tunnel.
 
-Now, back on R1, I check the security associations and verify that the SAs with R2 and R3 are formed correctly, which they are.
+## Step 3: Check that it's encrypted
+
+Back on R1, `show crypto isakmp sa` shows the handshakes with R2 and R3 are up.
 
 ![description](/assets/img/Pasted image 20260522195246.png)
 
-Another useful command is `show crypto ipsec sa`. It displays the **IPsec Phase 2 SAs**, which are the security associations responsible for encrypting and authenticating the actual data traffic.
+And `show crypto ipsec sa` shows the sessions that actually encrypt the data:
 
 ![description](/assets/img/Pasted image 20260522200020.png)
 
-The first address corresponds to R1 and the second one to R3. Below that, R2 will also appear.
+The first address is R1 and the second is R3. R2 appears below.
 
-To finish the lab, I run a traceroute from R2 to the simulated LAN interface on R3. Then I run the traceroute again. This time, I can see that R1 has enabled direct spoke-to-spoke communication between R2 and R3.
+Last, the fun part. I run a traceroute from R2 to a LAN on R3. The first time, the traffic goes through the hub. The second time, it goes straight from R2 to R3: the hub has helped them build a direct, encrypted tunnel.
 
-This tunnel expires and closes dynamically when it is no longer needed. The tunnel automatically reopens when new traffic is sent between the spokes.
+That direct tunnel closes on its own when it's not used, and reopens as soon as the spokes talk again.
 
 ![description](/assets/img/Pasted image 20260522200419.png)
 
-In the end, this lab showed me how DMVPN and IPsec work together: DMVPN dynamically builds the GRE tunnels, while IPsec protects them using strong encryption and IKE negotiation.
+## What to remember
 
-Here are my three **must-remember takeaways** from this lab:
-
-1. **IKE and IPsec are separate layers**  
-   First, you configure **IKE (ISAKMP)** to establish the secure control channel. Then, you configure **IPsec (transform set + profile)** to protect the actual data traffic.
-
-2. **The hub uses `0.0.0.0` for dynamic spokes**  
-   On the hub, using `crypto isakmp key ... address 0.0.0.0 0.0.0.0` allows a single pre-shared key to work with multiple spokes, which is especially useful in DMVPN environments with dynamic IP addresses.
-
-3. **Always verify both SA types**  
-   Use `show crypto isakmp sa` to confirm that the IKE tunnel is established, and use `show crypto ipsec sa` to verify that real traffic is actually being encrypted between the peers.
+1. **IKE and IPsec are two different steps.** IKE sets up the secure handshake; IPsec (transform set and profile) protects the real traffic.
+2. **`0.0.0.0` on the hub** lets one key work for every spoke, even when their addresses change.
+3. **Check both:** `show crypto isakmp sa` for the handshake, `show crypto ipsec sa` to see that traffic is really being encrypted.

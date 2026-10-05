@@ -1,6 +1,6 @@
 ---
 topic: Projects
-title: From Fundamentals to Enterprise Complexity
+title: "Building a new branch office network from scratch"
 date: 2026-06-25 16:00:00 +0000
 categories: Projects
 tags:
@@ -18,38 +18,33 @@ image:
   path: "/assets/img/Pasted image 20260623101319.png"
   alt: "Project network topology"
 ---
-## Project Idea: From Fundamentals to Enterprise Complexity
+## The idea
 
-The philosophy behind this project is continuous, iterative improvement. Instead of building isolated labs every week, I am developing a single, "living" topology that evolves as I master new technologies.
+Instead of building a new lab every week and throwing it away, I'm building one network and keeping it. It starts simple, and every time I learn something new, I add it. Over time it should become more efficient, more redundant and more secure: from "day 0" to "day N".
 
-At its inception, the design focuses on core foundational services: **VLANs**, **DHCP relay**, **Router on a Stick implementation**, **Multi-Area OSPF**, and **NAT**. While the initial setup may seem simple, the goal is to move this network through the full **"Day 0 to Day N" lifecycle**, systematically making it more efficient, redundant, and secure.
+On the side I do a lot of troubleshooting exercises that don't make it into the blog. What I learn from breaking things there, I bring back here. This blog is the record of how the network grows.
 
-On the side, I perform intensive troubleshooting exercises that I don't always share in my portfolio. However, I use the lessons from those "breaks" to harden this main project, intentionally adding complexity and resolving the types of real-world issues, like configuration drift and protocol mismatches, that network engineers face daily. This blog serves as a record of that growth.
+### The scenario
 
-**The Real-World Scenario: Enterprise Branch Expansion**
+A company has a **main site** (500 employees) and **Remote Office 1** (220 employees). It's opening **Remote Office 2 (RO2)**, and I'm building that network from scratch.
 
-In a professional environment, this project represents a typical branch expansion. I am simulating the integration of a new site, **Remote Office 2 (RO2)**, into a corporate infrastructure that already supports a **Main Site** (500 employees) and **Remote Office 1** (220 employees).
+RO2 starts with four departments. Each one gets its own subnet, and their users are spread across four switches. I also leave room for two more departments later, so six subnets in total.
 
-**The Project Brief**
+I split the work into three parts:
 
-My objective is to build the RO2 network from the ground up to support four initial departments. Each department requires its own dedicated subnet to maintain separate broadcast domains. To ensure high availability and hardware efficiency, I am distributing users from all four departments across a four-switch fabric. Furthermore, I am designing the IP plan to accommodate two additional departments for future recruitment, totaling six subnets.
+1. **The IP plan**: split one `/24` into right-sized subnets with VLSM.
+2. **The basics**: cabling, SSH access, VLANs and trunks.
+3. **Routing and internet**: OSPF between the three sites, and NAT so RO2 can reach the internet.
 
-I have structured this project into three distinct phases:
-
-- **Phase 1: VLSM Address Scheme** – I will use **Variable Length Subnet Masking (VLSM)** to subdivide a single `/24` block into smaller, efficient subnets that meet the specific host counts for each department without wasting address space.
-- **Phase 2: Network Setup and Basic Configuration** – I will perform the physical-to-logical mapping, configure secure management access (SSH), and set up the switch infrastructure, including VLANs and trunking.
-- **Phase 3: OSPF Routing and Internet Access** – I will implement **Multi-Area OSPF** to provide dynamic, loop-free reachability between the Main Site, RO1, and RO2, while configuring NAT to allow RO2 users to access the Internet.
-
-## Defining IP Addresses and Subnets
+## The IP plan
 
 ## Addressing Table
 
 ![description](/assets/img/Pasted image 20260626163730.png)
 
+Six departments of 30 people each means 180 users. I split `172.20.43.0/24` with VLSM: a `/27` per department (30 usable addresses each, 2⁵−2 = 30), and a smaller `/29` for management.
 
-To support 180 employees across 6 departments in RO2 (30 users per department), I will subdivide the `172.20.43.0/24` block using VLSM, I will use a `/27` mask for departments, providing 30 usable host addresses per subnet (25−2=30), and a more efficient `/29` mask for management.
-
-RO2 Subnet Design (172.20.43.0/24)
+RO2 subnets (172.20.43.0/24):
 
 | Department | Subnet ID     | Mask | Usable Host Range    | Broadcast     |
 | ---------- | ------------- | ---- | -------------------- | ------------- |
@@ -61,15 +56,13 @@ RO2 Subnet Design (172.20.43.0/24)
 | Reserve 2  | 172.20.43.160 | /27  | 172.20.43.161 - .190 | 172.20.43.191 |
 | Management | 172.20.43.192 | /29  | 172.20.43.193 - .198 | 172.20.43.199 |
 
-This plan leaves **172.20.43.200 through 172.20.43.255** unused for future expansion.
+That leaves **172.20.43.200 to .255** free for later.
 
-## Topology and Secure Remote Access
+## SSH access
 
-I connected the devices as required, 4 departments on RO2, dividing the RO2 LAN into 6 subnets, not done any configuration yet.
+With everything cabled (four departments, six subnets, no config yet), the first job is remote access. SSH, not Telnet: SSH encrypts everything, passwords included.
 
-With the topology physically connected, I must now configure secure management. Remote access via **SSH** is preferred over Telnet because it encrypts all traffic, including passwords.
-
-Router Configuration (RO2 example)
+The router (RO2 as an example):
 
 ```
 hostname RO2
@@ -86,9 +79,7 @@ line vty 0 4
  transport input ssh
 ```
 
-Switch Configuration (S1 example)
-
-The switch requires a **Switched Virtual Interface (SVI)** for management and a default gateway to reach the HQ and RO1 networks
+A switch (S1 as an example) also needs a management interface (an SVI) and a default gateway, so it can be reached from HQ and RO1:
 
 ```
 hostname S1
@@ -113,69 +104,20 @@ line vty 0 15
  transport input ssh
 ```
 
-I did this configuration for all routers and switchtes so all are possible to access remotely.
+I did the same on every router and switch.
 
 ## DHCP
 
+All the IP addresses are handed out from one place: **HQ** is the DHCP server, and **RO2** passes the requests along (a "relay"). That way every lease is managed on one device. Later I want to move this to a Windows server.
 
-On HQ I create a pool for each VLAN on RO2 LAN. I excluded RO2 and Switches VLAN interfaces (used for remote login), which I will change to a new vlan for management, which i forgot to create before.
+The switches are the only devices with fixed addresses:
 
-The only devices that dont receive dynamic IP addresses are the switches. They receive the following static IP addresses.
-S1: 172.20.43.194
-S2: 172.20.43.195
-S3: 172.20.43.196
-S4: 172.20.43.197
+- S1: 172.20.43.194
+- S2: 172.20.43.195
+- S3: 172.20.43.196
+- S4: 172.20.43.197
 
-
-```
-HQ Router
-
-ip dhcp excluded-address 172.20.43.1  ! RO2's subinterface e0/0.10 IP
-ip dhcp pool RO2_VLAN10
-network 172.20.43.0 255.255.255.224
-default-router 172.20.43.1
-dns-server 8.8.8.8
-
-ip dhcp excluded-address 172.20.43.33  ! RO2's subinterface e0/0.20 IP
-ip dhcp pool RO2_VLAN20
-network 172.20.43.32 255.255.255.224
-default-router 172.20.43.33
-dns-server 8.8.8.8
-
-
-ip dhcp excluded-address 172.20.43.65  ! RO2's subinterface e0/0.30 IP
-ip dhcp pool RO2_VLAN30
-network 172.20.43.64 255.255.255.224
-default-router 172.20.43.65
-dns-server 8.8.8.8
-
-ip dhcp excluded-address 172.20.43.97  ! RO2's subinterface e0/0.40 IP
-ip dhcp pool RO2_VLAN40
-network 172.20.43.96 255.255.255.224
-default-router 172.20.43.97
-dns-server 8.8.8.8
-```
-
- and on RO2
- 
-```
-interface e0/0.10
-ip helper-address 172.20.47.249 ! HQ IP s1/1 IP address
-interface e0/0.20
-ip helper-address 172.20.47.249
-interface e0/0.30
-ip helper-address 172.20.47.249
-interface e0/0.40
-ip helper-address 172.20.47.249
-```
-
-## DHCP Implementation
-
-I am using a centralized DHCP model where **HQ** acts as the server and **RO2** acts as the relay agent. This allows for easier management of all IP leases from a single device. Later I am planning to implement it through a windows server.
-
-**HQ DHCP Server Configuration**
-
-I created a dedicated pool for each user VLAN. I excluded the gateway IP address (RO2's subinterface IP) for each pool to prevent the server from assigning it to a PC, which would cause an IP conflict.
+On HQ, one pool per VLAN. In each pool I exclude the gateway address (RO2's subinterface), so DHCP never gives it to a PC and causes a conflict.
 
 ```
 ! --- Global Exclusions ---
@@ -206,9 +148,7 @@ ip dhcp pool RO2_VLAN40
  dns-server 8.8.8.8
 ```
 
-**RO2 DHCP Relay Configuration**
-
-Since DHCP Discover messages are broadcasts, they cannot cross the WAN to reach HQ by default. To fix this, I configured the `ip helper-address` on RO2's subinterfaces. This tells RO2 to listen for client broadcasts and forward them as unicast packets to the HQ server at `172.20.47.249`.
+There's a catch: a PC asking for an address sends a broadcast, and broadcasts don't cross the WAN to HQ. `ip helper-address` on RO2 fixes that: RO2 catches the broadcast and forwards it to HQ (`172.20.47.249`, HQ's s1/1) as a normal packet.
 
 ```
 interface Ethernet0/0.10
@@ -224,15 +164,15 @@ interface Ethernet0/0.40
  ip helper-address 172.20.47.249
 ```
 
-## Router-on-a-Stick (ROAS) Implementation
+## Router-on-a-stick
 
-Now that the DHCP server is ready, I must configure the path between the clients and the router. I am using **Router-on-a-Stick (ROAS)**, which uses a single physical link to carry multiple VLANs between the switches and the router RO2.
+Next, the path between the PCs and the router. With router-on-a-stick, one cable from the switches to RO2 carries all the VLANs.
 
-**Switch Access and Trunk Ports**
+### Switches
 
-First, I configured the access ports for the end-user devices and the trunk links to interconnect the switches. I changed the **Native VLAN to 999** on all trunks as a security best practice to ensure untagged traffic is isolated.
+Access ports for the PCs, and trunks between the switches. On every trunk I changed the native VLAN to **999**, an unused VLAN, so untagged traffic doesn't end up anywhere useful. It's a common security practice.
 
-**Example: Switch S2 (Departments 1 & 2)**
+S2 (departments 1 and 2):
 
 ```
 interface Ethernet0/1
@@ -253,9 +193,7 @@ interface Ethernet0/0
  switchport trunk allowed vlan 10,20,99,999
 ```
 
-**Example: Switch S1 (The "Core" Switch)**
-
-S1 aggregates all traffic from S2, S3, and S4 and sends it to the router. It must allow all department VLANs and the management VLAN.
+S1 collects the traffic from S2, S3 and S4 and sends it to the router, so its trunk to RO2 carries every VLAN:
 
 ```
 interface Ethernet0/0
@@ -266,9 +204,9 @@ interface Ethernet0/0
  switchport trunk allowed vlan 10,20,30,40,99,999
 ```
 
-**Router RO2 Configuration**
+### The router
 
-I created logical **subinterfaces** on RO2's physical port to act as the default gateway for each VLAN. Each subinterface must match the VLAN ID used on the switches.
+On RO2's one physical port I create a **subinterface** per VLAN. Each one is the gateway for its VLAN, and reads the VLAN tag on incoming frames. The VLAN number must match the switches.
 
 ```
 interface Ethernet0/0.10
@@ -284,14 +222,9 @@ interface Ethernet0/0.999
  encapsulation dot1q 999 native
 ```
 
-**Note:** I ensured that every VLAN (10, 20, 30, 40, 99, 999) was manually created in the VLAN database of every switch. If a switch does not "know" a VLAN exists, it will discard all traffic for that ID, even if the trunk is configured to allow it
-
 ![description](/assets/img/Pasted image 20260623131201.png)
 
-
-To act as the default gateway for my four departments, I configured **Logical Subinterfaces** on RO2's physical interface. Each subinterface uses 802.1Q encapsulation to "peel off" the tags from incoming switch frames.
-
-**RO2  Configuration**
+The four department gateways:
 
 ```
 interface GigabitEthernet 0/0
@@ -316,50 +249,49 @@ interface GigabitEthernet 0/0.40
 
 ![description](/assets/img/Pasted image 20260623124604.png)
 
-**Troubleshooting the "Missing VLAN" Issue**
+### When it didn't work: the missing VLANs
 
-I ping from PC0 (vlan 10) to RO2. First pings where not working because although I configurated the trunks properly on S1 e0/1 and e0/0, i forgot to create the VLANs , so they were not appearing when doing show vlan. After creating them, it worked fine.
+My first ping from PC0 (VLAN 10) to RO2 failed. The trunks on S1 were fine, but I'd forgotten to create the VLANs themselves: they didn't show up in `show vlan`. A switch that doesn't know a VLAN drops its traffic, even if the trunk allows it. Once I created them, it worked.
 
 ![description](/assets/img/Pasted image 20260623131303.png)
 
-When I first attempted to connect **VLAN 30** from **S3**, the ping to the router failed. 
+Then VLAN 30 on S3 failed too.
 
 ![description](/assets/img/Pasted image 20260623132209.png)
 
-Using `show vlan` and `show interfaces trunk`, I identified two problems:
-- The native VLAN on S3 was still the default (VLAN 1), while the core switch (**S1**) was using **VLAN 999**.
-- Interface E0/0 was not yet operating as a trunk
+`show vlan` and `show interfaces trunk` showed two problems:
+
+- S3's native VLAN was still the default (1), while S1 used 999.
+- S3's e0/0 wasn't a trunk yet, so VLAN 30 had no way out.
 
 ![description](/assets/img/Pasted image 20260623132310.png)
 ![description](/assets/img/Pasted image 20260623132552.png)
 
-`sh vlan`  shows me two things, first that the native vlan continues being 1 which has to be changed to 999, and that e0/0 is not configured as a trunk yet, and thats why the traffic from vlan 30 is not being carried.
-
-I corrected this by explicitly defining the trunk and native VLAN:
+I set the trunk and the native VLAN on S3:
 
 ![description](/assets/img/Pasted image 20260623132742.png)
 
-so now the trunk has been created
+Now the trunk is up:
 
 ![description](/assets/img/Pasted image 20260623132829.png)
 
-and I will fix the mismatch chaging the S1 e0/2 configuration now
+On S1's side (e0/2), the native VLAN didn't match either, and the allowed VLANs weren't set:
 
 ![description](/assets/img/Pasted image 20260623133005.png)
 
-here we can see that the native vlan is mismatched and that the VLANs allowed where not specified yet. So i do both
+So I fixed both:
 
 ![description](/assets/img/Pasted image 20260623133139.png)
 
-but ping to the router from the PC still doesnt work. Why?
+But the ping still failed. Why?
 
 ![description](/assets/img/Pasted image 20260623133212.png)
 
-Simply because the VLAN 30 on S1 hasnt been created yet.
+Same mistake as before: VLAN 30 didn't exist on S1.
 
 ![description](/assets/img/Pasted image 20260623133302.png)
 
-I create it 
+I created it:
 
 ![description](/assets/img/Pasted image 20260623133329.png)
 
@@ -367,139 +299,145 @@ And the ping works.
 
 ![description](/assets/img/Pasted image 20260623133432.png)
 
-I take this: create first the vlans on all devices that are going to transmit them so I dont find this silly mistake again.
+Lesson learned: **create the VLANs on every switch they pass through, before anything else.** It's a silly mistake, and I made it twice.
 
-So, in S3
+On S3, the next errors:
 ![description](/assets/img/Pasted image 20260623133738.png)
 
-Those errors are fixed configurating S1 e0/3 properly
+Fixed by configuring S1's e0/3 properly:
 ![description](/assets/img/Pasted image 20260623133933.png)
 
-and PC3 from VLAN 40 pings easily to its router (RO2)
+And PC3 in VLAN 40 can reach its gateway on RO2:
 ![description](/assets/img/Pasted image 20260623134119.png)
 
-To verify that my **Router-on-a-Stick (ROAS)** configuration was fully functional, I performed an internal inter-VLAN test by pinging from **Dept 1 (VLAN 10)** to **Dept 4 (VLAN 40)**.
+### The full test
+
+A ping from department 1 (VLAN 10) to department 4 (VLAN 40):
 
 ![description](/assets/img/Pasted image 20260623134536.png)
 
-The ping was successful, confirming that:
+It works, which shows three things at once:
 
-1. The PCs are correctly receiving IP addresses via **DHCP relay**.
-2. The switches are tagging frames with the correct **802.1Q headers**.
-3. **RO2** is successfully routing traffic between its logical subinterfaces.
+1. The PCs get their addresses from HQ through the DHCP relay.
+2. The switches tag the frames with the right VLAN.
+3. RO2 routes between its subinterfaces.
 
-## OSPF Area Design and Communication
+## OSPF between the sites
 
- 
-To enable communication between RO1, HQ, and RO2, I implemented **Multi-Area OSPF**. This allows for a hierarchical design where Area 0 acts as the backbone connecting the remote sites.
+Now the three sites need to learn each other's networks. I use **multi-area OSPF**: Area 0 is the backbone that connects the offices.
 
-**OSPF Design Strategy**
+Two choices I made:
 
-- **Router IDs (RID):** On each router, I created a **Loopback 0** interface to serve as the RID. Since loopbacks are virtual, they remain "up/up" as long as the router is powered on, ensuring the OSPF process remains stable.
-- **Configuration Style:** While I used the traditional `network` command on RO1, I used the modern best practice of **interface-level OSPF** configuration for the other routers to ensure precision
+- **Router IDs on loopbacks.** A loopback is virtual, so it stays up as long as the router is on. That keeps the OSPF ID stable.
+- **Interface-level OSPF.** On RO1 I used the classic `network` command; on the other routers I enable OSPF directly on each interface, which is more precise.
 
 ![description](/assets/img/Pasted image 20260623144543.png)
 
-RO1 (I will only use the network command on RO1, on the other routers I will use what is best practice, assigning it directly to the interface)
+RO1, with the `network` command:
 ![description](/assets/img/Pasted image 20260623154923.png)
 ![description](/assets/img/Pasted image 20260623154955.png)
 ![description](/assets/img/Pasted image 20260623154938.png)
 
-**HQ  Configuration**
+### HQ
 
 ![description](/assets/img/Pasted image 20260623155606.png)
-(mistake, s1/1 should be in area 0, corrected below)
+(My mistake: s1/1 should be in area 0. Fixed below.)
 ![description](/assets/img/Pasted image 20260623155751.png)
 
-- **Passive-Interface Default:** I silenced OSPF on all interfaces by default. I then manually re-enabled it only on the WAN links. This prevents the router from sending unnecessary "Hello" packets onto user LANs, which saves CPU and prevents potential attackers from learning the topology.
-- **Point-to-Point Network Type:** On the Serial and direct Ethernet WAN links, I forced the network type to `point-to-point`. This tells OSPF that only two routers exist on the link, allowing it to bypass the Designated Router (DR) election and the associated 40-second wait timer.
+Two more settings on HQ:
 
-with both ospf processes running on RO1 and HQ I check if they are learning each other networks, which they do.
-HQ learns LAN RO1 network:
+- **Passive interfaces by default.** OSPF is silent everywhere, and I turn it back on only on the WAN links. Routers don't need to send OSPF hellos to user LANs: it wastes CPU, and someone on a LAN could learn the network layout from them.
+- **Point-to-point links.** On the WAN links there are only ever two routers, so I tell OSPF that. It skips the "designated router" election and its 40-second wait.
+
+### When it didn't work: a missing IP
+
+With OSPF running on RO1 and HQ, HQ learned RO1's LAN:
 ![description](/assets/img/Pasted image 20260623160703.png)
 
-but RO1 is not learning  LAN HQ network:
+But RO1 didn't learn HQ's LAN:
 ![description](/assets/img/Pasted image 20260623172845.png)
 
-I ask myself why, adjacency is alright
+The neighbours were fine:
 ![description](/assets/img/Pasted image 20260623173012.png)
 
-but HQ shows me that the state of the protocol is down, why?
+But on HQ, the protocol was down. Why?
 ![description](/assets/img/Pasted image 20260623173438.png)
 
-and with `show ip interface brief` I can see two hints
+`show ip interface brief` gave two clues:
 ![description](/assets/img/Pasted image 20260623173603.png)
 
-The first one is that the interface connecting the LAN doesnt have an IP address configured, for a configuration later the interface to RO2 is down, so I will keep that in mind. So I will start fixing what has to do with e0/1
+The LAN interface had no IP address. (The interface to RO2 was down too, but that's for later.) So I fixed e0/1 first:
 
 ![description](/assets/img/Pasted image 20260623173707.png)
 
-The subnet mask is /23 so it is 255.255.254.0. Right after that I can see that the protocol goes up
+The mask is /23, so 255.255.254.0. The protocol comes up right away:
 
 ![description](/assets/img/Pasted image 20260623173809.png)
 
-and the route to LAN HQ is advertised now from HQ to RO1 through OSPF.
+And HQ now advertises its LAN to RO1:
 
 ![description](/assets/img/Pasted image 20260623174946.png)
 
-To test it I make a ping from PC4 on RO1 to PC5 on LAN HQ, which is successfull.
+A ping from PC4 (RO1) to PC5 (HQ) works:
 
 ![description](/assets/img/Pasted image 20260623175652.png)
 
-I will continue configuring the connectivity to RO2 LAN, configuring OSPF on its router.
+### RO2
+
+Next, OSPF on RO2:
 
 ![description](/assets/img/Pasted image 20260623181529.png)
 
-e0/0 will be passive to avoid sending hello packets as there is no network, and prevents unautorized routers to form an adjacency.
+I make e0/0 passive: there's no other router on that side, so there's no reason to send hellos, and it stops any unknown router from joining.
 
-I can see the adjacency forming and after that the routes being advertised to RO2 from HQ using OSPF
+The neighbour relationship forms, and RO2 learns HQ's routes:
 
 ![description](/assets/img/Pasted image 20260624192247.png)
 
-As I have implemented ROAS and I dont have an IP address directly on RO2 e0/0 but only on its subinterfaces, I find it easier to use the network command in this case to advertise RO2 LAN.
+RO2's LAN lives on subinterfaces (no IP on e0/0 itself), so here the `network` command was simpler for advertising it:
 
 ![description](/assets/img/Pasted image 20260623181756.png)
 
-and after that i check that this routes are being learned by HQ Router
+HQ learns those routes:
 
 ![description](/assets/img/Pasted image 20260624191418.png)
 
-and I will now configure HQ to advertise its default route to its neighbors, with `default-information originate` and I can see it afterwards on RO1 and RO2
+Last, HQ shares its default route (its way to the internet) with `default-information originate`, and it shows up on RO1 and RO2:
 
 ![description](/assets/img/Pasted image 20260624192529.png)
 
-But even though I have the route I can not ping external networks from the ISP
+## Out to the internet: NAT
+
+But even with the default route, nothing could reach the ISP:
 
 ![description](/assets/img/Pasted image 20260624194705.png)
 
-Why? Well, I haven't configure NAT overload on my HQ router, so the ISP does not have a route to the internal network
-
-## NAT Overload configuration
+Because the ISP has no route back to my private addresses. HQ has to swap them for its public address on the way out: NAT overload.
 
 ![description](/assets/img/Pasted image 20260624195400.png)
 
-and after doing that, now a ping to 8.8.8.8 (google dns) works from PC
+Now a ping to 8.8.8.8 (Google DNS) works:
 
 ![description](/assets/img/Pasted image 20260624201154.png)
 
 ![description](/assets/img/Pasted image 20260624201144.png)
 
-
-`sh ip nat translations` on HQ router shows me the work being done by HQ now 
+`show ip nat translations` on HQ shows the translations happening:
 
 ![description](/assets/img/Pasted image 20260624202223.png)
 
-Inside global: "Public" IP address of my HQ router that the internet sees as the source of the traffic
-Inside local: actual private IP address of the host (in this case PC0 on LAN RO2)
-Outside global: Public IP address of the destination server, in this case Google DNS.
-Outside Local: In standard source NAT this is typically identical to the outside global address 
+- **Inside local**: the PC's real private address (here PC0 on RO2's LAN).
+- **Inside global**: HQ's public address, what the internet sees as the sender.
+- **Outside global**: the destination's public address, here Google DNS.
+- **Outside local**: with normal source NAT, the same as outside global.
 
-## Summary 
+## Where it stands
 
-With the successful implementation of Multi-Area OSPF, Remote Office 2 is now fully integrated into the corporate backbone. By following a structured approach—starting with a rigid VLSM design and moving through Layer 2 segmentation to Layer 3 dynamic routing—I have established a stable, reachable network environment
+RO2 is now part of the company network:
 
-Summary of Accomplishments:
+- **Separate departments:** each one in its own VLAN, talking to the others through RO2.
+- **Automatic addressing:** HQ hands out every address, with RO2 relaying the requests.
+- **Routing:** multi-area OSPF connects all three sites, with stable router IDs and point-to-point WAN links.
+- **Internet:** through NAT on HQ.
 
-- Logical Segmentation: Successfully implemented ROAS and trunking, ensuring that four distinct departments are isolated at Layer 2 but can communicate through the RO2 gateway.
-- Automated Services: Configured HQ as a centralized DHCP server, with RO2 acting as a relay agent to provide efficient IP addressing across all user subnets.
-- Dynamic Reachability: Established Multi-Area OSPF adjacencies using stable Loopback RIDs and optimized point-to-point network types for fast convergence
+That's day 0. Next comes making it redundant and more secure.

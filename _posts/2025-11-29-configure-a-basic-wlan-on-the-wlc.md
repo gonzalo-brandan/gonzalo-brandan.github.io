@@ -1,6 +1,6 @@
 ---
 topic: Wireless
-title: "Configure a Basic WLAN on the WLC"
+title: "Setting up a password-protected Wi-Fi network on a Cisco controller"
 date: 2025-11-29 16:00:00 +0000
 categories: networking
 tags: [WLAN, Cisco, Tutorial]
@@ -11,92 +11,88 @@ image:
   path: "/assets/img/Pasted image 20251125144231.png"
   alt: "WLAN lab topology"
 ---
-In this lab I will learn some of the features of a wireless LAN controller. I will create a new WLAN on the controller and implement security on that LAN. Then, I will configure a wireless host to connect to the new WLAN through an AP that is under the control of the WLC. 
+In a company, you don't configure each access point one by one. A wireless LAN controller (WLC) manages all of them from one place. In this lab I create a new Wi-Fi network on the controller, protect it with a password, and connect a laptop to it.
 
 ### Topology
 
 ![description](/assets/img/Pasted image 20251125144445.png)
 
-Steps:
+### 1. Log in to the controller
 
-### 1. Access the WLCs management via HTTPS
-
-First I open the web browser in the Admin PC. I enter the management IP address of WLC-1 specifiying the https protocol. (For security reasons, the WLC interface only supports secure http sessions). I log in.
+From the Admin PC I open a browser and go to the WLC's management IP. It has to be `https://`: the controller only accepts secure sessions.
 
 ![description](/assets/img/Pasted image 20251125145344.png)
 
-Once logged in I see the WLC Monitor Summary screen
+The first screen is the Monitor Summary:
 ![description](/assets/img/Pasted image 20251125145624.png)
-From this screen I can see overall WLC status. For example, number of APs joined, number of clients (devices connected to the wireless network through the APs), WLANs enabled, etc. At this point to me is important to see if an AP is joined to the WLC, otherwise no wireless clients can connect.
 
-I can see that one AP is connected to the WLC and it is operational (All APs -> 1, state Up). Also until this points this wireless network has no clients.
+It shows how many access points have joined, how many clients are connected and which WLANs are on. The first thing I look for is an AP that has joined. Without one, no device can connect to anything.
+
+Here one AP has joined and it's up. There are no clients yet.
 ![description](/assets/img/Pasted image 20251125150217.png)
 
-Clicking on "Detail" next to the All APs entry I find more information about the APs connected to this WLC. 
+"Detail" next to All APs shows more about each one.
 
-### 2. Creating a new WLAN on the WLC. 
+### 2. Create the WLAN
 
-Under the WLANs menu I choose the option Create New.
+Under **WLANs**, I choose **Create New**.
 
 ![description](/assets/img/2025-11-25_16-44.png)
 
-Now I have to assign a Profile Name, SSID and ID to the WLAN.
--> Profile name to identify this WLAN on the WLC GUI. (admin friendly label)
--> SSID that the users will see when connecting their devices.
--> ID as an internal identifier the WLC uses to track the WLAN. (System label, appears in logs, messages)
-I click on Apply so the settings go into effect.
+A WLAN needs three names:
+
+- **Profile name**: the label admins see in the controller.
+- **SSID**: the network name people see on their phone or laptop.
+- **ID**: the number the controller uses internally, for example in logs.
+
+I click Apply.
 
 ![description](/assets/img/Pasted image 20251125164808.png)
 
-Now the WLAN has been created. In order to make the WLAN functional I click on Enabled.
-Choosing the interface is important because thats the way to tell the WLC which VLAN/subnet to use for client traffic. In this case I use the previously configured WLAN-5 interface.
+The WLAN exists now, but it's off, so I tick **Enabled**. I also pick the interface. This matters: it tells the controller which VLAN and subnet the clients go into. Here that's the WLAN-5 interface I set up earlier.
 
 ![description](/assets/img/2025-11-25_16-56.png)
 
-In the Advanced tab I Enable FlexConnect Local Switching and FlexConnect Local Auth options.
-FlexConnect Local Switching -> so the AP sends client traffic directly to the local VLAN instead of tunneling it back to the WLC.
-FlexConnect Local Auth -> so that the AP authenticates wireless clients locally, so authentication can happen even if the connection to the WLC is lost.
+In the **Advanced** tab I turn on two FlexConnect options:
 
+- **Local Switching**: the AP sends client traffic straight into the local VLAN, instead of sending it all back to the controller first.
+- **Local Auth**: the AP checks clients itself, so people can still connect if the link to the controller goes down.
 
 ![description](/assets/img/2025-11-25_17-02.png)
 
-Under the WLANs tab I can confirm that the WLAN Floor 2 Employees has been successfully created.
+The new WLAN, "Floor 2 Employees", shows up in the list.
 
 ![description](/assets/img/2025-11-25_17-13.png)
 
-Now it is time to secure the WLAN configuring it to use WPA2-PSK. Note: WPA2-PSK does not scale well and is not appropiate to use in a enterprise network, in next post I will configure the WLAN to use a RADIUS serer and WPA2-Enterprise for authentication.
-In the WLANs Edit screen > Security tab > Layer 2 I select WPA+WPA2 Protocols in order to secure the WLAN, otherwise it would be open to anyone. 
-I enable also PSK, which is a simple method for small deployments, that asks clients for a key in order to connect.
-I set the key in this example as Cisco123 (In real deployments would be a longer, more complicated password)
-I apply the changes.
+### 3. Add a password
+
+Right now the network is open to anyone. I protect it with **WPA2-PSK**: one shared password for everyone.
+
+In the WLAN's **Security → Layer 2** tab, I choose WPA+WPA2, enable PSK and set the key to `Cisco123`. (A real network would use a much longer one.)
 
 ![description](/assets/img/2025-11-25_17-25.png)
 ![description](/assets/img/Pasted image 20251125173402.png)
 
+A shared password is fine for a small office, but not for a company: everyone has the same key, and changing it means telling everyone. In the next post I replace it with WPA2-Enterprise, where each person logs in with their own account through a RADIUS server.
 
-I verify that the Security Policies for this WLAN have been updated.
+The security settings are now in place:
 
 ![description](/assets/img/Pasted image 20251125173633.png)
 
-
-### 3. Connect to the network through a wireless host.
+### 4. Connect a laptop
 
 ![description](/assets/img/Screenshot from 2025-11-26 11-10-46.png)
 
 ![description](/assets/img/Screenshot from 2025-11-26 11-11-03.png)
 
-I access the Pre-shared key previously configured (Cisco123)
+I pick the network and type the password, `Cisco123`.
 
 ![description](/assets/img/Pasted image 20251126111200.png)
 
-The connection with the AP has been successfull. 
-
-This hosts asks and receives a IP over DHCP succesfully.
+It connects, and the laptop gets an IP address from DHCP.
 
 ![description](/assets/img/Pasted image 20251126111509.png)
 
-To verify full connectivity and as last step in this lab I ping the server from this host.
+Last check: a ping to the server. It answers, so the whole path works, from the laptop through the AP to the rest of the network.
 
 ![description](/assets/img/Pasted image 20251126111723.png)
-
-

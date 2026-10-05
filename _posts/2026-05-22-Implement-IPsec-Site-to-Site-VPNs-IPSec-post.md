@@ -1,6 +1,6 @@
 ---
 topic: Security
-title: "Implementing IPsec Site-to-Site VPNs"
+title: "Connecting two offices securely with an IPsec VPN"
 date: 2026-05-22 16:00:00 +0000
 categories: networking
 tags: [ipsec, security, Cisco, Tutorial]
@@ -12,86 +12,62 @@ image:
   alt: "IPsec site-to-site VPN topology"
 ---
 
+Two offices want to talk to each other over the internet, but nobody in between should be able to read the traffic. That's what a site-to-site VPN is for.
+
+In this lab, R1 and R3 are the two offices, and R2 is the internet provider in the middle. R2 has no idea there's a VPN: it just forwards encrypted packets it can't read.
+
 ## Addressing Table
 
 ![description](/assets/img/Pasted image 20260520130637.png)
 
 ![description](/assets/img/Pasted image 20260520130651.png)
 
-In this lab, I will establish a site-to-site IPsec VPN tunnel between R1 and R3 through R2. R2 acts as the ISP router and has no knowledge of the VPN itself. This means R2 simply forwards the encrypted traffic between R1 and R3 without participating in the VPN negotiation, key exchange, or encryption/decryption process.
+## How it works
 
-VPN negotiation is the process where R1 and R3 agree on parameters such as encryption algorithms and lifetimes to establish the tunnel. Key exchange (for example through IKE) securely generates shared keys, which are then used to encrypt traffic at the sender and decrypt it at the receiver. IPsec operates at the Network layer (OSI Layer 3).
+Building an IPsec VPN has two parts:
 
-IPsec is an open framework that allows security protocols and encryption algorithms to evolve as new technologies are developed.
+1. **IKE**: the two routers agree on how to protect things and create shared keys. Think of it as a secure handshake.
+2. **IPsec**: using those keys, they encrypt the real traffic.
 
-There are two central configuration elements in the implementation of an IPsec VPN:
+Each part creates a **security association (SA)**: an agreement between the two routers about how traffic is encrypted and checked.
 
-- Implement Internet Key Exchange (IKE) parameters  
-  (how the two devices **agree on keys and establish** the VPN)
+- **Phase 1** (IKE SA): the secure handshake channel.
+- **Phase 2** (IPsec SA): the channel that carries the encrypted data.
 
-- Implement IPsec parameters  
-  (how the actual **data is encrypted and protected** after the tunnel is established)
+IPsec works at layer 3 (the network layer), and it's an open framework: new encryption methods can be added as they come out.
 
----
+IKE is on by default on IOS images with crypto features. If it's off, `crypto isakmp enable` turns it on. If that command gives an error, the router probably needs a different IOS image.
 
-## Step 1: On R1 and R3, Implement Internet Key Exchange (IKE) Parameters
+## Step 1: The IKE policy
 
-In this step, I will configure IKE policies on R1 and R3. IKE Phase 1 defines the key exchange method used to exchange and validate IKE policies between peers. In IKE Phase 2, the peers exchange and match IPsec policies used for authentication and encryption of data traffic.
+`crypto isakmp policy <number>` creates a policy. The number also sets its priority: the router tries policy 1 first, then 2, and so on.
 
-So:
-
-- **Phase 1 = “secure handshake channel”** (IKE-SA) between R1 and R3
-- **Phase 2 = “data-protection channel”** (IPsec-SA) that encrypts the actual traffic
-
-IKE must be enabled for IPsec to function. IKE is enabled by default on IOS images with cryptographic feature sets. If it is disabled, it can be enabled with the command `crypto isakmp enable`. If that command produces an error, the device likely needs an upgraded IOS image.
-
-For IKE Phase 1, you define an ISAKMP policy with authentication, encryption, and hashing algorithms. Once both routers accept the ISAKMP security association (SA), Phase 1 is complete.
-
-A security association (SA) is an agreement between two devices that defines how traffic is encrypted, authenticated, and protected in an IPsec VPN.
-
----
-
-## Step 2: Create a Custom ISAKMP Policy
-
-To create a custom ISAKMP policy, I enter ISAKMP configuration mode using the command `crypto isakmp policy <number>` in global configuration mode.
-
-The policy number uniquely identifies the IKE policy and also determines its priority, where `1` is the highest priority. This means the router will try ISAKMP policy 1 first, then 2, then 3, and so on when negotiating IKE with the remote peer.
-
-I will create ISAKMP policy 10 and check the available parameters.
+I create policy 10 and type `?` to see the options:
 
 ![description](/assets/img/Pasted image 20260522121151.png)
 
-As shown by typing `?`, multiple IKE parameters are available. The following list contains the minimum recommended options.
+These are the minimum recommended settings:
 
 ![description](/assets/img/Pasted image 20260522121253.png)
 
-Entering ISAKMP policy configuration mode automatically assigns default parameters to the policy. To view these defaults, I use the command:
-
-`do show crypto isakmp policy`
+A new policy starts with default values. `do show crypto isakmp policy` shows them:
 
 ![description](/assets/img/Pasted image 20260522121700.png)
 
-The output highlights, inside the red square, the default parameters. For security reasons, most of these should be updated to the recommended minimum values shown in the previous table.
+The defaults (in the red box) are too weak, so I change most of them.
 
-### The Parameters Explained
+### What each setting does
 
-- **Encryption algorithm**  
-  Determines how confidential the control channel is by encrypting the negotiation messages.
+- **Encryption**: keeps the handshake messages secret.
+- **Hash**: makes sure nothing was changed on the way.
+- **Authentication**: proves the other side is really who it says it is.
+- **Diffie-Hellman group**: lets both routers create the same secret key without ever sending it over the network.
 
-- **Hash algorithm**  
-  Controls data integrity, ensuring that the data received from the peer has not been tampered with in transit.
-
-- **Authentication type**  
-  Ensures the packets truly come from the intended peer and not from an attacker.
-
-- **Diffie-Hellman group**  
-  Generates a shared secret key between the peers without sending the key itself across the network.
-
-In this lab, I will configure the following parameters for ISAKMP policy 10 on both R1 and R3:
+What I use on both R1 and R3:
 
 - Encryption: AES-256
 - Hash: SHA-256
-- Authentication method: Pre-shared key
+- Authentication: pre-shared key
 - Diffie-Hellman group: 14
 - Lifetime: 3600 seconds (60 minutes)
 
@@ -99,99 +75,68 @@ In this lab, I will configure the following parameters for ISAKMP policy 10 on b
 
 ![description](/assets/img/Pasted image 20260522123121.png)
 
-Using the `show crypto isakmp policy` command again, I can verify the changes.
+Checking again with `show crypto isakmp policy`:
 
 ![description](/assets/img/Pasted image 20260522123247.png)
 
 ![description](/assets/img/Pasted image 20260522123318.png)
 
-The policies must match on both peers.
+The policy has to be the same on both routers.
 
----
+## Step 2: The pre-shared key
 
-## Step 3: Configure the Pre-Shared Keys
-
-Because pre-shared keys are used as the authentication method in the IKE policy, a key must be configured on each router pointing to the remote VPN endpoint. These keys must match for authentication to succeed.
-
-The command used is:
+Since the policy uses a pre-shared key, each router needs the key and the address of the other side:
 
 `crypto isakmp key <key-string> address <ip-address>`
 
-In this case, the IP address refers to the global IP address of the remote peer, which is the outside interface of the remote router.
+The address is the other router's outside (internet-facing) interface. You can also use `0.0.0.0 0.0.0.0` to accept any peer, which is handy when the other side's IP changes or when many peers share one key.
 
-The `ip-address` parameter can also be configured as:
-
-`0.0.0.0 0.0.0.0`
-
-to allow a match against any peer. This is useful when the peer IP is dynamic, unknown, or when a single policy should apply to multiple peers.
-
-The outside interface of R3 is `e0/0` with IP address `64.100.1.2`.
+R3's outside interface is `e0/0`, with `64.100.1.2`:
 
 ![description](/assets/img/Pasted image 20260522124614.png)
 
-So on R1, the command will point to that address.
+So on R1 the key points to that address:
 
 ![description](/assets/img/Pasted image 20260522124659.png)
 
-On R3, I will instead use the outside interface IP address of R1.
+And on R3, it points to R1's outside address:
 
 ![description](/assets/img/Pasted image 20260522124845.png)
 
-So the final configuration becomes:
+Both together:
 
 ![description](/assets/img/Pasted image 20260522124925.png)
 
-**Note:** Production networks should use longer and more complex keys.
+(A real network would use a much longer key.)
 
----
+## Step 3: The transform set
 
-## Step 4: Configure the IPsec Transform Set
-
-The IPsec transform set is another cryptographic parameter negotiated between the routers to form a security association.
-
-To create an IPsec transform set, the command used is:
+The IKE policy protects the handshake. The **transform set** decides how the actual data is protected.
 
 `crypto ipsec transform-set <transform-set-name> <transform1> [transform2]`
 
-An IPsec transform set is a named group of settings that defines how VPN traffic is protected, including the encryption algorithm, integrity algorithm, and tunnel mode. R1 and R3 must agree on the same transform set so they can establish matching IPsec security associations for the tunnel.
-
-The ISAKMP configuration from Step 1 protects the *control messages* exchanged during IKE Phase 1, but the IPsec transform set defines how the *actual user data* is encrypted and authenticated inside the VPN tunnel during IPsec Phase 2.
-
-On R1 and R3, I will create a transform set named `S2S-VPN` and use `?` to check the available parameters.
+I create one called `S2S-VPN` and check the options:
 
 ![description](/assets/img/Pasted image 20260522131707.png)
 
-This list shows the available IPsec transform options on Cisco routers:
+What the options mean:
 
-- **`ah-xxx`** (for example `ah-sha-hmac`)  
-  Uses the Authentication Header (AH) protocol, which provides authentication and integrity only, without encryption.
-
-- **`esp-xxx`** (for example `esp-aes`, `esp-sha-hmac`)  
-  Uses the Encapsulating Security Payload (ESP) protocol, which can provide encryption, integrity, or both.
-
-- **`xxx-hmac`** (for example `esp-sha-hmac`)  
-  Refers to HMAC (Hash-based Message Authentication Code), which verifies packet integrity and authenticity.
-
-- **`esp-aes`, `esp-3des`, `esp-des`**  
-  These are encryption algorithms that determine how traffic is encrypted inside the tunnel.
+- **`ah-…`**: Authentication Header. Checks the packets but doesn't encrypt them.
+- **`esp-…`**: Encapsulating Security Payload. Can encrypt, check, or both.
+- **`…-hmac`**: a check that the packet is genuine and wasn't changed.
+- **`esp-aes`, `esp-3des`, `esp-des`**: the encryption itself.
 
 `R1(config)# crypto ipsec transform-set S2S-VPN esp-aes 256 esp-sha256-hmac`
 
 `R3(config)# crypto ipsec transform-set S2S-VPN esp-aes 256 esp-sha256-hmac`
 
-**Note:** The transforms inside the transform set do not need to match the ISAKMP policy. They can be different, as long as both peers agree on the IPsec transforms.
+The transform set doesn't have to match the IKE policy. It only has to match on both routers.
 
----
+## Step 4: Choose which traffic to encrypt
 
-## Step 5: Define Interesting Traffic
+The router needs to know which traffic should go through the tunnel. An extended ACL picks it out. Traffic the ACL doesn't match isn't dropped; it just goes out normally, unencrypted.
 
-It is necessary to define interesting traffic so the router knows which traffic should trigger the IPsec VPN tunnel.
-
-I will do this using an extended ACL to specify which traffic should be encrypted. Traffic denied by the ACL is not dropped; it is simply forwarded normally without encryption.
-
-In this scenario, from the perspective of R1, the traffic I want to encrypt is traffic going from the R1 LANs to the R3 LANs. From the perspective of R3, the ACL must be mirrored.
-
-These ACLs are applied outbound on the VPN endpoint interfaces and must mirror each other.
+From R1's side, that's traffic from R1's LANs to R3's LANs. R3 needs the mirror image: same networks, source and destination swapped.
 
 ### On R1
 
@@ -201,61 +146,43 @@ These ACLs are applied outbound on the VPN endpoint interfaces and must mirror e
 
 ![description](/assets/img/Pasted image 20260522133719.png)
 
-For a site-to-site IPsec tunnel to work correctly, the interesting-traffic ACLs must be mirrored, meaning the source and destination networks are swapped on the opposite peer.
+If the two ACLs don't mirror each other, the tunnel can still come up, but your traffic won't match it and will skip the encryption. Easy to miss.
 
-If the ACLs are not mirrored, the tunnel may still come up, but the traffic you expect to encrypt will not match the IPsec policy and will bypass the tunnel.
+## Step 5: The crypto map
 
----
-
-## Step 6: Create and Apply a Crypto Map
-
-A crypto map associates traffic matching an ACL with a peer and specific IKE/IPsec settings.
-
-After the crypto map is created, it can be applied to one or more interfaces. These interfaces should face the IPsec peer.
-
-To create a crypto map, use:
+The crypto map ties everything together: which traffic (the ACL), to which peer, with which transform set. Then it goes on the interface facing the other office.
 
 `crypto map <name> <sequence-number> ipsec-isakmp`
 
-I will create the crypto map on R1 with the following settings:
-
-- Name: `S2S-CMAP`
-- Sequence number: `10`
-- Type: `ipsec-isakmp`
-
-This means IKE will be used to establish the IPsec security associations.
+On R1: name `S2S-CMAP`, sequence `10`, type `ipsec-isakmp` (meaning IKE sets up the tunnel).
 
 ![description](/assets/img/Pasted image 20260522134815.png)
 
-Now I will use the ACL to specify which traffic should be encrypted.
+Which traffic to encrypt (the ACL):
 
 ![description](/assets/img/Pasted image 20260522134921.png)
 
-Next, I set the peer IP address, which is required. This will point to R3’s VPN endpoint interface.
+Who the peer is (R3's outside interface):
 
 ![description](/assets/img/Pasted image 20260522135039.png)
 
-Then I use the `set transform-set` command to specify which transform set should be used for this peer.
+Which transform set to use:
 
 ![description](/assets/img/Pasted image 20260522135328.png)
 
-I then mirror the crypto map configuration on R3.
+The same on R3, mirrored:
 
 ![description](/assets/img/Pasted image 20260522135600.png)
 
-Finally, the crypto maps must be applied to the interfaces.
+And finally, the crypto maps go on the interfaces:
 
 ![description](/assets/img/Pasted image 20260522135726.png)
 
 ![description](/assets/img/Pasted image 20260522135700.png)
 
----
+## Does it work?
 
-## Verifying the VPN
-
-Now that the VPN is configured, I will test it to verify that it works as expected.
-
-Useful commands:
+Two useful commands:
 
 `show crypto ipsec transform-set S2S-VPN`
 `show crypto map`
@@ -264,25 +191,22 @@ Useful commands:
 
 ![description](/assets/img/Pasted image 20260522140341.png)
 
-The `show crypto isakmp sa` command reveals that no IKE security associations exist yet. Once interesting traffic is generated, this output changes.
+At first, `show crypto isakmp sa` shows nothing. That's normal: the tunnel only comes up when there's traffic to encrypt.
 
 ![description](/assets/img/Pasted image 20260522140402.png)
 
+After sending some traffic between the LANs, the security associations appear:
+
 ![description](/assets/img/Pasted image 20260522140714.png)
 
-The same verification can be done on R3.
+And the same on R3:
 
 ![description](/assets/img/Pasted image 20260522140850.png)
 
-This output confirms that the exercise is complete and that the IPsec site-to-site VPN is functioning correctly.
+The tunnel is up and the traffic is encrypted.
 
----
+## What I took from it
 
-## Takeaway
+A site-to-site VPN is built in layers: IKE makes the secure handshake, then IPsec protects the data, while the provider in the middle just forwards packets it can't read.
 
-Overall, this lab helped me understand how an IPsec site-to-site VPN is built in layers: first IKE establishes a secure control channel, then IPsec protects the actual data traffic, while the ISP router in the middle simply forwards encrypted packets without any involvement.
-
-The key takeaway is that both the IKE and IPsec parameters must match on both peers, and the interesting-traffic ACLs must also be mirrored so the routers agree on what traffic should be encrypted.
-
-Seeing the tunnel come up and the security associations appear after generating traffic was a satisfying confirmation that all the components were finally working together.
-
+Everything has to match on both sides: the IKE policy, the transform set, and the mirrored ACLs. And seeing the security associations appear the moment traffic started flowing was a satisfying way to know all the pieces finally worked together.
